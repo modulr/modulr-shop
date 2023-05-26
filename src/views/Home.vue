@@ -31,7 +31,7 @@
 </script>
 
 <template>
-    <div class="relative overflow-hidden before:absolute before:top-0 before:left-1/2 before:bg-[url('/16.jpg')] before:bg-no-repeat before:bg-top before:bg-cover before:w-full before:h-full before:-z-[1] before:transform before:-translate-x-1/2 dark:before:bg-[url('../svg/component/polygon-dark.svg')]">
+    <div class="relative overflow-hidden before:absolute before:top-0 before:left-1/2 before:bg-[url('/16.jpg')] before:bg-no-repeat before:bg-top before:bg-cover before:w-full before:h-full before:-z-[1] before:transform before:-translate-x-1/2 dark:before:bg-[url('/16.jpg')]">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center flex-wrap">
                 <div class="relative lg:w-7/12 py-24 xl:py-32">
