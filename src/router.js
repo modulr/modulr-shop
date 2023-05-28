@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from './views/Home.vue'
-import Detail from './views/Detail.vue'
+import Store from './views/Store.vue'
+import Autopart from './views/Autopart.vue'
 
 export default createRouter({
 
@@ -8,7 +9,8 @@ export default createRouter({
 
     routes: [
         { path: '/', component: Home },
-        { path: '/detail', component: Detail }
+        { path: '/store', component: Store },
+        { path: '/autopart', component: Autopart }
     ]
 
 })
