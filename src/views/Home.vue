@@ -68,16 +68,16 @@
     </div>
     <div class="mx-auto -mt-8">
         <div class="flex flex-nowrap justify-center overflow-hidden space-x-4 pl-6">
-            <img src="img/logos/toyota.png" alt="">
-            <img src="img/logos/volvo.png" alt="">
-            <img src="img/logos/ford.png" alt="">
-            <img src="img/logos/lamborghini.png" alt="">
-            <img src="img/logos/audi.png" alt="">
-            <img src="img/logos/mini.png" alt="">
-            <img src="img/logos/vw.png" alt="">
-            <img src="img/logos/land-rover.png" alt="">
-            <img src="img/logos/mazda.png" alt="">
-            <img src="img/logos/nissan.png" alt="">
+            <img src="/img/logos/toyota.png" alt="">
+            <img src="/img/logos/volvo.png" alt="">
+            <img src="/img/logos/ford.png" alt="">
+            <img src="/img/logos/lamborghini.png" alt="">
+            <img src="/img/logos/audi.png" alt="">
+            <img src="/img/logos/mini.png" alt="">
+            <img src="/img/logos/vw.png" alt="">
+            <img src="/img/logos/land-rover.png" alt="">
+            <img src="/img/logos/mazda.png" alt="">
+            <img src="/img/logos/nissan.png" alt="">
         </div>
     </div>
     <div class="container mx-auto px-4 mb-32" v-if="loading">
@@ -185,7 +185,7 @@
                         Nos especializamos en la comercialización de autopartes, respaldados por una amplia experiencia en el sector. Gracias a nuestro conocimiento y trayectoria, nos enorgullece ofrecer un servicio de alta calidad.
                     </div>
                 </div>
-                <img class="h-32" src="img/bg-footer.png" alt="Auto">
+                <img class="h-32" src="/img/bg-footer.png" alt="Auto">
             </div>
             <hr class="my-6 border-gray-200 sm:mx-auto lg:my-8" />
             <span class="block mb-6 lg:mb-8 text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 Auto Global. All Rights Reserved.</span>
