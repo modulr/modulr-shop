@@ -10,7 +10,7 @@ export default createRouter({
     routes: [
         { path: '/', component: Home },
         { path: '/store', component: Store },
-        { path: '/autopart', component: Autopart }
+        { path: '/autopart/:id', component: Autopart }
     ]
 
 })

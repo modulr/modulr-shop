@@ -92,7 +92,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-x-8 sm:gap-y-16">
             <div class="w-full mx-auto overflow-hidden bg-white rounded-2xl shadow-md shadow-slate-300/60 duration-300 hover:shadow-xl">
                 <div class="animate-pulse">
-                    <div className=" h-48 bg-gray-300 rounded"></div>
+                    <div className="h-48 bg-gray-300 rounded"></div>
                 </div>
                 <div class="px-4 py-6 space-y-2">
                     <div className="animate-pulse h-4 bg-gray-300 rounded"></div>
@@ -167,7 +167,7 @@
 
     <div class="container mx-auto px-4 pt-20 pb-36" v-else>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-x-8 sm:gap-y-16">
-            <div class="mx-auto overflow-hidden bg-white rounded-2xl shadow-md shadow-slate-300/60 duration-300 hover:shadow-xl" v-for="autopart in autoparts" :key="autopart.id">
+            <router-link :to="`/autopart/${autopart.id}`" class="mx-auto overflow-hidden bg-white rounded-2xl shadow-md shadow-slate-300/60 duration-300 hover:shadow-xl" v-for="autopart in autoparts" :key="autopart.id">
                 <img class="w-full h-52 object-cover object-center" :src="autopart.url" :alt="autopart.name" />
                 <div class="px-4 py-6">
                     <h2 class="mb-5 font-medium text-gray-600">{{ autopart.name }}</h2>
@@ -175,10 +175,10 @@
                     <div class="flex items-center">
                         <p class="mr-2 text-xl font-semibold text-gray-900">${{ autopart.sale_price }}</p>
                         <p class="text-base font-medium text-gray-500 line-through">${{ autopart.discount_price }}</p>
-                        <p class="ml-auto text-base font-medium text-green-500">10% off</p>
+                        <p class="ml-auto text-base font-medium text-green-500">10%</p>
                     </div>
                 </div>
-            </div>
+            </router-link>
         </div>
         <div class="flex items-center justify-center pt-28 px-4">
             <div class="w-full flex items-center justify-between border-b border-gray-200">

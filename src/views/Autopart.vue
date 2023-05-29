@@ -1,89 +1,236 @@
+<script>
+    import api from '../api'
+
+    export default {
+        data() {
+            return {
+                autopartId: this.$route.params.id,
+                autopart: {
+                    make: {},
+                    model: {},
+                    years: [],
+                    origin: {},
+                    status: {},
+                    images: [],
+                    store: {},
+                    storeMl: {},
+                },
+                currentImage: null,
+                loading: false
+            }
+        },
+
+        // watch: {
+        //     autopartId(newValue, old) {
+        //         console.log(newValue);
+        //         if (newValue) {
+        //             this.get(newValue)
+        //         }
+        //     },
+        //     '$route.params.id'(to, from) {
+        //         console.log(to);
+        //         this.get(to)
+        //     }
+        // },
+
+        methods: {
+            async get(id) {
+                this.loading = true
+                await api.get(`/api/autoparts/${id}`)
+                .then((response) => {
+
+                    this.autopart = response.data
+                    this.setCurrentImage(this.autopart.images[0])
+                    this.loading = false
+
+                }).catch( error => {
+
+                    this.loading = false
+                    console.error( 'Error al consultar en la API: ', error );
+                })
+            },
+            setCurrentImage(img) {
+                this.currentImage = img
+            }
+        },
+
+        mounted() {
+            this.get(this.autopartId)
+        }
+        
+    }
+    
+</script>
+
 <template>
-    <div class="relative overflow-hidden before:absolute before:top-0 before:left-1/2 before:bg-[url('/16.jpg')] before:bg-no-repeat before:bg-top before:bg-cover before:w-full before:h-full before:-z-[1] before:transform before:-translate-x-1/2 dark:before:bg-[url('/16.jpg')]">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-52">
-            <div class="flex justify-center">
-                <div class="max-w-5xl text-center">
-                    <h1 class="font-bold text-4xl text-red-700 md:text-5xl">Your favorite dishes, right at your door</h1>
-                    <form action="" class="w-full mt-12">
-                        <div class="relative flex p-1 rounded-full bg-white border border-red-500 shadow-md md:p-2">
-                            <select class="hidden p-3 rounded-full bg-transparent md:block md:p-4" name="domain" id="domain">
-                                <option value="design">FastFood</option>
-                                <option value="development">Restaurant</option>
-                                <option value="marketing">Marketing</option>
-                            </select>
-                            <input placeholder="Your favorite food" class="w-full p-4 rounded-full" type="text">
-                            <button type="button" title="Start buying" class="ml-auto py-3 px-6 rounded-full text-center transition bg-gradient-to-b from-red-500 to-red-700 hover:to-red-800 md:px-12">
-                                <span class="hidden text-white font-semibold md:block">
-                                    Search
-                                </span>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 mx-auto text-red-900 md:hidden bi bi-search" fill="currentColor" viewBox="0 0 16 16">
-                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                                </svg>
-                            </button>
+    <section class="py-12 sm:py-16"> 
+        <div class="container mx-auto px-4">
+
+            <ol role="list" class="flex items-center">
+                <li>
+                    <router-link to="/" class="rounded-md p-1 text-sm font-medium text-gray-600 focus:text-gray-900 focus:shadow hover:text-gray-800"> Home </router-link>
+                </li>
+                <li v-if="autopart.store.name">
+                    <span class="mx-2 text-gray-400">/</span>
+                    <span class="rounded-md p-1 text-sm font-medium text-gray-600 focus:text-gray-900 focus:shadow hover:text-gray-800"> {{ autopart.store.name }} </span>
+                </li>
+                <li v-if="autopart.id">
+                    <span class="mx-2 text-gray-400">/</span>
+                    <span class="rounded-md p-1 text-sm font-medium text-gray-600 focus:text-gray-900 focus:shadow hover:text-gray-800"> {{ autopart.id }} </span>
+                </li>
+            </ol>
+
+            <div v-if="loading" class="lg:col-gap-12 xl:col-gap-16 mt-8 grid grid-cols-1 gap-12 lg:mt-12 lg:grid-cols-5 lg:gap-16">
+                <div class="lg:col-span-3 lg:row-end-1">
+                    <div class="sticky top-0 z-50 overflow-hidden">
+                        <div class="relative mb-6 lg:mb-10 lg:h-2/4">
+                            <div className="animate-pulse h-72 bg-gray-300 rounded"></div>
                         </div>
-                    </form>
-                    <p class="mt-8 text-gray-700">Sit amet consectetur adipisicing elit. <a href="#" class="text-red-700">connection</a> tenetur nihil quaerat suscipit, sunt dignissimos.</p>
+                        <div class="flex-wrap hidden md:flex">
+                            <div class="w-1/2 p-2 sm:w-1/4">
+                                <div href="#" class="block border">
+                                    <div className="animate-pulse h-20 bg-gray-300 rounded"></div>
+                                </div>
+                            </div>
+                            <div class="w-1/2 p-2 sm:w-1/4">
+                                <div href="#" class="block border">
+                                    <div className="animate-pulse h-20 bg-gray-300 rounded"></div>
+                                </div>
+                            </div>
+                            <div class="w-1/2 p-2 sm:w-1/4">
+                                <div href="#" class="block border">
+                                    <div className="animate-pulse h-20 bg-gray-300 rounded"></div>
+                                </div>
+                            </div>
+                            <div class="w-1/2 p-2 sm:w-1/4">
+                                <div href="#" class="block border">
+                                    <div className="animate-pulse h-20 bg-gray-300 rounded"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-2 lg:row-span-2 lg:row-end-2">
+                    <div class="mt-5 flex items-center">
+                        <div class="w-full mb-12">
+                            <div class="mb-12">
+                                <div className="animate-pulse h-6 bg-gray-300 rounded mb-6"></div>
+                                <div className="animate-pulse h-6 bg-gray-300 rounded w-2/3"></div>
+                            </div>
+                            <div class="space-y-2 mb-12">
+                                <div className="animate-pulse h-4 bg-gray-300 rounded"></div>
+                                <div className="animate-pulse h-4 bg-gray-300 rounded"></div>
+                                <div className="animate-pulse h-4 bg-gray-300 rounded w-3/4"></div>
+                                <div className="animate-pulse h-4 bg-gray-300 rounded w-2/4"></div>
+                            </div>
+                            <div class="flex space-x-2">
+                                <div className="animate-pulse h-10 bg-gray-300 rounded w-1/2"></div>
+                                <div className="animate-pulse h-10 bg-gray-300 rounded w-1/2"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-3">
+                    <div class="border-b border-gray-300">
+                        <nav class="flex gap-4">
+                            <span class="border-b-2 border-gray-900 py-4 font-medium text-gray-900"> Descripción </span>
+                        </nav>
+                    </div>
+
+                    <div class="mt-8 flow-root sm:mt-12 space-y-2">
+                        <div className="animate-pulse h-4 bg-gray-300 rounded"></div>
+                        <div className="animate-pulse h-4 bg-gray-300 rounded"></div>
+                        <div className="animate-pulse h-4 bg-gray-300 rounded"></div>
+                        <div className="animate-pulse h-4 bg-gray-300 rounded w-2/3"></div>
+                        <div className="animate-pulse h-4 bg-gray-300 rounded w-1/3"></div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <section>
-        <div class="relative overflow-hidden bg-no-repeat bg-cover" style=" background-position: 50%; background-image: url('/16.jpg'); height: 500px;">
-            <div class="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden bg-fixed" style="background-color: rgba(0, 0, 0, 0.75)">
-                <div class="flex justify-center items-center h-full">
-                    <div class="text-center text-white px-6 md:px-12">
-                        <h1 class="max-w-5xl text-2xl font-bold leading-none tracking-tighter text-neutral-300 md:text-5xl lg:text-6xl lg:max-w-7xl">
-                            Long headline to turn <br class="hidden lg:block">your visitors into users
-                        </h1>
-                        <form action="" method="post" id="revue-form" name="revue-form" target="_blank" class="p-2 mt-8 transition duration-500 ease-in-out transform border2 bg-gray-50 md:mx-auto rounded-xl sm:max-w-3xl lg:flex">
-                            <div class="divide-y lg:divide-x lg:divide-y-0 lg:flex space-y 4">
-                            <div class="flex-1 min-w-0 revue-form-group">
-                                <label for="name" class="sr-only">Name</label>
-                                <input id="name" type="text" class="block w-full px-5 py-3 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform bg-transparent border border-transparent rounded-md focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" placeholder="Enter your name ">
+            <div v-else class="lg:col-gap-12 xl:col-gap-16 mt-8 grid grid-cols-1 gap-12 lg:mt-12 lg:grid-cols-5 lg:gap-16">
+                <div class="lg:col-span-3 lg:row-end-1">
+                    <div>
+                        <div class="relative mb-6 lg:mb-10 lg:h-2/4" v-if="currentImage">
+                            <img class="object-cover w-full lg:h-full" :src="currentImage.url" alt="Auto Global">
+                        </div>
+                        <div class="flex-wrap hidden md:flex">
+                            <div class="w-1/2 p-2 sm:w-1/4" v-for="image in autopart.images" :key="image.id">
+                                <a href="#" class="block border hover:border-red-300" @click.prevent="setCurrentImage(image)">
+                                    <img class="object-cover w-full lg:h-20" :src="image.url_thumbnail" alt="Auto Global">
+                                </a>
                             </div>
-                            <div class="flex-1 min-w-0 revue-form-group">
-                                <label for="member_email" class="sr-only">Email address</label>
-                                <input id="cta-email" type="email" class="block w-full px-5 py-3 text-base text-neutral-600 placeholder-gray-300 transition duration-500 ease-in-out transform bg-transparent border border-transparent rounded-md focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" placeholder="Enter your email  ">
-                            </div>
-                            </div>
-                            <div class="mt-4 sm:mt-0 lg:ml-3 revue-form-actions">
-                            <button type="submit" value="Subscribe" name="member[subscribe]" id="member_submit" class="block w-full px-5 py-3 text-base font-medium text-white bg-blue-600 border border-transparent rounded-lg shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300 sm:px-10">Notify me</button>
-                            </div>
-                        </form>
+                        </div>
                     </div>
+                </div>
+
+                <div class="lg:col-span-2 lg:row-span-2 lg:row-end-2">
+                    <div class="mt-5 flex items-center">
+                        <div class="w-full mb-14">
+                            <span class="text-lg font-medium text-rose-500">{{ autopart.origin.name }}</span>
+                            <h1 class="max-w-xl mt-2 mb-6 text-2xl font-bold md:text-4xl">{{ autopart.name }}</h1>
+                            <p class="text-green-600 mb-4">10% descuento</p>
+                            <h2 class="inline-block mb-8 text-4xl font-bold text-gray-700">
+                                <span>${{ autopart.sale_price }}</span>
+                                <span class="text-base font-normal text-gray-500 line-through ml-2">${{ autopart.discount_price }}</span>
+                            </h2>
+                            <div class="mb-8">
+                                <h3 class="w-16 pb-1 mb-4 border-b border-red-300">Marca</h3>
+                                <div class="font-bold">{{ autopart.make.name }}</div>
+                            </div>
+                            <div class="mb-8">
+                                <h3 class="w-16 pb-1 mb-4 border-b border-red-300">Modelo</h3>
+                                <div class="font-bold">{{ autopart.model.name }}</div>
+                            </div>
+                            <div class="mb-12">
+                                <h3 class="w-16 pb-1 mb-4 border-b border-red-300">Años</h3>
+                                <div class="font-bold" v-if="autopart.years.length > 0">
+                                    <span v-for="(year, index) in autopart.years" :key="year.id" >
+                                        {{year.name}}<span v-if="index+1 < autopart.years.length">, </span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap items-center gap-4">
+                                <a href="#" class="flex items-center justify-center w-full p-4 bg-red-600 rounded-md border border-red-600  lg:w-2/5 text-gray-50 hover:bg-red-700">
+                                    Comprar
+                                </a>
+                                <a v-if="autopart.ml_url" :href="autopart.ml_url" target="_blank" class="flex items-center justify-center w-full p-4 text-red-600 border border-red-600 rounded-md lg:w-2/5 hover:bg-red-600 hover:border-red-600 hover:text-white">
+                                    Mercado Libre
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-3">
+                    <div class="border-b border-gray-300">
+                        <nav class="flex gap-4">
+                            <span class="border-b-2 border-gray-900 py-4 font-medium text-gray-900"> Descripción </span>
+                        </nav>
+                    </div>
+
+                    <div class="mt-8 flow-root sm:mt-12 mb-8 whitespace-pre-line">
+                        {{ autopart.description }}
+                    </div>
+
+                    <div v-if="autopart.location">Ubicación {{ autopart.location }}</div>
                 </div>
             </div>
         </div>
     </section>
-    
-    <div class="relative overflow-hidden before:absolute before:top-0 before:left-1/2 before:bg-[url('/16.jpg')] before:bg-no-repeat before:bg-top before:bg-cover before:w-full before:h-full before:-z-[1] before:transform before:-translate-x-1/2 dark:before:bg-[url('/16.jpg')]">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-32">
-            <div class="flex items-center flex-wrap px-2 md:px-0">
-                <div class="relative lg:w-7/12 lg:py-24 xl:py-32">
-                    <h1 class="font-bold text-4xl text-red-700 md:text-5xl">Your favorite dishes, right at your door</h1>
-                    <form action="" class="w-full mt-12">
-                        <div class="relative flex p-1 rounded-full bg-white border border-red-500 shadow-md md:p-2">
-                            <select class="hidden p-3 rounded-full bg-transparent md:block md:p-4" name="domain" id="domain">
-                                <option value="design">FastFood</option>
-                                <option value="development">Restaurant</option>
-                                <option value="marketing">Marketing</option>
-                            </select>
-                            <input placeholder="Your favorite food" class="w-full p-4 rounded-full" type="text">
-                            <button type="button" title="Start buying" class="ml-auto py-3 px-6 rounded-full text-center transition bg-gradient-to-b from-red-500 to-red-700 hover:to-red-800 md:px-12">
-                                <span class="hidden text-white font-semibold md:block">
-                                    Search
-                                </span>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 mx-auto text-red-900 md:hidden bi bi-search" fill="currentColor" viewBox="0 0 16 16">
-                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                                </svg>
-                            </button>
-                        </div>
-                    </form>
-                    <p class="mt-8 text-gray-700">Sit amet consectetur adipisicing elit. <a href="#" class="text-red-700">connection</a> tenetur nihil quaerat suscipit, sunt dignissimos.</p>
+
+    <div class="container mx-auto px-4 mt-44">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-20 space-x-0 sm:space-x-8 space-y-16 md:space-y-0">
+            <div class="md:w-6/12">
+                <h3 class="font-title text-2xl mb-2">Auto Global</h3>
+                <div class="text-gray-500 font-medium text-lg">
+                    Nos especializamos en la comercialización y distribución de autopartes, respaldados por una amplia experiencia en el sector.
                 </div>
             </div>
+            <img class="w-full sm:w-auto md:h-32" src="/img/bg-footer.png" alt="Auto">
         </div>
+        <hr class="my-6 lg:my-8 border-gray-200 mx-auto" />
+        <span class="block mb-6 lg:mb-8 text-sm text-gray-500 text-center">© 2023 Auto Global. All Rights Reserved.</span>
     </div>
-
 </template>
