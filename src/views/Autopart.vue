@@ -153,12 +153,12 @@
                 <div class="lg:col-span-3 lg:row-end-1">
                     <div>
                         <div class="relative mb-6 lg:mb-10 lg:h-2/4" v-if="currentImage">
-                            <img class="object-cover w-full lg:h-full" :src="currentImage.url" alt="Auto Global">
+                            <img class="object-cover w-full lg:h-full rounded-2xl" :src="currentImage.url" alt="Auto Global">
                         </div>
-                        <div class="flex-wrap hidden md:flex">
-                            <div class="w-1/2 p-2 sm:w-1/4" v-for="image in autopart.images" :key="image.id">
-                                <a href="#" class="block border hover:border-red-300" @click.prevent="setCurrentImage(image)">
-                                    <img class="object-cover w-full lg:h-20" :src="image.url_thumbnail" alt="Auto Global">
+                        <div class="flex flex-wrap">
+                            <div class="w-1/5 p-1 sm:p-2" v-for="image in autopart.images" :key="image.id">
+                                <a href="#" class="block border-2 hover:border-red-400 rounded-md" :class="[currentImage.id == image.id ? 'border-red-400': 'border-transparent']" @click.prevent="setCurrentImage(image)">
+                                    <img class="object-cover w-full lg:h-20 rounded" :src="image.url_thumbnail" alt="Auto Global">
                                 </a>
                             </div>
                         </div>
@@ -166,9 +166,9 @@
                 </div>
 
                 <div class="lg:col-span-2 lg:row-span-2 lg:row-end-2">
-                    <div class="mt-5 flex items-center">
+                    <div class="sm:mt-5 flex items-center">
                         <div class="w-full mb-14">
-                            <span class="text-lg font-medium text-rose-500">{{ autopart.origin.name }}</span>
+                            <span class="text-lg font-medium text-red-600">{{ autopart.origin.name }}</span>
                             <h1 class="max-w-xl mt-2 mb-6 text-2xl font-bold md:text-4xl">{{ autopart.name }}</h1>
                             <p class="text-green-600 mb-4">10% descuento</p>
                             <h2 class="inline-block mb-8 text-4xl font-bold text-gray-700">
@@ -176,15 +176,15 @@
                                 <span class="text-base font-normal text-gray-500 line-through ml-2">${{ autopart.discount_price }}</span>
                             </h2>
                             <div class="mb-8">
-                                <h3 class="w-16 pb-1 mb-4 border-b border-red-300">Marca</h3>
+                                <h3 class="w-16 pb-1 mb-4 border-b border-red-400 text-gray-600">Marca</h3>
                                 <div class="font-bold">{{ autopart.make.name }}</div>
                             </div>
                             <div class="mb-8">
-                                <h3 class="w-16 pb-1 mb-4 border-b border-red-300">Modelo</h3>
+                                <h3 class="w-16 pb-1 mb-4 border-b border-red-400 text-gray-600">Modelo</h3>
                                 <div class="font-bold">{{ autopart.model.name }}</div>
                             </div>
                             <div class="mb-12">
-                                <h3 class="w-16 pb-1 mb-4 border-b border-red-300">Años</h3>
+                                <h3 class="w-16 pb-1 mb-4 border-b border-red-400 text-gray-600">Años</h3>
                                 <div class="font-bold" v-if="autopart.years.length > 0">
                                     <span v-for="(year, index) in autopart.years" :key="year.id" >
                                         {{year.name}}<span v-if="index+1 < autopart.years.length">, </span>
@@ -192,10 +192,10 @@
                                 </div>
                             </div>
                             <div class="flex flex-wrap items-center gap-4">
-                                <a href="#" class="flex items-center justify-center w-full p-4 bg-red-600 rounded-md border border-red-600  lg:w-2/5 text-gray-50 hover:bg-red-700">
+                                <a :href="`https://api.whatsapp.com/send?phone=528117409087&text=Me%20interesa%20la%20autoparte%20${autopart.name},%20ID:%20${autopart.id}&source=&data=`" target="_blank" class="flex items-center justify-center w-full p-4 bg-red-600 rounded-full border border-red-600 lg:w-2/5 text-white hover:bg-red-700">
                                     Comprar
                                 </a>
-                                <a v-if="autopart.ml_url" :href="autopart.ml_url" target="_blank" class="flex items-center justify-center w-full p-4 text-red-600 border border-red-600 rounded-md lg:w-2/5 hover:bg-red-600 hover:border-red-600 hover:text-white">
+                                <a v-if="autopart.ml_url" :href="autopart.ml_url" target="_blank" class="flex items-center justify-center w-full p-4 text-red-600 border border-red-600 rounded-full lg:w-2/5 hover:bg-red-600 hover:border-red-600 hover:text-white">
                                     Mercado Libre
                                 </a>
                             </div>
@@ -206,7 +206,7 @@
                 <div class="lg:col-span-3">
                     <div class="border-b border-gray-300">
                         <nav class="flex gap-4">
-                            <span class="border-b-2 border-gray-900 py-4 font-medium text-gray-900"> Descripción </span>
+                            <span class="border-b-2 border-gray-900 py-4 text-gray-600"> Descripción </span>
                         </nav>
                     </div>
 
@@ -224,13 +224,13 @@
         <div class="flex flex-col md:flex-row justify-between items-end mb-20 space-x-0 sm:space-x-8 space-y-16 md:space-y-0">
             <div class="md:w-6/12">
                 <h3 class="font-title text-2xl mb-2">Auto Global</h3>
-                <div class="text-gray-500 font-medium text-lg">
+                <div class="text-gray-700 font-medium text-lg">
                     Nos especializamos en la comercialización y distribución de autopartes, respaldados por una amplia experiencia en el sector.
                 </div>
             </div>
             <img class="w-full sm:w-auto md:h-32" src="/img/bg-footer.png" alt="Auto">
         </div>
         <hr class="my-6 lg:my-8 border-gray-200 mx-auto" />
-        <span class="block mb-6 lg:mb-8 text-sm text-gray-500 text-center">© 2023 Auto Global. All Rights Reserved.</span>
+        <span class="block mb-6 lg:mb-8 text-sm text-gray-600 text-center">© 2023 Auto Global. All Rights Reserved.</span>
     </div>
 </template>

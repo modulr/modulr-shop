@@ -89,75 +89,75 @@
         <div class="flex justify-center">
             <img class="" src="/img/loader.gif" alt="Loading Autoparts">
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-x-8 sm:gap-y-16">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-y-16">
             <div class="w-full mx-auto overflow-hidden bg-white rounded-2xl shadow-md shadow-slate-300/60 duration-300 hover:shadow-xl">
                 <div class="animate-pulse">
                     <div className="h-48 bg-gray-300 rounded"></div>
                 </div>
-                <div class="px-4 py-6 space-y-2">
+                <div class="px-4 py-6 space-y-4">
                     <div className="animate-pulse h-4 bg-gray-300 rounded"></div>
                     <div className="animate-pulse h-4 bg-gray-300 rounded"></div>
                 </div>
             </div>
             <div class="w-full mx-auto overflow-hidden bg-white rounded-2xl shadow-md shadow-slate-300/60 duration-300 hover:shadow-xl">
                 <div class="animate-pulse">
-                    <div className=" h-48 bg-gray-300 rounded"></div>
+                    <div className="h-48 bg-gray-300 rounded"></div>
                 </div>
-                <div class="px-4 py-6 space-y-2">
+                <div class="px-4 py-6 space-y-4">
                     <div className="animate-pulse h-4 bg-gray-300 rounded"></div>
                     <div className="animate-pulse h-4 bg-gray-300 rounded"></div>
                 </div>
             </div>
             <div class="w-full mx-auto overflow-hidden bg-white rounded-2xl shadow-md shadow-slate-300/60 duration-300 hover:shadow-xl">
                 <div class="animate-pulse">
-                    <div className=" h-48 bg-gray-300 rounded"></div>
+                    <div className="h-48 bg-gray-300 rounded"></div>
                 </div>
-                <div class="px-4 py-6 space-y-2">
+                <div class="px-4 py-6 space-y-4">
                     <div className="animate-pulse h-4 bg-gray-300 rounded"></div>
                     <div className="animate-pulse h-4 bg-gray-300 rounded"></div>
                 </div>
             </div>
             <div class="w-full mx-auto overflow-hidden bg-white rounded-2xl shadow-md shadow-slate-300/60 duration-300 hover:shadow-xl">
                 <div class="animate-pulse">
-                    <div className=" h-48 bg-gray-300 rounded"></div>
+                    <div className="h-48 bg-gray-300 rounded"></div>
                 </div>
-                <div class="px-4 py-6 space-y-2">
+                <div class="px-4 py-6 space-y-4">
                     <div className="animate-pulse h-4 bg-gray-300 rounded"></div>
                     <div className="animate-pulse h-4 bg-gray-300 rounded"></div>
                 </div>
             </div>
             <div class="w-full mx-auto overflow-hidden bg-white rounded-2xl shadow-md shadow-slate-300/60 duration-300 hover:shadow-xl">
                 <div class="animate-pulse">
-                    <div className=" h-48 bg-gray-300 rounded"></div>
+                    <div className="h-48 bg-gray-300 rounded"></div>
                 </div>
-                <div class="px-4 py-6 space-y-2">
+                <div class="px-4 py-6 space-y-4">
                     <div className="animate-pulse h-4 bg-gray-300 rounded"></div>
                     <div className="animate-pulse h-4 bg-gray-300 rounded"></div>
                 </div>
             </div>
             <div class="w-full mx-auto overflow-hidden bg-white rounded-2xl shadow-md shadow-slate-300/60 duration-300 hover:shadow-xl">
                 <div class="animate-pulse">
-                    <div className=" h-48 bg-gray-300 rounded"></div>
+                    <div className="h-48 bg-gray-300 rounded"></div>
                 </div>
-                <div class="px-4 py-6 space-y-2">
+                <div class="px-4 py-6 space-y-4">
                     <div className="animate-pulse h-4 bg-gray-300 rounded"></div>
                     <div className="animate-pulse h-4 bg-gray-300 rounded"></div>
                 </div>
             </div>
             <div class="w-full mx-auto overflow-hidden bg-white rounded-2xl shadow-md shadow-slate-300/60 duration-300 hover:shadow-xl">
                 <div class="animate-pulse">
-                    <div className=" h-48 bg-gray-300 rounded"></div>
+                    <div className="h-48 bg-gray-300 rounded"></div>
                 </div>
-                <div class="px-4 py-6 space-y-2">
+                <div class="px-4 py-6 space-y-4">
                     <div className="animate-pulse h-4 bg-gray-300 rounded"></div>
                     <div className="animate-pulse h-4 bg-gray-300 rounded"></div>
                 </div>
             </div>
             <div class="w-full mx-auto overflow-hidden bg-white rounded-2xl shadow-md shadow-slate-300/60 duration-300 hover:shadow-xl">
                 <div class="animate-pulse">
-                    <div className=" h-48 bg-gray-300 rounded"></div>
+                    <div className="h-48 bg-gray-300 rounded"></div>
                 </div>
-                <div class="px-4 py-6 space-y-2">
+                <div class="px-4 py-6 space-y-4">
                     <div className="animate-pulse h-4 bg-gray-300 rounded"></div>
                     <div className="animate-pulse h-4 bg-gray-300 rounded"></div>
                 </div>
@@ -166,14 +166,14 @@
     </div>
 
     <div class="container mx-auto px-4 pt-20 pb-36" v-else>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-x-8 sm:gap-y-16">
-            <router-link :to="`/autopart/${autopart.id}`" class="mx-auto overflow-hidden bg-white rounded-2xl shadow-md shadow-slate-300/60 duration-300 hover:shadow-xl" v-for="autopart in autoparts" :key="autopart.id">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-x-8 sm:gap-y-16">
+            <router-link :to="`/autopart/${autopart.id}`" class="w-full mx-auto overflow-hidden bg-white rounded-2xl shadow-md shadow-slate-300/60 duration-300 hover:shadow-xl" v-for="autopart in autoparts" :key="autopart.id">
                 <img class="w-full h-52 object-cover object-center" :src="autopart.url" :alt="autopart.name" />
                 <div class="px-4 py-6">
-                    <h2 class="mb-5 font-medium text-gray-600">{{ autopart.name }}</h2>
+                    <h2 class="mb-5 font-medium">{{ autopart.name }}</h2>
                     <!-- <p class="mb-5 text-base text-gray-400 truncate ...">{{ autopart.description }}</p> -->
                     <div class="flex items-center">
-                        <p class="mr-2 text-xl font-semibold text-gray-900">${{ autopart.sale_price }}</p>
+                        <p class="mr-2 text-xl font-semibold">${{ autopart.sale_price }}</p>
                         <p class="text-base font-medium text-gray-500 line-through">${{ autopart.discount_price }}</p>
                         <p class="ml-auto text-base font-medium text-green-500">10%</p>
                     </div>
@@ -216,14 +216,14 @@
         <div class="flex flex-col md:flex-row justify-between items-end mb-20 space-x-0 sm:space-x-8 space-y-16 md:space-y-0">
             <div class="md:w-6/12">
                 <h3 class="font-title text-2xl mb-2">Auto Global</h3>
-                <div class="text-gray-500 font-medium text-lg">
+                <div class="text-gray-700 font-medium text-lg">
                     Nos especializamos en la comercialización y distribución de autopartes, respaldados por una amplia experiencia en el sector.
                 </div>
             </div>
             <img class="w-full sm:w-auto md:h-32" src="/img/bg-footer.png" alt="Auto">
         </div>
         <hr class="my-6 lg:my-8 border-gray-200 mx-auto" />
-        <span class="block mb-6 lg:mb-8 text-sm text-gray-500 text-center">© 2023 Auto Global. All Rights Reserved.</span>
+        <span class="block mb-6 lg:mb-8 text-sm text-gray-600 text-center">© 2023 Auto Global. All Rights Reserved.</span>
     </div>
     
 </template>
