@@ -10,7 +10,14 @@ export default createRouter({
     routes: [
         { path: '/', component: Home },
         { path: '/store', component: Store },
-        { path: '/autopart/:id', component: Autopart }
-    ]
+        { path: '/autopart/:id/:name?', component: Autopart }
+    ],
 
+    scrollBehavior(to, from, savedPosition) {
+        if (savedPosition) {
+            return savedPosition
+        } else {
+            return { top: 0 }
+        }
+    }
 })

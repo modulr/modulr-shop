@@ -27,7 +27,9 @@
         },
         
         mounted() {
-            this.getAll()
+            if ( this.autoparts == 0 ){
+                this.getAll()
+            }
         }
     }
     
@@ -167,7 +169,7 @@
 
     <div class="container mx-auto px-4 pt-20 pb-36" v-else>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-x-8 sm:gap-y-16">
-            <router-link :to="`/autopart/${autopart.id}`" class="w-full mx-auto overflow-hidden bg-white rounded-2xl shadow-md shadow-slate-300/60 duration-300 hover:shadow-xl" v-for="autopart in autoparts" :key="autopart.id">
+            <router-link :to="`/autopart/${autopart.id}/${autopart.name.replaceAll(' ', '-')}`" class="w-full mx-auto overflow-hidden bg-white rounded-2xl shadow-md shadow-slate-300/60 duration-300 hover:shadow-xl" v-for="autopart in autoparts" :key="autopart.id">
                 <img class="w-full h-52 object-cover object-center" :src="autopart.url" :alt="autopart.name" />
                 <div class="px-4 py-6">
                     <h2 class="mb-5 font-medium">{{ autopart.name }}</h2>
@@ -181,8 +183,8 @@
             </router-link>
         </div>
         <div class="flex items-center justify-center pt-28 px-4">
-            <div class="w-full flex items-center justify-between border-b border-gray-200">
-                <div class="flex items-center pb-4 text-gray-600 hover:text-red-700 cursor-pointer">
+            <div class="w-full flex items-center justify-between border-t border-gray-200">
+                <div class="flex items-center pt-4 text-gray-600 hover:text-red-700 cursor-pointer">
                     <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M1.1665 4H12.8332" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M1.1665 4L4.49984 7.33333" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
@@ -191,16 +193,16 @@
                     <p class=" ml-3 font-medium leading-none">Previous</p>                    
                 </div>
                 <div class="sm:flex hidden">
-                    <p class=" font-medium leading-none cursor-pointer text-gray-600 hover:text-red-700 border-b border-transparent hover:border-red-400 pb-4 mr-4 px-2">1</p>
-                    <p class=" font-medium leading-none cursor-pointer text-gray-600 hover:text-red-700 border-b border-transparent hover:border-red-400 pb-4 mr-4 px-2">2</p>
-                    <p class=" font-medium leading-none cursor-pointer text-gray-600 hover:text-red-700 border-b border-transparent hover:border-red-400 pb-4 mr-4 px-2">3</p>
-                    <p class=" font-medium leading-none cursor-pointer text-red-700 border-b border-red-400 pb-4 mr-4 px-2">4</p>
-                    <p class=" font-medium leading-none cursor-pointer text-gray-600 hover:text-red-700 border-b border-transparent hover:border-red-400 pb-4 mr-4 px-2">5</p>
-                    <p class=" font-medium leading-none cursor-pointer text-gray-600 hover:text-red-700 border-b border-transparent hover:border-red-400 pb-4 mr-4 px-2">6</p>
-                    <p class=" font-medium leading-none cursor-pointer text-gray-600 hover:text-red-700 border-b border-transparent hover:border-red-400 pb-4 mr-4 px-2">7</p>
-                    <p class=" font-medium leading-none cursor-pointer text-gray-600 hover:text-red-700 border-b border-transparent hover:border-red-400 pb-4 mr-4 px-2">8</p>
+                    <p class=" font-medium leading-none cursor-pointer text-gray-600 hover:text-red-700 border-t border-transparent hover:border-red-400 pt-4 mr-4 px-2">1</p>
+                    <p class=" font-medium leading-none cursor-pointer text-gray-600 hover:text-red-700 border-t border-transparent hover:border-red-400 pt-4 mr-4 px-2">2</p>
+                    <p class=" font-medium leading-none cursor-pointer text-gray-600 hover:text-red-700 border-t border-transparent hover:border-red-400 pt-4 mr-4 px-2">3</p>
+                    <p class=" font-medium leading-none cursor-pointer text-red-700 border-t border-red-400 pt-4 mr-4 px-2">4</p>
+                    <p class=" font-medium leading-none cursor-pointer text-gray-600 hover:text-red-700 border-t border-transparent hover:border-red-400 pt-4 mr-4 px-2">5</p>
+                    <p class=" font-medium leading-none cursor-pointer text-gray-600 hover:text-red-700 border-t border-transparent hover:border-red-400 pt-4 mr-4 px-2">6</p>
+                    <p class=" font-medium leading-none cursor-pointer text-gray-600 hover:text-red-700 border-t border-transparent hover:border-red-400 pt-4 mr-4 px-2">7</p>
+                    <p class=" font-medium leading-none cursor-pointer text-gray-600 hover:text-red-700 border-t border-transparent hover:border-red-400 pt-4 mr-4 px-2">8</p>
                 </div>
-                <div class="flex items-center pb-4 text-gray-600 hover:text-red-700 cursor-pointer">
+                <div class="flex items-center pt-4 text-gray-600 hover:text-red-700 cursor-pointer">
                     <p class=" font-medium leading-none mr-3">Next</p>
                     <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M1.1665 4H12.8332" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
@@ -210,20 +212,6 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="container mx-auto px-4">
-        <div class="flex flex-col md:flex-row justify-between items-end mb-20 space-x-0 sm:space-x-8 space-y-16 md:space-y-0">
-            <div class="md:w-6/12">
-                <h3 class="font-title text-2xl mb-2">Auto Global</h3>
-                <div class="text-gray-700 font-medium text-lg">
-                    Nos especializamos en la comercialización y distribución de autopartes, respaldados por una amplia experiencia en el sector.
-                </div>
-            </div>
-            <img class="w-full sm:w-auto md:h-32" src="/img/bg-footer.png" alt="Auto">
-        </div>
-        <hr class="my-6 lg:my-8 border-gray-200 mx-auto" />
-        <span class="block mb-6 lg:mb-8 text-sm text-gray-600 text-center">© 2023 Auto Global. All Rights Reserved.</span>
     </div>
     
 </template>

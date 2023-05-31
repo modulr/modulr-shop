@@ -68,7 +68,7 @@
 
             <ol role="list" class="flex items-center">
                 <li>
-                    <router-link to="/" class="rounded-md p-1 text-sm font-medium text-gray-600 focus:text-gray-900 focus:shadow hover:text-gray-800"> Home </router-link>
+                    <span class="rounded-md p-1 text-sm font-medium text-gray-600 focus:text-gray-900 focus:shadow hover:text-gray-800"> Home </span>
                 </li>
                 <li v-if="autopart.store.name">
                     <span class="mx-2 text-gray-400">/</span>
@@ -168,7 +168,7 @@
                 <div class="lg:col-span-2 lg:row-span-2 lg:row-end-2">
                     <div class="sm:mt-5 flex items-center">
                         <div class="w-full mb-14">
-                            <span class="text-lg font-medium text-red-600">{{ autopart.origin.name }}</span>
+                            <span class="text-lg font-medium text-red-600" v-if="autopart.origin">{{ autopart.origin.name }}</span>
                             <h1 class="max-w-xl mt-2 mb-6 text-2xl font-bold md:text-4xl">{{ autopart.name }}</h1>
                             <p class="text-green-600 mb-4">10% descuento</p>
                             <h2 class="inline-block mb-8 text-4xl font-bold text-gray-700">
@@ -177,11 +177,11 @@
                             </h2>
                             <div class="mb-8">
                                 <h3 class="w-16 pb-1 mb-4 border-b border-red-400 text-gray-600">Marca</h3>
-                                <div class="font-bold">{{ autopart.make.name }}</div>
+                                <div class="font-bold" v-if="autopart.make">{{ autopart.make.name }}</div>
                             </div>
                             <div class="mb-8">
                                 <h3 class="w-16 pb-1 mb-4 border-b border-red-400 text-gray-600">Modelo</h3>
-                                <div class="font-bold">{{ autopart.model.name }}</div>
+                                <div class="font-bold" v-if="autopart.model">{{ autopart.model.name }}</div>
                             </div>
                             <div class="mb-12">
                                 <h3 class="w-16 pb-1 mb-4 border-b border-red-400 text-gray-600">Años</h3>
@@ -219,18 +219,4 @@
             </div>
         </div>
     </section>
-
-    <div class="container mx-auto px-4 mt-44">
-        <div class="flex flex-col md:flex-row justify-between items-end mb-20 space-x-0 sm:space-x-8 space-y-16 md:space-y-0">
-            <div class="md:w-6/12">
-                <h3 class="font-title text-2xl mb-2">Auto Global</h3>
-                <div class="text-gray-700 font-medium text-lg">
-                    Nos especializamos en la comercialización y distribución de autopartes, respaldados por una amplia experiencia en el sector.
-                </div>
-            </div>
-            <img class="w-full sm:w-auto md:h-32" src="/img/bg-footer.png" alt="Auto">
-        </div>
-        <hr class="my-6 lg:my-8 border-gray-200 mx-auto" />
-        <span class="block mb-6 lg:mb-8 text-sm text-gray-600 text-center">© 2023 Auto Global. All Rights Reserved.</span>
-    </div>
 </template>
