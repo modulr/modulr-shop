@@ -34,7 +34,7 @@
             <div class="lg:flex lg:items-start">
               <div class="lg:order-2 lg:ml-5">
                 <div class="max-w-xl overflow-hidden rounded-lg">
-                  <img class="h-full w-full max-w-full object-cover" src="/images/12.png" alt="" />
+                  <img class="h-full w-full max-w-full object-cover" src="/images/car/12.png" alt="" />
                 </div>
               </div>
     
@@ -503,7 +503,7 @@
             </div>
       </div>
     
-      <div class="relative overflow-hidden before:absolute before:top-0 before:left-1/2 before:bg-[url('/16.jpg')] before:bg-no-repeat before:bg-top before:bg-cover before:w-full before:h-full before:-z-[1] before:transform before:-translate-x-1/2 dark:before:bg-[url('/16.jpg')]">
+      <div class="relative overflow-hidden before:absolute before:top-0 before:left-1/2 before:bg-[url('/img/bg-hero.jpg')] before:bg-no-repeat before:bg-top before:bg-cover before:w-full before:h-full before:-z-[1] before:transform before:-translate-x-1/2 dark:before:bg-[url('/img/bg-hero.jpg')]">
          <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-52">
                <div class="flex justify-center">
                   <div class="max-w-5xl text-center">
@@ -533,7 +533,7 @@
       </div>
    
       <section>
-         <div class="relative overflow-hidden bg-no-repeat bg-cover" style=" background-position: 50%; background-image: url('/16.jpg'); height: 500px;">
+         <div class="relative overflow-hidden bg-no-repeat bg-cover" style=" background-position: 50%; background-image: url('/img/bg-hero.jpg'); height: 500px;">
                <div class="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden bg-fixed" style="background-color: rgba(0, 0, 0, 0.75)">
                   <div class="flex justify-center items-center h-full">
                      <div class="text-center text-white px-6 md:px-12">
@@ -561,7 +561,7 @@
          </div>
       </section>
         
-      <div class="relative overflow-hidden before:absolute before:top-0 before:left-1/2 before:bg-[url('/16.jpg')] before:bg-no-repeat before:bg-top before:bg-cover before:w-full before:h-full before:-z-[1] before:transform before:-translate-x-1/2 dark:before:bg-[url('/16.jpg')]">
+      <div class="relative overflow-hidden before:absolute before:top-0 before:left-1/2 before:bg-[url('/img/bg-hero.jpg')] before:bg-no-repeat before:bg-top before:bg-cover before:w-full before:h-full before:-z-[1] before:transform before:-translate-x-1/2 dark:before:bg-[url('/img/bg-hero.jpg')]">
          <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-32">
                <div class="flex items-center flex-wrap px-2 md:px-0">
                   <div class="relative lg:w-7/12 lg:py-24 xl:py-32">
