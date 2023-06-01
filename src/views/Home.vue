@@ -33,36 +33,9 @@
         },
 
         methods: {
-            getRand(page) {
-                if (page > 0 && page <= this.pagination.last_page) {
-                    window.scroll({top: 0, left: 0, behavior: 'smooth'})
-                    this.loading = true
-                    api.get('/api/autoparts/rand?page='+page)
-                    .then((response) => {
-    
-                        this.autoparts = response.data.data
-                        this.pagination = {
-                            from: response.data.from,
-                            to: response.data.to,
-                            total: response.data.total,
-                            per_page: response.data.per_page,
-                            current_page: response.data.current_page,
-                            last_page: response.data.last_page
-                        }
-                        this.loading = false
-    
-                    }).catch( error => {
-    
-                        this.loading = false
-                        console.error( 'Error al consultar en la API: ', error );
-                    })
-                }
-            },
-            search(e) {
-                this.page = 1
-                e.preventDefault()
+            getAll(page) {
                 this.loading = true
-                api.post('/api/autoparts/search?page='+this.page, this.filters)
+                api.post('/api/autoparts/search?page='+page, this.filters)
                 .then((response) => {
 
                     this.autoparts = response.data.data
@@ -81,6 +54,16 @@
                     this.loading = false
                     console.error( 'Error al consultar en la API: ', error );
                 })
+            },
+            search(e) {
+                e.preventDefault()
+                this.getAll(1)
+            },
+            paginate(page) {
+                if (page > 0 && page <= this.pagination.last_page) {
+                    window.scroll({top: 0, left: 0, behavior: 'smooth'})
+                    this.getAll(page)
+                }
             },
             getMakes() {
                 api.get('/api/makes')
@@ -121,7 +104,7 @@
             this.getMakes()
             this.getModels()
             this.getCategories()
-            this.getRand(1)
+            this.getAll(1)
         },
 
         computed: {
@@ -311,7 +294,7 @@
             </div>
             <div class="flex items-center justify-center pt-28 px-4">
                 <div class="w-full flex items-center justify-between border-t border-gray-200">
-                    <div @click="getRand(pagination.current_page - 1)" class="flex items-center pt-4 text-gray-600 hover:text-red-700 cursor-pointer">
+                    <div @click="paginate(pagination.current_page - 1)" class="flex items-center pt-4 text-gray-600 hover:text-red-700 cursor-pointer">
                         <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M1.1665 4H12.8332" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M1.1665 4L4.49984 7.33333" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
@@ -320,9 +303,9 @@
                         <p class=" ml-3 font-medium leading-none">Previous</p>                    
                     </div>
                     <div class="sm:flex hidden">
-                        <p @click="getRand(page)" v-for="page in visiblePages" :key="page" :class="[pagination.current_page == page ? 'text-red-700 border-red-400' : 'border-transparent']" class="pt-4 mr-4 px-2 font-medium leading-none cursor-pointer text-gray-600 border-t hover:text-red-700 hover:border-red-400">{{ page }}</p>
+                        <p @click="paginate(page)" v-for="page in visiblePages" :key="page" :class="[pagination.current_page == page ? 'text-red-700 border-red-400' : 'border-transparent']" class="pt-4 mr-4 px-2 font-medium leading-none cursor-pointer text-gray-600 border-t hover:text-red-700 hover:border-red-400">{{ page }}</p>
                     </div>
-                    <div @click="getRand(pagination.current_page + 1)" class="flex items-center pt-4 text-gray-600 hover:text-red-700 cursor-pointer">
+                    <div @click="paginate(pagination.current_page + 1)" class="flex items-center pt-4 text-gray-600 hover:text-red-700 cursor-pointer">
                         <p class=" font-medium leading-none mr-3">Next</p>
                         <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M1.1665 4H12.8332" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
