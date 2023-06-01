@@ -157,9 +157,9 @@
                         </div>
                         <div class="flex flex-wrap">
                             <div class="w-1/5 p-1 sm:p-2" v-for="image in autopart.images" :key="image.id">
-                                <a href="#" class="block border-2 hover:border-red-400 rounded-md" :class="[currentImage.id == image.id ? 'border-red-400': 'border-transparent']" @click.prevent="setCurrentImage(image)">
+                                <div :class="[currentImage.id == image.id ? 'border-red-400': 'border-transparent']" @click.prevent="setCurrentImage(image)" class="block border-2 hover:border-red-400 rounded-md">
                                     <img class="object-cover w-full lg:h-20 rounded" :src="image.url_thumbnail" alt="Auto Global">
-                                </a>
+                                </div>
                             </div>
                         </div>
                     </div>
