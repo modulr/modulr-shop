@@ -55,8 +55,7 @@
                     console.error( 'Error al consultar en la API: ', error );
                 })
             },
-            search(e) {
-                e.preventDefault()
+            search() {
                 this.getAll(1)
             },
             paginate(page) {
@@ -137,7 +136,7 @@
         <div class="container mx-auto px-4">
             <div class="flex flex-wrap pt-16 pb-32 sm:py-32 lg:py-40">
                 <h1 class="font-title font-bold text-3xl text-red-600 md:text-4xl drop-shadow-md w-4/6 md:w-5/12 mb-12">Encuentra todo para <span class="text-gray-900">tu auto</span></h1>
-                <form @submit="search" class="w-full lg:w-8/12 flex flex-col sm:flex-row p-4 sm:p-2 space-y-4 sm:space-y-0 space-x-1 bg-white shadow-md rounded-3xl sm:rounded-full border border-gray-200">
+                <form @submit.prevent="search" class="w-full lg:w-8/12 flex flex-col sm:flex-row p-4 sm:p-2 space-y-4 sm:space-y-0 space-x-1 bg-white shadow-md rounded-3xl sm:rounded-full border border-gray-200">
                     <Multiselect
                         placeholder="Marca"
                         v-model="filters.make"
