@@ -1,133 +1,56 @@
-<script>
-    import api from '../api'
+<script setup>
+    import { onMounted, computed } from 'vue'
     import Multiselect from '@vueform/multiselect'
+    import Footer from '../components/Footer.vue';
+    import { useAutopartsStore } from '../stores/autoparts'; 
 
-    export default {
-        components: {
-            Multiselect,
-        },
+    const autopartsStore = useAutopartsStore()
 
-        data() {
-            return {
-                autoparts: {},
-                loading: false,
-                lists: {
-                    makes: [],
-                    models: [],
-                    categories: [],
-                },
-                filters: {
-                    make: null,
-                    model: null,
-                    category: null,
-                },
-                pagination: {
-                    from: 0,
-                    to: 0,
-                    total: 0,
-                    per_page: 50,
-                    current_page: 1,
-                    last_page: 1
-                }
-            }
-        },
+    onMounted( () => {
+        if (autopartsStore.lists.makes.length == 0)
+            autopartsStore.getMakes()
 
-        methods: {
-            getAll(page) {
-                this.loading = true
-                api.post('/api/autoparts/search?page='+page, this.filters)
-                .then((response) => {
+        if (autopartsStore.lists.models.length == 0)
+            autopartsStore.getModels()
 
-                    this.autoparts = response.data.data
-                    this.pagination = {
-                        from: response.data.from,
-                        to: response.data.to,
-                        total: response.data.total,
-                        per_page: response.data.per_page,
-                        current_page: response.data.current_page,
-                        last_page: response.data.last_page
-                    }
-                    this.loading = false
+        if (autopartsStore.lists.categories.length == 0)
+            autopartsStore.getCategories()
 
-                }).catch( error => {
+        if (autopartsStore.autoparts.length == 0)
+            autopartsStore.getAutoparts(1)
+    })
 
-                    this.loading = false
-                    console.error( 'Error al consultar en la API: ', error );
-                })
-            },
-            search() {
-                this.getAll(1)
-            },
-            paginate(page) {
-                if (page > 0 && page <= this.pagination.last_page) {
-                    window.scroll({top: 0, left: 0, behavior: 'smooth'})
-                    this.getAll(page)
-                }
-            },
-            getMakes() {
-                api.get('/api/makes')
-                .then((response) => {
+    function search() {
+        autopartsStore.getAutoparts(1)
+    }
 
-                    this.lists.makes = response.data
-
-                }).catch( error => {
-
-                    console.error( 'Error al consultar en la API: ', error );
-                })
-            },
-            getModels() {
-                api.get('/api/models')
-                .then((response) => {
-
-                    this.lists.models = response.data
-
-                }).catch( error => {
-
-                    console.error( 'Error al consultar en la API: ', error );
-                })
-            },
-            getCategories() {
-                api.get('/api/categories')
-                .then((response) => {
-
-                    this.lists.categories = response.data
-
-                }).catch( error => {
-
-                    console.error( 'Error al consultar en la API: ', error );
-                })
-            }
-        },
-        
-        mounted() {
-            this.getMakes()
-            this.getModels()
-            this.getCategories()
-            this.getAll(1)
-        },
-
-        computed: {
-            filterModels () {
-                this.filters.model = null
-
-                if (this.filters.make) {
-                    var filterArray = this.lists.models
-    
-                    var makeId = this.filters.make.id
-                    filterArray = filterArray.filter(function(item)  {
-                        return item.make_id == makeId
-                    })
-    
-                    return filterArray
-                }
-            },
-            visiblePages() {
-                const startPage = Math.max(this.pagination.current_page - 2, 1);
-                const endPage = Math.min(startPage + 4, this.pagination.total);
-                return Array.from({ length: endPage - startPage + 1 }, (_, index) => startPage + index);
-            },
+    function paginate(page) {
+        if (page > 0 && page <= autopartsStore.pagination.last_page) {
+            window.scroll({top: 0, left: 0, behavior: 'smooth'})
+            autopartsStore.getAutoparts(page)
         }
     }
+
+    const filterModels = computed(() => {
+        autopartsStore.filters.model = null
+
+        if (autopartsStore.filters.make) {
+            var filterArray = autopartsStore.lists.models
+
+            var makeId = autopartsStore.filters.make.id
+            filterArray = filterArray.filter(function(item)  {
+                return item.make_id == makeId
+            })
+
+            return filterArray
+        }
+    })
+
+    const visiblePages = computed(() => {
+        const startPage = Math.max(autopartsStore.pagination.current_page - 2, 1);
+        const endPage = Math.min(startPage + 4, autopartsStore.pagination.last_page);
+        return Array.from({ length: endPage - startPage + 1 }, (_, index) => startPage + index);
+    })
     
 </script>
 
@@ -139,16 +62,16 @@
                 <form @submit.prevent="search" class="w-full lg:w-8/12 flex flex-col sm:flex-row p-4 sm:p-2 space-y-4 sm:space-y-0 space-x-1 bg-white shadow-md rounded-3xl sm:rounded-full border border-gray-200">
                     <Multiselect
                         placeholder="Marca"
-                        v-model="filters.make"
+                        v-model="autopartsStore.filters.make"
                         :searchable="true"
                         track-by="name"
                         label="name"
                         value-prop="id"
                         :object="true"
-                        :options="lists.makes" />
+                        :options="autopartsStore.lists.makes" />
                     <Multiselect
                         placeholder="Modelo"
-                        v-model="filters.model"
+                        v-model="autopartsStore.filters.model"
                         :searchable="true"
                         track-by="name"
                         label="name"
@@ -157,13 +80,13 @@
                         :options="filterModels" />
                     <Multiselect
                         placeholder="Categoria"
-                        v-model="filters.category"
+                        v-model="autopartsStore.filters.category"
                         :searchable="true"
                         track-by="name"
                         label="name"
                         value-prop="id"
                         :object="true"
-                        :options="lists.categories" />
+                        :options="autopartsStore.lists.categories" />
                     <!-- <input placeholder="Pieza" class="w-full p-4 rounded-full outline-0" type="text"> -->
                     <button type="submit" class="w-full md:w-auto ml-auto py-3 px-12 rounded-full text-center transition bg-gradient-to-b from-red-500 to-red-700 hover:to-red-800 outline-none">
                         <div class="flex justify-center items-center space-x-4">
@@ -195,7 +118,7 @@
         </div>
     </div>
 
-    <div class="container mx-auto px-4 pt-20 mb-72" v-if="loading">
+    <div class="container mx-auto px-4 pt-20 mb-72" v-if="autopartsStore.loading">
         <!-- <div class="flex justify-center">
             <img class="" src="/img/loader-1.gif" alt="Loading Autoparts">
         </div> -->
@@ -276,12 +199,13 @@
     </div>
 
     <div v-else>
-        <div class="container mx-auto px-4 pt-20 pb-36" v-if="autoparts.length > 0">
+        <div class="container mx-auto px-4 pt-20 pb-36" v-if="autopartsStore.autoparts.length > 0">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-x-8 sm:gap-y-16">
-                <router-link :to="`/autopart/${autopart.id}/${autopart.name.replace(/[ \/]/g, '-')}`" v-for="autopart in autoparts" :key="autopart.id" class="w-full mx-auto overflow-hidden bg-white rounded-2xl shadow-md shadow-slate-300/60 duration-300 hover:shadow-xl">
+                <router-link :to="`/autopart/${autopart.id}/${autopart.name.replace(/[ \/]/g, '-')}`" v-for="autopart in autopartsStore.autoparts" :key="autopart.id"
+                class="w-full mx-auto overflow-hidden bg-white rounded-2xl shadow-md shadow-slate-300/60 duration-300 hover:shadow-xl">
                     <img class="w-full h-52 object-cover object-center" :src="autopart.url" :alt="autopart.name" />
                     <div class="px-4 py-6">
-                        <h2 class="mb-5 font-medium">{{ autopart.name }}</h2>
+                        <h2 class="mb-5 font-medium line-clamp-2">{{ autopart.name }}</h2>
                         <!-- <p class="mb-5 text-base text-gray-400 truncate ...">{{ autopart.description }}</p> -->
                         <div class="flex items-center">
                             <p class="mr-2 text-xl font-semibold">${{ autopart.sale_price }}</p>
@@ -293,7 +217,7 @@
             </div>
             <div class="flex items-center justify-center pt-28 px-4">
                 <div class="w-full flex items-center justify-between border-t border-gray-200">
-                    <div @click="paginate(pagination.current_page - 1)" class="flex items-center pt-4 text-gray-600 hover:text-red-700 cursor-pointer">
+                    <div @click="paginate(autopartsStore.pagination.current_page - 1)" class="flex items-center pt-4 text-gray-600 hover:text-red-700 cursor-pointer">
                         <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M1.1665 4H12.8332" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M1.1665 4L4.49984 7.33333" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
@@ -302,9 +226,9 @@
                         <p class=" ml-3 font-medium leading-none">Previous</p>                    
                     </div>
                     <div class="sm:flex hidden">
-                        <p @click="paginate(page)" v-for="page in visiblePages" :key="page" :class="[pagination.current_page == page ? 'text-red-700 border-red-400' : 'border-transparent']" class="pt-4 mr-4 px-2 font-medium leading-none cursor-pointer text-gray-600 border-t hover:text-red-700 hover:border-red-400">{{ page }}</p>
+                        <p @click="paginate(page)" v-for="page in visiblePages" :key="page" :class="[autopartsStore.pagination.current_page == page ? 'text-red-700 border-red-400' : 'border-transparent']" class="pt-4 mr-4 px-2 font-medium leading-none cursor-pointer text-gray-600 border-t hover:text-red-700 hover:border-red-400">{{ page }}</p>
                     </div>
-                    <div @click="paginate(pagination.current_page + 1)" class="flex items-center pt-4 text-gray-600 hover:text-red-700 cursor-pointer">
+                    <div @click="paginate(autopartsStore.pagination.current_page + 1)" class="flex items-center pt-4 text-gray-600 hover:text-red-700 cursor-pointer">
                         <p class=" font-medium leading-none mr-3">Next</p>
                         <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M1.1665 4H12.8332" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
@@ -327,5 +251,6 @@
             </div>
         </div>
     </div>
-    
+
+    <Footer></Footer>
 </template>
