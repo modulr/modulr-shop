@@ -1,10 +1,12 @@
 <script setup>
-    import { onMounted, computed } from 'vue'
+    import { onMounted, computed, ref } from 'vue'
     import Multiselect from '@vueform/multiselect'
     import Footer from '../components/Footer.vue';
     import { useAutopartsStore } from '../stores/autoparts'; 
 
     const autopartsStore = useAutopartsStore()
+    const searchQuery = ref('');
+    const selectedCategory = ref(null);
 
     onMounted( () => {
         if (autopartsStore.lists.makes.length == 0)
@@ -23,6 +25,29 @@
     function search() {
         autopartsStore.getAutoparts(1)
     }
+
+    function searchCategories(search) {
+      searchQuery.value = search;
+    }
+
+    const filteredCategories = computed(() => {
+      const query = searchQuery.value.toLowerCase();
+      const category = selectedCategory.value;
+
+      if (!autopartsStore.lists.categories || autopartsStore.lists.categories.length === 0) {
+        return [];
+      }
+      
+
+      return autopartsStore.lists.categories.filter((option) => {
+        const nameMatch = option.name.toLowerCase().includes(query);
+        const variants = JSON.parse(option.variants || '[]'); // Conversión a matriz
+        const variantsMatch = variants && variants.some((variant) => variant.toLowerCase().includes(query));
+        const categoryMatch = !category || option.id === category;
+  
+        return (nameMatch || variantsMatch) && categoryMatch;
+      });
+    });
 
     function paginate(page) {
         if (page > 0 && page <= autopartsStore.pagination.last_page) {
@@ -82,11 +107,13 @@
                         placeholder="Categoria"
                         v-model="autopartsStore.filters.category"
                         :searchable="true"
+                        :filter-results="false"
+                        @search-change="searchCategories"
                         track-by="name"
                         label="name"
                         value-prop="id"
                         :object="true"
-                        :options="autopartsStore.lists.categories" />
+                        :options="filteredCategories" />
                     <!-- <input placeholder="Pieza" class="w-full p-4 rounded-full outline-0" type="text"> -->
                     <button type="submit" class="w-full md:w-auto ml-auto py-3 px-12 rounded-full text-center transition bg-gradient-to-b from-red-500 to-red-700 hover:to-red-800 outline-none">
                         <div class="flex justify-center items-center space-x-4">
