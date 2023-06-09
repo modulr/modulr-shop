@@ -1,6 +1,7 @@
 <script>
     import api from '../api'
     import Multiselect from '@vueform/multiselect'
+    import { useMainStore } from '../store'
 
     export default {
         components: {
@@ -9,6 +10,7 @@
 
         data() {
             return {
+                main: useMainStore(),
                 autoparts: {},
                 loading: false,
                 lists: {
@@ -132,6 +134,7 @@
 </script>
 
 <template>
+    {{ this.main.message }}
     <div class="bg-[url('/img/bg-hero.jpg')] bg-no-repeat bg-top bg-cover w-full h-full">
         <div class="container mx-auto px-4">
             <div class="flex flex-wrap pt-16 pb-32 sm:py-32 lg:py-40">
@@ -327,5 +330,4 @@
             </div>
         </div>
     </div>
-    
 </template>
