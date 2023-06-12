@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from './views/Home.vue'
+import Autoparts from './views/Autoparts.vue'
 import Store from './views/Store.vue'
 import Autopart from './views/Autopart.vue'
 
@@ -8,9 +8,9 @@ export default createRouter({
     history: createWebHistory(),
 
     routes: [
-        { path: '/', component: Home },
+        { path: '/:id?', component: Autoparts },
         { path: '/store', component: Store },
-        { path: '/autopart/:id/:name?', component: Autopart }
+        { path: '/autopart/:id/:name?', component: Autopart, props: true }
     ],
 
     scrollBehavior(to, from, savedPosition) {
