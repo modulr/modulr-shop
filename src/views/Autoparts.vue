@@ -6,7 +6,7 @@
 
     const autopartsStore = useAutopartsStore()
     const searchQuery = ref('');
-    const selectedCategory = ref(null);
+    // const selectedCategory = ref(null);
 
     onMounted( () => {
         if (autopartsStore.lists.makes.length == 0)
@@ -30,25 +30,6 @@
       searchQuery.value = search;
     }
 
-    const filteredCategories = computed(() => {
-      const query = searchQuery.value.toLowerCase();
-      const category = selectedCategory.value;
-
-      if (!autopartsStore.lists.categories || autopartsStore.lists.categories.length === 0) {
-        return [];
-      }
-      
-
-      return autopartsStore.lists.categories.filter((option) => {
-        const nameMatch = option.name.toLowerCase().includes(query);
-        const variants = JSON.parse(option.variants || '[]'); // Conversión a matriz
-        const variantsMatch = variants && variants.some((variant) => variant.toLowerCase().includes(query));
-        const categoryMatch = !category || option.id === category;
-  
-        return (nameMatch || variantsMatch) && categoryMatch;
-      });
-    });
-
     function paginate(page) {
         if (page > 0 && page <= autopartsStore.pagination.last_page) {
             window.scroll({top: 0, left: 0, behavior: 'smooth'})
@@ -71,12 +52,31 @@
         }
     })
 
+    const filteredCategories = computed(() => {
+      const query = searchQuery.value.toLowerCase();
+      //const category = selectedCategory.value;
+
+      if (!autopartsStore.lists.categories || autopartsStore.lists.categories.length === 0) {
+        return [];
+      }
+      
+
+      return autopartsStore.lists.categories.filter((option) => {
+        const nameMatch = option.name.toLowerCase().includes(query);
+        const variants = JSON.parse(option.variants || '[]'); // Conversión a matriz
+        const variantsMatch = variants && variants.some((variant) => variant.toLowerCase().includes(query));
+       // const categoryMatch = !category || option.id === category;
+  
+        return (nameMatch || variantsMatch);// && categoryMatch;
+      });
+    });
+
     const visiblePages = computed(() => {
         const startPage = Math.max(autopartsStore.pagination.current_page - 2, 1);
         const endPage = Math.min(startPage + 4, autopartsStore.pagination.last_page);
         return Array.from({ length: endPage - startPage + 1 }, (_, index) => startPage + index);
     })
-    
+
 </script>
 
 <template>
@@ -145,7 +145,61 @@
         </div>
     </div>
 
-    <div class="container mx-auto px-4 pt-20 mb-72" v-if="autopartsStore.loading">
+    <div v-if="!autopartsStore.loading">
+        <div class="container mx-auto px-4 pt-20 pb-36" v-if="autopartsStore.autoparts.length > 0">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-x-8 sm:gap-y-16">
+                <router-link :to="`/autopart/${autopart.id}/${autopart.name.replace(/[ \/]/g, '-')}`" v-for="autopart in autopartsStore.autoparts" :key="autopart.id"
+                class="w-full mx-auto overflow-hidden bg-white rounded-2xl shadow-md shadow-slate-300/60 duration-300 hover:shadow-xl">
+                    <img class="w-full h-52 object-cover object-center" :src="autopart.url" :alt="autopart.name" />
+                    <div class="px-4 py-6">
+                        <h2 class="mb-5 font-medium line-clamp-2">{{ autopart.name }}</h2>
+                        <!-- <p class="mb-5 text-base text-gray-400 truncate ...">{{ autopart.description }}</p> -->
+                        <div class="flex items-center">
+                            <p class="mr-2 text-xl font-semibold">${{ autopart.sale_price }}</p>
+                            <p class="text-base font-medium text-gray-500 line-through">${{ autopart.discount_price }}</p>
+                            <p class="ml-auto text-base font-medium text-green-500">10%</p>
+                        </div>
+                    </div>
+                </router-link>
+            </div>
+            <div class="flex items-center justify-center pt-28 px-4">
+                <div class="w-full flex items-center justify-between border-t border-gray-200">
+                    <div @click="paginate(autopartsStore.pagination.current_page - 1)" class="flex items-center pt-4 text-gray-600 hover:text-red-700 cursor-pointer">
+                        <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1.1665 4H12.8332" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M1.1665 4L4.49984 7.33333" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M1.1665 4.00002L4.49984 0.666687" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <p class=" ml-3 font-medium leading-none">Previous</p>                    
+                    </div>
+                    <div class="sm:flex hidden">
+                        <p @click="paginate(page)" v-for="page in visiblePages" :key="page" :class="[autopartsStore.pagination.current_page == page ? 'text-red-700 border-red-400' : 'border-transparent']" class="pt-4 mr-4 px-2 font-medium leading-none cursor-pointer text-gray-600 border-t hover:text-red-700 hover:border-red-400">{{ page }}</p>
+                    </div>
+                    <div @click="paginate(autopartsStore.pagination.current_page + 1)" class="flex items-center pt-4 text-gray-600 hover:text-red-700 cursor-pointer">
+                        <p class=" font-medium leading-none mr-3">Next</p>
+                        <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1.1665 4H12.8332" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M9.5 7.33333L12.8333 4" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M9.5 0.666687L12.8333 4.00002" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>    
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div v-else>
+            <div class="bg-[url('/img/not-found.png')] bg-no-repeat bg-center bg-contain w-full h-full">
+                <div class="container mx-auto px-4 text-center pt-40 pb-40 mb-32">
+                    <p class="text-2xl text-gray-500">No encontramos lo que buscas</p>
+                    <p class="text-lg text-gray-400">Intentalo de nuevo</p>
+                    <div class="flex justify-center">
+                        <img class="" src="/img/loader-4.gif" alt="Loading Autoparts">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mx-auto px-4 pt-20 mb-72" v-else>
         <!-- <div class="flex justify-center">
             <img class="" src="/img/loader-1.gif" alt="Loading Autoparts">
         </div> -->
@@ -220,60 +274,6 @@
                 <div class="px-4 py-6 space-y-4">
                     <div className="animate-pulse h-4 bg-gray-300 rounded"></div>
                     <div className="animate-pulse h-4 bg-gray-300 rounded"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div v-else>
-        <div class="container mx-auto px-4 pt-20 pb-36" v-if="autopartsStore.autoparts.length > 0">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-x-8 sm:gap-y-16">
-                <router-link :to="`/autopart/${autopart.id}/${autopart.name.replace(/[ \/]/g, '-')}`" v-for="autopart in autopartsStore.autoparts" :key="autopart.id"
-                class="w-full mx-auto overflow-hidden bg-white rounded-2xl shadow-md shadow-slate-300/60 duration-300 hover:shadow-xl">
-                    <img class="w-full h-52 object-cover object-center" :src="autopart.url" :alt="autopart.name" />
-                    <div class="px-4 py-6">
-                        <h2 class="mb-5 font-medium line-clamp-2">{{ autopart.name }}</h2>
-                        <!-- <p class="mb-5 text-base text-gray-400 truncate ...">{{ autopart.description }}</p> -->
-                        <div class="flex items-center">
-                            <p class="mr-2 text-xl font-semibold">${{ autopart.sale_price }}</p>
-                            <p class="text-base font-medium text-gray-500 line-through">${{ autopart.discount_price }}</p>
-                            <p class="ml-auto text-base font-medium text-green-500">10%</p>
-                        </div>
-                    </div>
-                </router-link>
-            </div>
-            <div class="flex items-center justify-center pt-28 px-4">
-                <div class="w-full flex items-center justify-between border-t border-gray-200">
-                    <div @click="paginate(autopartsStore.pagination.current_page - 1)" class="flex items-center pt-4 text-gray-600 hover:text-red-700 cursor-pointer">
-                        <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1.1665 4H12.8332" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M1.1665 4L4.49984 7.33333" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M1.1665 4.00002L4.49984 0.666687" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                        <p class=" ml-3 font-medium leading-none">Previous</p>                    
-                    </div>
-                    <div class="sm:flex hidden">
-                        <p @click="paginate(page)" v-for="page in visiblePages" :key="page" :class="[autopartsStore.pagination.current_page == page ? 'text-red-700 border-red-400' : 'border-transparent']" class="pt-4 mr-4 px-2 font-medium leading-none cursor-pointer text-gray-600 border-t hover:text-red-700 hover:border-red-400">{{ page }}</p>
-                    </div>
-                    <div @click="paginate(autopartsStore.pagination.current_page + 1)" class="flex items-center pt-4 text-gray-600 hover:text-red-700 cursor-pointer">
-                        <p class=" font-medium leading-none mr-3">Next</p>
-                        <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1.1665 4H12.8332" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M9.5 7.33333L12.8333 4" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M9.5 0.666687L12.8333 4.00002" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>    
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div v-else>
-            <div class="bg-[url('/img/not-found.png')] bg-no-repeat bg-center bg-contain w-full h-full">
-                <div class="container mx-auto px-4 text-center pt-40 pb-40 mb-32">
-                    <p class="text-2xl text-gray-500">No encontramos lo que buscas</p>
-                    <p class="text-lg text-gray-400">Intentalo de nuevo</p>
-                    <div class="flex justify-center">
-                        <img class="" src="/img/loader-4.gif" alt="Loading Autoparts">
-                    </div>
                 </div>
             </div>
         </div>

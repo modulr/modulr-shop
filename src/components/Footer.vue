@@ -1,5 +1,5 @@
 <template>
-    <div class="container mx-auto px-4">
+    <div class="container mx-auto px-4 mt-52">
         <div class="flex flex-col md:flex-row justify-between items-end mb-20 space-x-0 sm:space-x-8 space-y-16 md:space-y-0">
             <div class="md:w-6/12">
                 <h3 class="font-title text-2xl mb-2">Auto Global</h3>
