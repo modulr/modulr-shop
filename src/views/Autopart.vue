@@ -31,87 +31,101 @@
         <div class="container mx-auto px-4">
 
             <div v-if="!autopartsStore.loading">
-                <ol role="list" class="flex items-center">
-                    <li>
-                        <span class="rounded-md p-1 text-sm font-medium text-gray-600 focus:text-gray-900 focus:shadow hover:text-gray-800"> Home </span>
-                    </li>
-                    <li>
-                        <span class="mx-2 text-gray-400">/</span>
-                        <span class="rounded-md p-1 text-sm font-medium text-gray-600 focus:text-gray-900 focus:shadow hover:text-gray-800"> {{ autopartsStore.autopart.store?.name }} </span>
-                    </li>
-                    <li>
-                        <span class="mx-2 text-gray-400">/</span>
-                        <span class="rounded-md p-1 text-sm font-medium text-gray-600 focus:text-gray-900 focus:shadow hover:text-gray-800"> {{ autopartsStore.autopart.id }} </span>
-                    </li>
-                </ol>
-                <div class="grid grid-cols-1 gap-12 mt-8 lg:mt-12 lg:grid-cols-5 lg:gap-16 lg:col-gap-12 xl:col-gap-16">
-                    <div class="lg:col-span-3 lg:row-end-1">
-                        <div>
-                            <div class="mb-6 lg:mb-10 h-screen bg-red-100">
-                                <img class="object-contain w-full h-full rounded-2xl" :src="autopartsStore.currentImage?.url" alt="Auto Global">
-                            </div>
-                            <div class="flex flex-wrap">
-                                <div class="w-1/5 p-1 sm:p-2" v-for="image in autopartsStore.autopart.images" :key="image.id">
-                                    <div :class="[autopartsStore.currentImage?.id == image.id ? 'border-red-400': 'border-transparent']"
-                                    @click.prevent="setCurrentImage(image)" class="block border-2 hover:border-red-400 rounded-md">
-                                        <img class="object-cover w-full h-20 rounded" :src="image.url_thumbnail" alt="Auto Global">
+                <div v-if="autopartsStore.autopart">
+                    <ol role="list" class="flex items-center">
+                        <li>
+                            <span class="rounded-md p-1 text-sm font-medium text-gray-600 focus:text-gray-900 focus:shadow hover:text-gray-800"> Home </span>
+                        </li>
+                        <li>
+                            <span class="mx-2 text-gray-400">/</span>
+                            <span class="rounded-md p-1 text-sm font-medium text-gray-600 focus:text-gray-900 focus:shadow hover:text-gray-800"> {{ autopartsStore.autopart.store?.name }} </span>
+                        </li>
+                        <li>
+                            <span class="mx-2 text-gray-400">/</span>
+                            <span class="rounded-md p-1 text-sm font-medium text-gray-600 focus:text-gray-900 focus:shadow hover:text-gray-800"> {{ autopartsStore.autopart.id }} </span>
+                        </li>
+                    </ol>
+                    <div class="grid grid-cols-1 gap-12 mt-8 lg:mt-12 lg:grid-cols-5 lg:gap-16 lg:col-gap-12 xl:col-gap-16">
+                        <div class="lg:col-span-3 lg:row-end-1">
+                            <div>
+                                <div class="mb-6 aspect-w-16 aspect-h-9">
+                                    <img class="object-contain w-full h-full" :src="autopartsStore.currentImage?.url" alt="Auto Global">
+                                </div>
+                                <div class="flex flex-wrap">
+                                    <div class="w-1/5 p-1 sm:p-2" v-for="image in autopartsStore.autopart.images" :key="image.id">
+                                        <div :class="[autopartsStore.currentImage?.id == image.id ? 'border-red-400': 'border-transparent']"
+                                        @mouseover.prevent="setCurrentImage(image)" class="block border-2 hover:border-red-400 rounded-md">
+                                            <img class="object-cover w-full h-20 rounded" :src="image.url_thumbnail" alt="Auto Global">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-    
-                    <div class="lg:col-span-2 lg:row-span-2 lg:row-end-2">
-                        <div class="sm:mt-5 flex items-center">
-                            <div class="w-full mb-14">
-                                <span class="text-lg font-medium text-red-600">{{ autopartsStore.autopart.origin?.name }}</span>
-                                <h1 class="max-w-xl mt-2 mb-6 text-2xl font-bold md:text-4xl">{{ autopartsStore.autopart.name }}</h1>
-                                <p class="text-green-600 mb-4">10% descuento</p>
-                                <h2 class="inline-block mb-8 text-4xl font-bold text-gray-700">
-                                    <span>${{ autopartsStore.autopart.sale_price }}</span>
-                                    <span class="text-base font-normal text-gray-500 line-through ml-2">${{ autopartsStore.autopart.discount_price }}</span>
-                                </h2>
-                                <div class="mb-8">
-                                    <h3 class="w-16 pb-1 mb-4 border-b border-red-400 text-gray-600">Marca</h3>
-                                    <div class="font-bold">{{ autopartsStore.autopart.make?.name }}</div>
-                                </div>
-                                <div class="mb-8">
-                                    <h3 class="w-16 pb-1 mb-4 border-b border-red-400 text-gray-600">Modelo</h3>
-                                    <div class="font-bold">{{ autopartsStore.autopart.model?.name }}</div>
-                                </div>
-                                <div class="mb-12">
-                                    <h3 class="w-16 pb-1 mb-4 border-b border-red-400 text-gray-600">Años</h3>
-                                    <div class="font-bold" v-if="autopartsStore.autopart.years?.length > 0">
-                                        <span v-for="(year, index) in autopartsStore.autopart.years" :key="year.id" >
-                                            {{year.name}}<span v-if="index+1 < autopartsStore.autopart.years.length">, </span>
-                                        </span>
+        
+                        <div class="lg:col-span-2 lg:row-span-2 lg:row-end-2">
+                            <div class="sm:mt-5 flex items-center">
+                                <div class="w-full mb-14">
+                                    <span class="text-lg font-medium text-red-600">{{ autopartsStore.autopart.origin?.name }}</span>
+                                    <h1 class="max-w-xl mt-2 text-2xl font-bold md:text-4xl">{{ autopartsStore.autopart.name }}</h1>
+                                    <h3 class="mb-6 text-gray-500">{{ autopartsStore.autopart.autopart_number }}</h3>
+                                    <p class="text-green-600 mb-4">10% descuento</p>
+                                    <h2 class="inline-block mb-8 text-4xl font-bold text-gray-700">
+                                        <span>${{ autopartsStore.autopart.sale_price }}</span>
+                                        <span class="text-base font-normal text-gray-500 line-through ml-2">${{ autopartsStore.autopart.discount_price }}</span>
+                                    </h2>
+                                    <div class="mb-8">
+                                        <h3 class="w-16 pb-1 mb-4 border-b border-red-400 text-gray-600">Marca</h3>
+                                        <h3 class="font-bold">{{ autopartsStore.autopart.make?.name }}</h3>
                                     </div>
-                                </div>
-                                <div class="flex flex-wrap items-center gap-4">
-                                    <a :href="`https://api.whatsapp.com/send?phone=528117409087&text=Me%20interesa%20la%20autoparte%20${autopartsStore.autopart.name},%20ID:%20${autopartsStore.autopart.id}&source=&data=`" target="_blank" class="flex items-center justify-center w-full p-4 bg-red-600 rounded-full border border-red-600 lg:w-2/5 text-white hover:bg-red-700">
-                                        Comprar
-                                    </a>
-                                    <a v-if="autopartsStore.autopart.ml_url" :href="autopartsStore.autopart.ml_url" target="_blank"
-                                    class="flex items-center justify-center w-full p-4 text-red-600 border border-red-600 rounded-full lg:w-2/5 hover:bg-red-600 hover:border-red-600 hover:text-white">
-                                        Mercado Libre
-                                    </a>
+                                    <div class="mb-8">
+                                        <h3 class="w-16 pb-1 mb-4 border-b border-red-400 text-gray-600">Modelo</h3>
+                                        <h3 class="font-bold">{{ autopartsStore.autopart.model?.name }}</h3>
+                                    </div>
+                                    <div class="mb-12">
+                                        <h3 class="w-16 pb-1 mb-4 border-b border-red-400 text-gray-600">Años</h3>
+                                        <h3 class="font-bold" v-if="autopartsStore.autopart.years?.length > 0">
+                                            <span v-for="(year, index) in autopartsStore.autopart.years" :key="year.id" >
+                                                {{year.name}}<span v-if="index+1 < autopartsStore.autopart.years.length">, </span>
+                                            </span>
+                                        </h3>
+                                    </div>
+                                    <div class="flex flex-wrap items-center gap-4">
+                                        <a :href="`https://api.whatsapp.com/send?phone=528117409087&text=Me%20interesa%20la%20autoparte%20${autopartsStore.autopart.name},%20ID:%20${autopartsStore.autopart.id}&source=&data=`" target="_blank" class="flex items-center justify-center w-full p-4 bg-red-600 rounded-full border border-red-600 lg:w-2/5 text-white hover:bg-red-700">
+                                            Comprar
+                                        </a>
+                                        <a v-if="autopartsStore.autopart.ml_url" :href="autopartsStore.autopart.ml_url" target="_blank"
+                                        class="flex items-center justify-center w-full p-4 text-red-600 border border-red-600 rounded-full lg:w-2/5 hover:bg-red-600 hover:border-red-600 hover:text-white">
+                                            Mercado Libre
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+        
+                        <div class="lg:col-span-3">
+                            <div class="border-b border-gray-300">
+                                <nav class="flex gap-4">
+                                    <span class="border-b-2 border-gray-900 py-4 text-gray-600"> Descripción </span>
+                                </nav>
+                            </div>
+        
+                            <div class="mt-8 flow-root sm:mt-12 mb-8 whitespace-pre-line">
+                                {{ autopartsStore.autopart.description }}
+                            </div>
+        
+                            <div v-if="autopartsStore.autopart.location">Ubicación {{ autopartsStore.autopart.location }}</div>
+                        </div>
                     </div>
-    
-                    <div class="lg:col-span-3">
-                        <div class="border-b border-gray-300">
-                            <nav class="flex gap-4">
-                                <span class="border-b-2 border-gray-900 py-4 text-gray-600"> Descripción </span>
-                            </nav>
+                </div>
+                <div v-else>
+                    <div class="bg-[url('/img/not-found.png')] bg-no-repeat bg-center bg-contain w-full h-full">
+                        <div class="container mx-auto px-4 text-center pt-16 pb-40 mb-32">
+                            <p class="text-2xl text-gray-500">No encontramos lo que buscas</p>
+                            <p class="text-lg text-gray-400 mb-12">Intentalo de nuevo</p>
+                            <div class="flex justify-center">
+                                <img class="" src="/img/loader-3.gif" alt="Loading Autoparts">
+                            </div>
                         </div>
-    
-                        <div class="mt-8 flow-root sm:mt-12 mb-8 whitespace-pre-line">
-                            {{ autopartsStore.autopart.description }}
-                        </div>
-    
-                        <div v-if="autopartsStore.autopart.location">Ubicación {{ autopartsStore.autopart.location }}</div>
                     </div>
                 </div>
             </div>
