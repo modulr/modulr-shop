@@ -85,9 +85,9 @@
             <div class="flex flex-wrap pt-16 pb-32 sm:py-32 lg:py-40 xl:py-48">
                 <div class="mb-8 pl-1">
                     <h1 class="font-title font-bold text-4xl text-gray-900 md:text-5xl drop-shadow-md">Auto <span class="text-red-600">Global</span></h1>
-                    <h2 class="text-gray-600 text-xl">Las mejores piezas para tu automovil</h2>
+                    <h2 class="text-gray-500 text-xl tracking-widest">Las mejores piezas para tu automóvil</h2>
                 </div>
-                <form @submit.prevent="search" class="w-full lg:w-8/12 flex flex-col sm:flex-row p-4 sm:p-2 space-y-4 sm:space-y-0 space-x-0 sm:space-x-1 bg-white shadow-md rounded-3xl sm:rounded-full border border-gray-200">
+                <form @submit.prevent="search" class="w-full lg:w-9/12 flex flex-col sm:flex-row p-4 sm:p-2 space-y-4 sm:space-y-0 space-x-0 sm:space-x-1 bg-white shadow-md rounded-3xl sm:rounded-full border border-gray-200">
                     <Multiselect
                         placeholder="Marca"
                         v-model="autopartsStore.filters.make"
@@ -117,7 +117,7 @@
                         value-prop="id"
                         :object="true"
                         :options="filteredCategories" />
-                    <!-- <input placeholder="Pieza" class="w-full p-4 rounded-full outline-0" type="text"> -->
+                    <input placeholder="Número de autoparte" class="w-full p-4 rounded-full outline-0" type="text">
                     <button type="submit" class="w-full md:w-auto ml-auto py-3 px-12 rounded-full text-center transition bg-gradient-to-b from-red-500 to-red-700 hover:to-red-800 outline-red-600">
                         <div class="flex justify-center items-center space-x-4">
                             <!-- <svg xmlns="http://www.w3.org/2000/svg" class="w-5 text-white" fill="currentColor" viewBox="0 0 16 16">
