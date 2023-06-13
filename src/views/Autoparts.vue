@@ -82,9 +82,12 @@
 <template>
     <div class="bg-[url('/img/bg-hero.jpg')] bg-no-repeat bg-top bg-cover w-full h-full">
         <div class="container mx-auto px-4">
-            <div class="flex flex-wrap pt-16 pb-32 sm:py-32 lg:py-40">
-                <h1 class="font-title font-bold text-3xl text-red-600 md:text-4xl drop-shadow-md w-4/6 md:w-5/12 mb-12">Encuentra todo para <span class="text-gray-900">tu auto</span></h1>
-                <form @submit.prevent="search" class="w-full lg:w-8/12 flex flex-col sm:flex-row p-4 sm:p-2 space-y-4 sm:space-y-0 space-x-1 bg-white shadow-md rounded-3xl sm:rounded-full border border-gray-200">
+            <div class="flex flex-wrap pt-16 pb-32 sm:py-32 lg:py-40 xl:py-48">
+                <div class="mb-8 pl-1">
+                    <h1 class="font-title font-bold text-4xl text-gray-900 md:text-5xl drop-shadow-md">Auto <span class="text-red-600">Global</span></h1>
+                    <h2 class="text-gray-600 text-xl">Las mejores piezas para tu automovil</h2>
+                </div>
+                <form @submit.prevent="search" class="w-full lg:w-8/12 flex flex-col sm:flex-row p-4 sm:p-2 space-y-4 sm:space-y-0 space-x-0 sm:space-x-1 bg-white shadow-md rounded-3xl sm:rounded-full border border-gray-200">
                     <Multiselect
                         placeholder="Marca"
                         v-model="autopartsStore.filters.make"
@@ -115,7 +118,7 @@
                         :object="true"
                         :options="filteredCategories" />
                     <!-- <input placeholder="Pieza" class="w-full p-4 rounded-full outline-0" type="text"> -->
-                    <button type="submit" class="w-full md:w-auto ml-auto py-3 px-12 rounded-full text-center transition bg-gradient-to-b from-red-500 to-red-700 hover:to-red-800 outline-none">
+                    <button type="submit" class="w-full md:w-auto ml-auto py-3 px-12 rounded-full text-center transition bg-gradient-to-b from-red-500 to-red-700 hover:to-red-800 outline-red-600">
                         <div class="flex justify-center items-center space-x-4">
                             <!-- <svg xmlns="http://www.w3.org/2000/svg" class="w-5 text-white" fill="currentColor" viewBox="0 0 16 16">
                                 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
@@ -149,7 +152,7 @@
         <div class="container mx-auto px-4 pt-20 pb-36" v-if="autopartsStore.autoparts.length > 0">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-x-8 sm:gap-y-16">
                 <router-link :to="`/autopart/${autopart.id}/${autopart.name.replace(/[ \/]/g, '-')}`" v-for="autopart in autopartsStore.autoparts" :key="autopart.id"
-                class="w-full mx-auto overflow-hidden bg-white rounded-2xl shadow-md shadow-slate-300/60 duration-300 hover:shadow-xl">
+                class="w-full mx-auto overflow-hidden bg-white rounded-2xl shadow-md shadow-slate-300/60 duration-300 hover:shadow-xl outline-red-100">
                     <img class="w-full h-52 object-cover object-center" :src="autopart.url" :alt="autopart.name" />
                     <div class="px-4 py-6">
                         <h2 class="mb-5 font-medium line-clamp-2">{{ autopart.name }}</h2>

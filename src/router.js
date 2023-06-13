@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Autoparts from './views/Autoparts.vue'
-import Store from './views/Store.vue'
+import Components from './views/Components.vue'
 import Autopart from './views/Autopart.vue'
 
 export default createRouter({
@@ -8,8 +8,8 @@ export default createRouter({
     history: createWebHistory(),
 
     routes: [
-        { path: '/:id?', component: Autoparts },
-        { path: '/store', component: Store },
+        { path: '/', component: Autoparts },
+        { path: '/components', component: Components },
         { path: '/autopart/:id/:name?', component: Autopart, props: true }
     ],
 

@@ -27,7 +27,7 @@
 </script>
 
 <template>
-    <section class="py-12 sm:py-16"> 
+    <section class="py-12"> 
         <div class="container mx-auto px-4">
 
             <div v-if="!autopartsStore.loading">
@@ -47,12 +47,30 @@
                     </ol>
                     <div class="grid grid-cols-1 gap-12 mt-8 lg:mt-12 lg:grid-cols-5 lg:gap-16 lg:col-gap-12 xl:col-gap-16">
                         <div class="lg:col-span-3 lg:row-end-1">
+                            <!-- <div class="lg:flex lg:items-start">
+                                <div class="lg:order-2 w-full">
+                                    <div class="aspect-w-16 aspect-h-12 rounded-lg">
+                                        <img class="h-full w-full object-contain" :src="autopartsStore.currentImage?.url" alt="Auto Global">
+                                    </div>
+                                </div>
+                                <div class="mt-2 w-full lg:order-1 lg:w-32 lg:flex-shrink-0">
+                                    <div class="flex flex-row items-start lg:flex-col space-x-2 space-y-2">
+                                        <div class="w-full h-20 rounded-lg text-center"
+                                            v-for="image in autopartsStore.autopart.images" :key="image.id">
+                                            <div :class="[autopartsStore.currentImage?.id == image.id ? 'border-red-400': 'border-transparent']"
+                                            @mouseover.prevent="setCurrentImage(image)" class="block border-2 hover:border-red-400 rounded-md">
+                                                <img class="object-cover w-full h-20 rounded" :src="image.url_thumbnail" alt="Auto Global">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
                             <div>
-                                <div class="mb-6 aspect-w-16 aspect-h-9">
+                                <div class="mb-6 aspect-w-16 aspect-h-10">
                                     <img class="object-contain w-full h-full" :src="autopartsStore.currentImage?.url" alt="Auto Global">
                                 </div>
                                 <div class="flex flex-wrap">
-                                    <div class="w-1/5 p-1 sm:p-2" v-for="image in autopartsStore.autopart.images" :key="image.id">
+                                    <div class="w-1/6 p-1" v-for="image in autopartsStore.autopart.images" :key="image.id">
                                         <div :class="[autopartsStore.currentImage?.id == image.id ? 'border-red-400': 'border-transparent']"
                                         @mouseover.prevent="setCurrentImage(image)" class="block border-2 hover:border-red-400 rounded-md">
                                             <img class="object-cover w-full h-20 rounded" :src="image.url_thumbnail" alt="Auto Global">
@@ -63,7 +81,7 @@
                         </div>
         
                         <div class="lg:col-span-2 lg:row-span-2 lg:row-end-2">
-                            <div class="sm:mt-5 flex items-center">
+                            <div class="flex items-center">
                                 <div class="w-full mb-14">
                                     <span class="text-lg font-medium text-red-600">{{ autopartsStore.autopart.origin?.name }}</span>
                                     <h1 class="max-w-xl mt-2 text-2xl font-bold md:text-4xl">{{ autopartsStore.autopart.name }}</h1>
@@ -136,7 +154,7 @@
                 <div class="grid grid-cols-1 gap-12 mt-8 lg:mt-12 lg:grid-cols-5 lg:gap-16 lg:col-gap-12 xl:col-gap-16">
                     <div class="lg:col-span-3 lg:row-end-1">
                         <div class="sticky top-0 z-50 overflow-hidden">
-                            <div class="relative mb-6 lg:mb-10 lg:h-2/4">
+                            <div class="relative mb-6">
                                 <div className="animate-pulse h-72 bg-gray-300 rounded"></div>
                             </div>
                             <div class="flex-wrap hidden md:flex">
@@ -165,11 +183,13 @@
                     </div>
 
                     <div class="lg:col-span-2 lg:row-span-2 lg:row-end-2">
-                        <div class="mt-5 flex items-center">
+                        <div class="flex items-center">
                             <div class="w-full mb-12">
                                 <div class="mb-12">
+                                    <div className="animate-pulse h-4 bg-gray-300 rounded w-1/4 mb-4"></div>
                                     <div className="animate-pulse h-6 bg-gray-300 rounded mb-6"></div>
-                                    <div className="animate-pulse h-6 bg-gray-300 rounded w-2/3"></div>
+                                    <div className="animate-pulse h-4 bg-gray-300 rounded w-2/6 mb-8"></div>
+                                    <div className="animate-pulse h-8 bg-gray-300 rounded w-2/3"></div>
                                 </div>
                                 <div class="space-y-2 mb-12">
                                     <div className="animate-pulse h-4 bg-gray-300 rounded"></div>
@@ -178,8 +198,8 @@
                                     <div className="animate-pulse h-4 bg-gray-300 rounded w-2/4"></div>
                                 </div>
                                 <div class="flex space-x-2">
-                                    <div className="animate-pulse h-10 bg-gray-300 rounded w-1/2"></div>
-                                    <div className="animate-pulse h-10 bg-gray-300 rounded w-1/2"></div>
+                                    <div className="animate-pulse h-14 bg-gray-300 rounded-full w-1/2"></div>
+                                    <div className="animate-pulse h-14 bg-gray-300 rounded-full w-1/2"></div>
                                 </div>
                             </div>
                         </div>
