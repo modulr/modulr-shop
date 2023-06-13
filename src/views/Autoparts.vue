@@ -85,7 +85,7 @@
             <div class="flex flex-wrap pt-16 pb-32 sm:py-32 lg:py-40 xl:py-48">
                 <div class="mb-8 pl-1">
                     <h1 class="font-title font-bold text-4xl text-gray-900 md:text-5xl drop-shadow-md">Auto <span class="text-red-600">Global</span></h1>
-                    <h2 class="text-gray-500 text-xl tracking-widest">Las mejores piezas para tu automóvil</h2>
+                    <h2 class="text-gray-500 text-lg md:text-2xl tracking-wide md:tracking-wider">Las mejores piezas para tu automóvil</h2>
                 </div>
                 <form @submit.prevent="search" class="w-full lg:w-9/12 flex flex-col sm:flex-row p-4 sm:p-2 space-y-4 sm:space-y-0 space-x-0 sm:space-x-1 bg-white shadow-md rounded-3xl sm:rounded-full border border-gray-200">
                     <Multiselect
