@@ -23,6 +23,7 @@ export const useAutopartsStore = defineStore('autoparts', {
             make: null,
             model: null,
             category: null,
+            number: null,
         },
         autopart: {},
         currentImage: null,

@@ -34,15 +34,15 @@
                 <div v-if="autopartsStore.autopart">
                     <ol role="list" class="flex items-center">
                         <li>
-                            <span class="rounded-md p-1 text-sm font-medium text-gray-600 focus:text-gray-900 focus:shadow hover:text-gray-800"> Home </span>
+                            <span class="rounded-md p-1 text-sm font-medium font-title">Auto <span class="text-red-600">Global</span></span>
                         </li>
                         <li>
                             <span class="mx-2 text-gray-400">/</span>
-                            <span class="rounded-md p-1 text-sm font-medium text-gray-600 focus:text-gray-900 focus:shadow hover:text-gray-800"> {{ autopartsStore.autopart.store?.name }} </span>
+                            <span class="rounded-md p-1 text-sm font-medium text-gray-600"> {{ autopartsStore.autopart.store?.name }} </span>
                         </li>
                         <li>
                             <span class="mx-2 text-gray-400">/</span>
-                            <span class="rounded-md p-1 text-sm font-medium text-gray-600 focus:text-gray-900 focus:shadow hover:text-gray-800"> {{ autopartsStore.autopart.id }} </span>
+                            <span class="rounded-md p-1 text-sm font-medium text-gray-600"> {{ autopartsStore.autopart.id }} </span>
                         </li>
                     </ol>
                     <div class="grid grid-cols-1 gap-12 mt-8 lg:mt-12 lg:grid-cols-5 lg:gap-16 lg:col-gap-12 xl:col-gap-16">
@@ -70,7 +70,7 @@
                                     <img class="object-contain w-full h-full" :src="autopartsStore.currentImage?.url" alt="Auto Global">
                                 </div>
                                 <div class="flex flex-wrap">
-                                    <div class="w-1/6 p-1" v-for="image in autopartsStore.autopart.images" :key="image.id">
+                                    <div class="w-1/5 p-1" v-for="image in autopartsStore.autopart.images" :key="image.id">
                                         <div :class="[autopartsStore.currentImage?.id == image.id ? 'border-red-400': 'border-transparent']"
                                         @mouseover.prevent="setCurrentImage(image)" class="block border-2 hover:border-red-400 rounded-md">
                                             <img class="object-cover w-full h-20 rounded" :src="image.url_thumbnail" alt="Auto Global">
@@ -92,15 +92,15 @@
                                         <span class="text-base font-normal text-gray-500 line-through ml-2">${{ autopartsStore.autopart.discount_price }}</span>
                                     </h2>
                                     <div class="mb-8">
-                                        <h3 class="w-16 pb-1 mb-4 border-b border-red-400 text-gray-600">Marca</h3>
+                                        <h3 class="w-16 pb-1 mb-4 border-b border-red-400 text-gray-600 text-sm">Marca</h3>
                                         <h3 class="font-bold">{{ autopartsStore.autopart.make?.name }}</h3>
                                     </div>
                                     <div class="mb-8">
-                                        <h3 class="w-16 pb-1 mb-4 border-b border-red-400 text-gray-600">Modelo</h3>
+                                        <h3 class="w-16 pb-1 mb-4 border-b border-red-400 text-gray-600 text-sm">Modelo</h3>
                                         <h3 class="font-bold">{{ autopartsStore.autopart.model?.name }}</h3>
                                     </div>
                                     <div class="mb-12">
-                                        <h3 class="w-16 pb-1 mb-4 border-b border-red-400 text-gray-600">Años</h3>
+                                        <h3 class="w-16 pb-1 mb-4 border-b border-red-400 text-gray-600 text-sm">Años</h3>
                                         <h3 class="font-bold" v-if="autopartsStore.autopart.years?.length > 0">
                                             <span v-for="(year, index) in autopartsStore.autopart.years" :key="year.id" >
                                                 {{year.name}}<span v-if="index+1 < autopartsStore.autopart.years.length">, </span>

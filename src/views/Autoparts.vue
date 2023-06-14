@@ -82,7 +82,7 @@
 <template>
     <div class="bg-[url('/img/bg-hero.jpg')] bg-no-repeat bg-top bg-cover w-full h-full">
         <div class="container mx-auto px-4">
-            <div class="flex flex-wrap pt-16 pb-32 sm:py-32 lg:py-40 xl:py-48">
+            <div class="flex flex-wrap pt-16 pb-32 sm:py-32 lg:py-40 xl:py-60">
                 <div class="mb-8 pl-1">
                     <h1 class="font-title font-bold text-4xl text-gray-900 md:text-5xl drop-shadow-md">Auto <span class="text-red-600">Global</span></h1>
                     <h2 class="text-gray-500 text-lg md:text-2xl tracking-wide md:tracking-wider">Las mejores piezas para tu automóvil</h2>
@@ -117,7 +117,7 @@
                         value-prop="id"
                         :object="true"
                         :options="filteredCategories" />
-                    <input placeholder="Número de autoparte" class="w-full p-4 rounded-full outline-0" type="text">
+                    <input type="text" class="w-full p-4 rounded-full outline-0" v-model="autopartsStore.filters.number" placeholder="Número de autoparte">
                     <button type="submit" class="w-full md:w-auto ml-auto py-3 px-12 rounded-full text-center transition bg-gradient-to-b from-red-500 to-red-700 hover:to-red-800 outline-red-600">
                         <div class="flex justify-center items-center space-x-4">
                             <!-- <svg xmlns="http://www.w3.org/2000/svg" class="w-5 text-white" fill="currentColor" viewBox="0 0 16 16">
@@ -149,7 +149,7 @@
     </div>
 
     <div v-if="!autopartsStore.loading">
-        <div class="container mx-auto px-4 pt-20 pb-36" v-if="autopartsStore.autoparts.length > 0">
+        <div class="container mx-auto px-4 pt-20 lg:pt-32 pb-36" v-if="autopartsStore.autoparts.length > 0">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-x-8 sm:gap-y-16">
                 <router-link :to="`/autopart/${autopart.id}/${autopart.name.replace(/[ \/]/g, '-')}`" v-for="autopart in autopartsStore.autoparts" :key="autopart.id"
                 class="w-full mx-auto overflow-hidden bg-white rounded-2xl shadow-md shadow-slate-300/60 duration-300 hover:shadow-xl outline-red-100">
@@ -202,7 +202,7 @@
         </div>
     </div>
 
-    <div class="container mx-auto px-4 pt-20 mb-72" v-else>
+    <div class="container mx-auto px-4 pt-20 lg:pt-32 pb-72" v-else>
         <!-- <div class="flex justify-center">
             <img class="" src="/img/loader-1.gif" alt="Loading Autoparts">
         </div> -->
