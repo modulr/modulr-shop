@@ -34,7 +34,9 @@
                 <div v-if="autopartsStore.autopart">
                     <ol role="list" class="flex items-center">
                         <li>
-                            <span class="rounded-md p-1 text-sm font-medium font-title">Auto <span class="text-red-600">Global</span></span>
+                            <router-link to="/">
+                                <span class="rounded-md p-1 text-sm font-medium font-title">Auto <span class="text-red-600">Global</span></span>
+                            </router-link>
                         </li>
                         <li>
                             <span class="mx-2 text-gray-400">/</span>
@@ -81,31 +83,30 @@
                         </div>
         
                         <div class="lg:col-span-2 lg:row-span-2 lg:row-end-2">
-                            <div class="flex items-center">
+                            <div class="flex items-center sticky top-10 z-50 overflow-hidden">
                                 <div class="w-full mb-14">
-                                    <span class="text-lg font-medium text-red-600">{{ autopartsStore.autopart.origin?.name }}</span>
-                                    <h1 class="max-w-xl mt-2 text-2xl font-bold md:text-4xl">{{ autopartsStore.autopart.name }}</h1>
-                                    <h3 class="mb-6 text-gray-500">{{ autopartsStore.autopart.autopart_number }}</h3>
-                                    <p class="text-green-600 mb-4">10% descuento</p>
+                                    <span class="text-sm font-medium" :class="[autopartsStore.autopart.origin_id == 1 ? 'text-red-600' : 'text-gray-500']">{{ autopartsStore.autopart.origin?.name }}</span>
+                                    <h1 class="max-w-xl mb-6 mt-2 text-2xl font-bold md:text-3xl">{{ autopartsStore.autopart.name }}</h1>
+                                    <p class="text-green-600 mb-1">10% descuento</p>
                                     <h2 class="inline-block mb-8 text-4xl font-bold text-gray-700">
                                         <span>${{ autopartsStore.autopart.sale_price }}</span>
                                         <span class="text-base font-normal text-gray-500 line-through ml-2">${{ autopartsStore.autopart.discount_price }}</span>
                                     </h2>
-                                    <div class="mb-8">
-                                        <h3 class="w-16 pb-1 mb-4 border-b border-red-400 text-gray-600 text-sm">Marca</h3>
+                                    <div class="mb-6">
                                         <h3 class="font-bold">{{ autopartsStore.autopart.make?.name }}</h3>
+                                        <h3 class="w-16 pb-1 mt-2 border-t border-red-400 text-gray-600 text-sm">Marca</h3>
                                     </div>
-                                    <div class="mb-8">
-                                        <h3 class="w-16 pb-1 mb-4 border-b border-red-400 text-gray-600 text-sm">Modelo</h3>
+                                    <div class="mb-6">
                                         <h3 class="font-bold">{{ autopartsStore.autopart.model?.name }}</h3>
+                                        <h3 class="w-16 pb-1 mt-2 border-t border-red-400 text-gray-600 text-sm">Modelo</h3>
                                     </div>
                                     <div class="mb-12">
-                                        <h3 class="w-16 pb-1 mb-4 border-b border-red-400 text-gray-600 text-sm">Años</h3>
                                         <h3 class="font-bold" v-if="autopartsStore.autopart.years?.length > 0">
                                             <span v-for="(year, index) in autopartsStore.autopart.years" :key="year.id" >
                                                 {{year.name}}<span v-if="index+1 < autopartsStore.autopart.years.length">, </span>
                                             </span>
                                         </h3>
+                                        <h3 class="w-16 pb-1 mt-2 border-t border-red-400 text-gray-600 text-sm">Años</h3>
                                     </div>
                                     <div class="flex flex-wrap items-center gap-4">
                                         <a :href="`https://api.whatsapp.com/send?phone=528117409087&text=Me%20interesa%20la%20autoparte%20${autopartsStore.autopart.name},%20ID:%20${autopartsStore.autopart.id}&source=&data=`" target="_blank" class="flex items-center justify-center w-full p-4 bg-red-600 rounded-full border border-red-600 lg:w-2/5 text-white hover:bg-red-700">
@@ -115,6 +116,10 @@
                                         class="flex items-center justify-center w-full p-4 text-red-600 border border-red-600 rounded-full lg:w-2/5 hover:bg-red-600 hover:border-red-600 hover:text-white">
                                             Mercado Libre
                                         </a>
+                                    </div>
+                                    <div class="mt-8 space-y-2">
+                                        <h1 class="text-sm font-medium text-gray-600" v-if="autopartsStore.autopart.autopart_number">Número {{ autopartsStore.autopart.autopart_number }}</h1>
+                                        <div class="text-sm font-medium text-gray-600" v-if="autopartsStore.autopart.location">Ubicación {{ autopartsStore.autopart.location }}</div>
                                     </div>
                                 </div>
                             </div>
@@ -130,8 +135,6 @@
                             <div class="mt-8 flow-root sm:mt-12 mb-8 whitespace-pre-line">
                                 {{ autopartsStore.autopart.description }}
                             </div>
-        
-                            <div v-if="autopartsStore.autopart.location">Ubicación {{ autopartsStore.autopart.location }}</div>
                         </div>
                     </div>
                 </div>
