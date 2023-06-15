@@ -135,6 +135,12 @@
 
     <div class="mx-auto -mt-8">
         <div class="flex flex-nowrap space-x-4 sm:justify-between overflow-x-scroll scrollbar-hide">
+            <img class="h-16 px-6" src="/img/logos/nissan.svg" alt="Nissan">
+            <img class="h-16 px-6" src="/img/logos/acura.svg" alt="Acura">
+            <img class="h-16 px-6" src="/img/logos/tesla.svg" alt="Tesla">
+            <img class="h-16 px-6" src="/img/logos/bmw.svg" alt="BMW">
+            <!-- <img class="h-16 px-6" src="/img/logos/audi.svg" alt="Audi">
+            <img class="h-16 px-6" src="/img/logos/mercedes-benz.svg" alt="Mercedes Benz"> -->
             <img src="/img/logos/toyota.png" alt="">
             <img src="/img/logos/volvo.png" alt="">
             <img src="/img/logos/ford.png" alt="">
@@ -144,7 +150,6 @@
             <img src="/img/logos/vw.png" alt="">
             <img src="/img/logos/land-rover.png" alt="">
             <img src="/img/logos/mazda.png" alt="">
-            <img src="/img/logos/nissan.png" alt="">
         </div>
     </div>
 
