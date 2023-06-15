@@ -53,22 +53,29 @@
     })
 
     const filteredCategories = computed(() => {
-      const query = searchQuery.value.toLowerCase();
-      //const category = selectedCategory.value;
+        const query = searchQuery.value.toLowerCase();
+        //const category = selectedCategory.value;
 
-      if (!autopartsStore.lists.categories || autopartsStore.lists.categories.length === 0) {
-        return [];
-      }
+        if (!autopartsStore.lists.categories || autopartsStore.lists.categories.length === 0) {
+            return [];
+        }
       
+        let cats = autopartsStore.lists.categories.filter((option) => {
+            const nameMatch = option.name.toLowerCase().includes(query);
+            const variants = JSON.parse(option.variants || '[]'); // Conversión a matriz
+            const variantsMatch = variants && variants.some((variant) => variant.toLowerCase().includes(query));
+            // const categoryMatch = !category || option.id === category;
+    
+            return (nameMatch || variantsMatch);// && categoryMatch;
+        });
+        if(cats.length < 1){
+            cats = cats.concat({
+                id: 0,
+                name: query
+            });
+        }
+        return cats;
 
-      return autopartsStore.lists.categories.filter((option) => {
-        const nameMatch = option.name.toLowerCase().includes(query);
-        const variants = JSON.parse(option.variants || '[]'); // Conversión a matriz
-        const variantsMatch = variants && variants.some((variant) => variant.toLowerCase().includes(query));
-       // const categoryMatch = !category || option.id === category;
-  
-        return (nameMatch || variantsMatch);// && categoryMatch;
-      });
     });
 
     const visiblePages = computed(() => {
