@@ -89,7 +89,7 @@
 <template>
     <div class="bg-[url('/img/bg-hero.jpg')] bg-no-repeat bg-top bg-cover w-full h-full">
         <div class="container mx-auto px-4">
-            <div class="flex flex-wrap pt-16 pb-32 sm:py-32 lg:py-40 xl:py-60">
+            <div class="flex flex-wrap pt-20 pb-32 lg:pt-36 lg:pb-40 xl:pt-48 xl:pb-60 2xl:pt-56 2xl:pb-72">
                 <div class="mb-8 pl-1">
                     <h1 class="font-title font-bold text-4xl text-gray-900 md:text-5xl drop-shadow-md">Auto <span class="text-red-600">Global</span></h1>
                     <h2 class="text-gray-500 text-lg md:text-2xl tracking-wide md:tracking-wider">Las mejores piezas para tu automóvil</h2>
@@ -142,21 +142,33 @@
 
     <div class="mx-auto -mt-8">
         <div class="flex flex-nowrap space-x-4 sm:justify-between overflow-x-scroll scrollbar-hide">
-            <img class="h-16 px-6" src="/img/logos/nissan.svg" alt="Nissan">
-            <img class="h-16 px-6" src="/img/logos/acura.svg" alt="Acura">
-            <img class="h-16 px-6" src="/img/logos/tesla.svg" alt="Tesla">
-            <img class="h-16 px-6" src="/img/logos/bmw.svg" alt="BMW">
-            <!-- <img class="h-16 px-6" src="/img/logos/audi.svg" alt="Audi">
-            <img class="h-16 px-6" src="/img/logos/mercedes-benz.svg" alt="Mercedes Benz"> -->
-            <img src="/img/logos/toyota.png" alt="">
-            <img src="/img/logos/volvo.png" alt="">
-            <img src="/img/logos/ford.png" alt="">
-            <img src="/img/logos/lamborghini.png" alt="">
-            <img src="/img/logos/audi.png" alt="">
-            <img src="/img/logos/mini.png" alt="">
-            <img src="/img/logos/vw.png" alt="">
-            <img src="/img/logos/land-rover.png" alt="">
-            <img src="/img/logos/mazda.png" alt="">
+            <img class="h-16 w-44 px-6" src="/img/logos/acura.svg" alt="Acura">
+            <img class="h-16 w-44 px-6" src="/img/logos/alfa-romeo.svg" alt="Alfa Romeo">
+            <img class="h-16 w-44 px-6" src="/img/logos/audi.svg" alt="Audi">
+            <img class="h-16 w-44 px-6" src="/img/logos/bmw.svg" alt="BMW">
+            <img class="h-16 w-44 px-6" src="/img/logos/cadillac.svg" alt="Cadillac">
+            <img class="h-16 w-44 px-6" src="/img/logos/chevrolet.svg" alt="Chevrolet">
+            <img class="h-16 w-44 px-6" src="/img/logos/ford.svg" alt="Ford">
+            <img class="h-16 w-44 px-6" src="/img/logos/honda.svg" alt="Honda">
+            <img class="h-16 w-44 px-6" src="/img/logos/hyundai.svg" alt="Hyundai">
+            <img class="h-16 w-44 px-6" src="/img/logos/infiniti.svg" alt="Infiniti">
+            <img class="h-16 w-44 px-6" src="/img/logos/jaguar.svg" alt="Jaguar">
+            <img class="h-16 w-44 px-6" src="/img/logos/jeep.svg" alt="Jeep">
+            <img class="h-16 w-44 px-6" src="/img/logos/kia.svg" alt="Kia">
+            <img class="h-16 w-44 px-6" src="/img/logos/land-rover.svg" alt="Land Rover">
+            <img class="h-16 w-44 px-6" src="/img/logos/lexus.svg" alt="Lexus">
+            <img class="h-16 w-44 px-6" src="/img/logos/lincoln.svg" alt="Lincoln">
+            <img class="h-16 w-44 px-6" src="/img/logos/maserati.svg" alt="Maserati">
+            <img class="h-16 w-44 px-6" src="/img/logos/mazda.svg" alt="Mazda">
+            <img class="h-16 w-44 px-6" src="/img/logos/mercedes-benz.svg" alt="Mercedes Benz">
+            <img class="h-16 w-44 px-6" src="/img/logos/mini.svg" alt="Mini">
+            <img class="h-16 w-44 px-6" src="/img/logos/mitsubishi.svg" alt="Mitsubishi">
+            <img class="h-16 w-44 px-6" src="/img/logos/nissan.svg" alt="Nissan">
+            <img class="h-16 w-44 px-6" src="/img/logos/porsche.svg" alt="Porsche">
+            <img class="h-16 w-44 px-6" src="/img/logos/tesla.svg" alt="Tesla">
+            <img class="h-16 w-44 px-6" src="/img/logos/toyota.svg" alt="Toyota">
+            <img class="h-16 w-44 px-6" src="/img/logos/volkswagen.svg" alt="Volkswagen">
+            <img class="h-16 w-44 px-6" src="/img/logos/volvo.svg" alt="Volvo">
         </div>
     </div>
 
