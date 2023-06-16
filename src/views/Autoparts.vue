@@ -1,11 +1,15 @@
 <script setup>
-    import { onMounted, computed, ref } from 'vue'
+    import { onMounted, computed, ref, nextTick } from 'vue'
     import Multiselect from '@vueform/multiselect'
     import Footer from '../components/Footer.vue';
     import { useAutopartsStore } from '../stores/autoparts'; 
 
     const autopartsStore = useAutopartsStore()
     const searchQuery = ref('');
+    const makeSelect = ref('');
+    const modelSelect = ref('');
+    const categorySelect = ref('');
+    const numberSelect = ref('');
     // const selectedCategory = ref(null);
 
     onMounted( () => {
@@ -84,6 +88,20 @@
         return Array.from({ length: endPage - startPage + 1 }, (_, index) => startPage + index);
     })
 
+    function handleMakeInput(){
+        modelSelect.value.focus();
+        modelSelect.value.open();
+    }
+
+    function handleModelInput(){
+        categorySelect.value.focus();
+        categorySelect.value.open();
+    }
+
+    function handleCategoryInput(){
+        numberSelect.value.focus();
+    }
+
 </script>
 
 <template>
@@ -96,6 +114,7 @@
                 </div>
                 <form @submit.prevent="search" class="w-full lg:w-9/12 flex flex-col sm:flex-row p-4 sm:p-2 space-y-4 sm:space-y-0 space-x-0 sm:space-x-1 bg-white shadow-md rounded-3xl sm:rounded-full border border-gray-200">
                     <Multiselect
+                        ref="makeSelect"
                         placeholder="Marca"
                         v-model="autopartsStore.filters.make"
                         :searchable="true"
@@ -103,8 +122,10 @@
                         label="name"
                         value-prop="id"
                         :object="true"
-                        :options="autopartsStore.lists.makes" />
+                        :options="autopartsStore.lists.makes"
+                        @select="handleMakeInput" />
                     <Multiselect
+                        ref="modelSelect"
                         placeholder="Modelo"
                         v-model="autopartsStore.filters.model"
                         :searchable="true"
@@ -112,8 +133,10 @@
                         label="name"
                         value-prop="id"
                         :object="true"
-                        :options="filterModels" />
+                        :options="filterModels" 
+                        @select="handleModelInput"/>
                     <Multiselect
+                        ref="categorySelect"
                         placeholder="Categoria"
                         v-model="autopartsStore.filters.category"
                         :searchable="true"
@@ -123,8 +146,9 @@
                         label="name"
                         value-prop="id"
                         :object="true"
-                        :options="filteredCategories" />
-                    <input type="text" class="w-full p-4 rounded-full outline-0" v-model="autopartsStore.filters.number" placeholder="Número de autoparte">
+                        :options="filteredCategories" 
+                        @select="handleCategoryInput"/>
+                    <input ref="numberSelect" type="text" class="w-full p-4 rounded-full outline-0" v-model="autopartsStore.filters.number" placeholder="Número de autoparte">
                     <button type="submit" class="w-full md:w-auto ml-auto py-3 px-12 rounded-full text-center transition bg-gradient-to-b from-red-500 to-red-700 hover:to-red-800 outline-red-600">
                         <div class="flex justify-center items-center space-x-4">
                             <!-- <svg xmlns="http://www.w3.org/2000/svg" class="w-5 text-white" fill="currentColor" viewBox="0 0 16 16">
