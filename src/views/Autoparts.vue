@@ -82,7 +82,7 @@
 <template>
     <div class="bg-[url('/img/bg-hero.jpg')] bg-no-repeat bg-top bg-cover w-full h-full">
         <div class="container mx-auto px-4">
-            <div class="flex flex-wrap pt-16 pb-32 sm:py-32 lg:py-40 xl:py-60">
+            <div class="flex flex-wrap pt-20 pb-32 lg:pt-36 lg:pb-40 xl:pt-48 xl:pb-60 2xl:pt-56 2xl:pb-72">
                 <div class="mb-8 pl-1">
                     <h1 class="font-title font-bold text-4xl text-gray-900 md:text-5xl drop-shadow-md">Auto <span class="text-red-600">Global</span></h1>
                     <h2 class="text-gray-500 text-lg md:text-2xl tracking-wide md:tracking-wider">Las mejores piezas para tu automóvil</h2>
