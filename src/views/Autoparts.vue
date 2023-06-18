@@ -28,6 +28,7 @@
 
     function search() {
         autopartsStore.getAutoparts(1)
+        window.scroll({top: 500, left: 0, behavior: 'smooth'})
     }
 
     function searchCategories(search) {
@@ -137,7 +138,7 @@
                         @select="handleModelInput"/>
                     <Multiselect
                         ref="categorySelect"
-                        placeholder="Categoria"
+                        placeholder="Autoparte"
                         v-model="autopartsStore.filters.category"
                         :searchable="true"
                         :filter-results="false"
@@ -148,7 +149,7 @@
                         :object="true"
                         :options="filteredCategories" 
                         @select="handleCategoryInput"/>
-                    <input ref="numberSelect" type="text" class="w-full p-4 rounded-full outline-0" v-model="autopartsStore.filters.number" placeholder="Número de autoparte">
+                    <input ref="numberSelect" type="text" class="w-full p-4 rounded-full outline-0" v-model="autopartsStore.filters.number" placeholder="Año, núm parte, lado, posición">
                     <button type="submit" class="w-full md:w-auto ml-auto py-3 px-12 rounded-full text-center transition bg-gradient-to-b from-red-500 to-red-700 hover:to-red-800 outline-red-600">
                         <div class="flex justify-center items-center space-x-4">
                             <!-- <svg xmlns="http://www.w3.org/2000/svg" class="w-5 text-white" fill="currentColor" viewBox="0 0 16 16">

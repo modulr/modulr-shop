@@ -85,7 +85,7 @@
                         <div class="lg:col-span-2 lg:row-span-2 lg:row-end-2">
                             <div class="flex items-center sticky top-10 z-50 overflow-hidden">
                                 <div class="w-full mb-14">
-                                    <span class="text-sm font-medium" :class="[autopartsStore.autopart.origin_id == 1 ? 'text-red-600' : 'text-gray-500']">{{ autopartsStore.autopart.origin?.name }}</span>
+                                    <span class="text-sm font-medium" :class="[autopartsStore.autopart.origin_id == 1 ? 'text-red-600' : 'text-gray-400']">{{ autopartsStore.autopart.origin?.name }}</span>
                                     <h1 class="max-w-xl mb-6 mt-2 text-2xl font-bold md:text-3xl">{{ autopartsStore.autopart.name }}</h1>
                                     <p class="text-green-600 mb-1">10% descuento</p>
                                     <h2 class="inline-block mb-8 text-4xl font-bold text-gray-700">
@@ -118,14 +118,14 @@
                                         </a>
                                     </div>
                                     <div class="mt-8 space-y-2">
-                                        <h1 class="text-sm font-medium text-gray-600" v-if="autopartsStore.autopart.autopart_number">Número {{ autopartsStore.autopart.autopart_number }}</h1>
-                                        <div class="text-sm font-medium text-gray-600" v-if="autopartsStore.autopart.location">Ubicación {{ autopartsStore.autopart.location }}</div>
+                                        <h1 class="text-sm font-medium text-gray-600" v-if="autopartsStore.autopart.autopart_number">No. parte. {{ autopartsStore.autopart.autopart_number }}</h1>
+                                        <div class="text-sm font-medium text-gray-600" v-if="autopartsStore.autopart.location">Ubicación. {{ autopartsStore.autopart.location }}</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
         
-                        <div class="lg:col-span-3">
+                        <div class="lg:col-span-3" v-if="autopartsStore.autopart.description">
                             <div class="border-b border-gray-300">
                                 <nav class="flex gap-4">
                                     <span class="border-b-2 border-gray-900 py-4 text-gray-600"> Descripción </span>
@@ -158,7 +158,9 @@
                     <div class="lg:col-span-3 lg:row-end-1">
                         <div class="sticky top-0 z-50 overflow-hidden">
                             <div class="relative mb-6">
-                                <div className="animate-pulse h-72 bg-gray-300 rounded"></div>
+                                <div className="flex justify-center py-28 animate-pulse border rounded">
+                                    <img class="" src="/img/loader-1.gif" alt="Loading Autoparts">
+                                </div>
                             </div>
                             <div class="flex-wrap hidden md:flex">
                                 <div class="w-1/2 p-2 sm:w-1/4">
@@ -190,15 +192,18 @@
                             <div class="w-full mb-12">
                                 <div class="mb-12">
                                     <div className="animate-pulse h-4 bg-gray-300 rounded w-1/4 mb-4"></div>
-                                    <div className="animate-pulse h-6 bg-gray-300 rounded mb-6"></div>
-                                    <div className="animate-pulse h-4 bg-gray-300 rounded w-2/6 mb-8"></div>
-                                    <div className="animate-pulse h-8 bg-gray-300 rounded w-2/3"></div>
+                                    <div className="animate-pulse h-6 bg-gray-300 rounded mb-1"></div>
+                                    <div className="animate-pulse h-6 bg-gray-300 rounded mb-12 w-3/4"></div>
+                                    <div className="animate-pulse h-4 bg-gray-300 rounded w-2/6 mb-2"></div>
+                                    <div className="animate-pulse h-8 bg-gray-300 rounded w-2/3 mb-12"></div>
                                 </div>
-                                <div class="space-y-2 mb-12">
-                                    <div className="animate-pulse h-4 bg-gray-300 rounded"></div>
-                                    <div className="animate-pulse h-4 bg-gray-300 rounded"></div>
+                                <div class="space-y-2 my-20">
+                                    <div className="animate-pulse h-4 bg-gray-300 rounded w-2/4"></div>
                                     <div className="animate-pulse h-4 bg-gray-300 rounded w-3/4"></div>
                                     <div className="animate-pulse h-4 bg-gray-300 rounded w-2/4"></div>
+                                    <div className="animate-pulse h-4 bg-gray-300 rounded w-3/4"></div>
+                                    <div className="animate-pulse h-4 bg-gray-300 rounded"></div>
+                                    <div className="animate-pulse h-4 bg-gray-300 rounded"></div>
                                 </div>
                                 <div class="flex space-x-2">
                                     <div className="animate-pulse h-14 bg-gray-300 rounded-full w-1/2"></div>
