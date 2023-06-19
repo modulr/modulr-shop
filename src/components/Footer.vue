@@ -7,7 +7,7 @@
                     Nos especializamos en la comercialización y distribución de autopartes, respaldados por una amplia experiencia en el sector.
                 </div>
             </div>
-            <img class="w-full sm:w-auto md:h-32" src="/img/bg-footer.png" alt="Auto">
+            <img class="w-full sm:w-auto md:h-32" src="/img/bg-footer.png" alt="Automovil">
         </div>
         <hr class="my-6 lg:my-8 border-gray-200 mx-auto" />
         <span class="block mb-6 lg:mb-8 text-sm text-gray-600 text-center">© 2023 Auto Global. All Rights Reserved.</span>

@@ -69,13 +69,13 @@
                             </div> -->
                             <div>
                                 <div class="mb-6 aspect-w-16 aspect-h-10">
-                                    <img class="object-contain w-full h-full" :src="autopartsStore.currentImage?.url" alt="Auto Global">
+                                    <img class="object-contain w-full h-full" :src="autopartsStore.currentImage?.url" :alt="autopartsStore.autopart.name">
                                 </div>
                                 <div class="flex flex-wrap">
                                     <div class="w-1/5 p-1" v-for="image in autopartsStore.autopart.images" :key="image.id">
                                         <div :class="[autopartsStore.currentImage?.id == image.id ? 'border-red-400': 'border-transparent']"
                                         @mouseover.prevent="setCurrentImage(image)" class="block border-2 hover:border-red-400 rounded-md">
-                                            <img class="object-cover w-full h-20 rounded" :src="image.url_thumbnail" alt="Auto Global">
+                                            <img class="object-cover w-full h-20 rounded" loading="lazy" :src="image.url_thumbnail" :alt="autopartsStore.autopart.name">
                                         </div>
                                     </div>
                                 </div>

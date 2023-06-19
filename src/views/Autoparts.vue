@@ -202,7 +202,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-x-8 sm:gap-y-16">
                 <router-link :to="`/autopart/${autopart.id}/${autopart.name.replace(/[ \/]/g, '-')}`" v-for="autopart in autopartsStore.autoparts" :key="autopart.id"
                 class="w-full mx-auto overflow-hidden bg-white rounded-2xl shadow-md shadow-slate-300/60 duration-300 hover:shadow-xl outline-red-100">
-                    <img class="w-full h-52 object-cover object-center" :src="autopart.url" :alt="autopart.name" />
+                    <img class="w-full h-52 object-cover object-center" loading="lazy" :src="autopart.url" :alt="autopart.name" />
                     <div class="px-4 py-6">
                         <h2 class="mb-5 font-medium line-clamp-2">{{ autopart.name }}</h2>
                         <!-- <p class="mb-5 text-base text-gray-400 truncate ...">{{ autopart.description }}</p> -->
