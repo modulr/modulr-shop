@@ -15,12 +15,6 @@ export default createRouter({
         { path: '/login', component: Components, beforeEnter(to, from, next) {
             window.location.href = "http://app.autoglobal.mx";
         }},
-        { path: '/api/autoparts/mercado/auth', component: Components, beforeEnter(to, from, next) {
-            window.location.href = "https://app.autoglobal.mx/api/autoparts/mercado/auth";
-        }},
-        { path: '/api/autoparts/mercado/notifications', component: Components, beforeEnter(to, from, next) {
-            window.location.href = "https://app.autoglobal.mx/api/autoparts/mercado/notifications";
-        }},
         { path: '/:pathMatch(.*)*', component: NotFound },
     ],
 

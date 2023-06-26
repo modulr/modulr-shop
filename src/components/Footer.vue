@@ -1,7 +1,7 @@
 <template>
     <div class="container mx-auto px-4 mt-52">
-        <div class="flex flex-col md:flex-row justify-between items-end mb-20 space-x-0 sm:space-x-8 space-y-16 md:space-y-0">
-            <div class="md:w-6/12">
+        <div class="flex flex-col lg:flex-row justify-between items-end mb-20 space-x-0 md:space-x-8 space-y-16 lg:space-y-0">
+            <div class="lg:w-6/12">
                 <h3 class="font-title text-2xl mb-2">Auto <span class="text-red-600">Global</span></h3>
                 <div class="text-gray-700 font-medium text-lg">
                     Nos especializamos en la comercialización y distribución de autopartes, respaldados por una amplia experiencia en el sector.
