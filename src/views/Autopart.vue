@@ -253,21 +253,21 @@
 
     <div v-if="showImage" class="fixed w-full h-100 inset-0 z-50 overflow-hidden flex justify-center items-center p-2">
         <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" @click.self="showImage = false"></div>
-        <button @click="showImage = false" class="fixed top-2 right-2 outline-none focus:outline-none">
-            <svg class="fill-current text-white " xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
-                <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
-            </svg>
-        </button>
         <div class="flex max-w-full max-h-full overflow-auto">
             <!-- <img class="object-contain w-full h-full" :src="showImage?.url" :alt="showImage?.name"> -->
             <swiper-container navigation="true" class="max-w-full" loop="true" :initial-slide="orderImage" :zoom="true">
                 <swiper-slide v-for="image in autopartsStore.autopart.images" :key="image.id">
                     <div class="swiper-zoom-container">
-                        <img class="w-full" loading="lazy" :src="image.url" :alt="autopartsStore.autopart.name">
+                        <img class="object-contain w-full h-full" loading="lazy" :src="image.url" :alt="autopartsStore.autopart.name">
                     </div>
                 </swiper-slide>
             </swiper-container>  
         </div>
+        <button @click="showImage = false" class="z-50 fixed top-4 right-4 outline-none focus:outline-none">
+            <svg class="fill-current text-white " xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+                <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
+            </svg>
+        </button>
     </div>
 
     <Footer></Footer>
