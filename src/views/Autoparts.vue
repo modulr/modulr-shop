@@ -111,7 +111,7 @@
     <div class="bg-[url('/img/bg-hero.jpg')] bg-no-repeat bg-top bg-cover w-full h-full">
         <div class="container mx-auto px-4">
             <div class="flex justify-end mt-4">
-                <a href="https://app.autoglobal.mx" class="py-2 px-12 font-medium text-red-600 border border-red-600 rounded-full hover:bg-red-600 hover:border-red-600 hover:text-white">Entrar</a>
+                <router-link to="/login" class="py-2 px-12 font-medium text-red-600 border border-red-600 rounded-full hover:bg-red-600 hover:border-red-600 hover:text-white">Entrar</router-link>
             </div>
             <div class="flex flex-wrap pt-20 pb-32 lg:pt-32 lg:pb-40 xl:pt-46 xl:pb-60 2xl:pt-52 2xl:pb-72">
                 <div class="mb-8 pl-1">
