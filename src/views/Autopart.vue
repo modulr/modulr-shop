@@ -260,7 +260,7 @@
         </button>
         <div class="flex max-w-full max-h-full overflow-auto">
             <!-- <img class="object-contain w-full h-full" :src="showImage?.url" :alt="showImage?.name"> -->
-            <swiper-container navigation="true" class="max-w-4xl" loop="true" :initial-slide="orderImage" :zoom="true">
+            <swiper-container navigation="true" class="max-w-full" loop="true" :initial-slide="orderImage" :zoom="true">
                 <swiper-slide v-for="image in autopartsStore.autopart.images" :key="image.id">
                     <div class="swiper-zoom-container">
                         <img class="w-full" loading="lazy" :src="image.url" :alt="autopartsStore.autopart.name">
