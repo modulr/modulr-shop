@@ -1,8 +1,10 @@
 <script setup>
-    import { onMounted, computed, ref, nextTick } from 'vue'
+    import { onMounted, computed, ref } from 'vue'
     import Multiselect from '@vueform/multiselect'
     import Footer from '../components/Footer.vue';
     import { useAutopartsStore } from '../stores/autoparts'; 
+    import { register } from 'swiper/element/bundle';
+    register();
 
     const autopartsStore = useAutopartsStore()
     const searchQuery = ref('');
@@ -108,7 +110,10 @@
 <template>
     <div class="bg-[url('/img/bg-hero.jpg')] bg-no-repeat bg-top bg-cover w-full h-full">
         <div class="container mx-auto px-4">
-            <div class="flex flex-wrap pt-20 pb-32 lg:pt-36 lg:pb-40 xl:pt-48 xl:pb-60 2xl:pt-56 2xl:pb-72">
+            <div class="flex justify-end mt-4">
+                <a href="https://app.autoglobal.mx" class="py-2 px-12 font-medium text-red-600 border border-red-600 rounded-full hover:bg-red-600 hover:border-red-600 hover:text-white">Entrar</a>
+            </div>
+            <div class="flex flex-wrap pt-20 pb-32 lg:pt-32 lg:pb-40 xl:pt-46 xl:pb-60 2xl:pt-52 2xl:pb-72">
                 <div class="mb-8 pl-1">
                     <h1 class="font-title font-bold text-4xl text-gray-900 md:text-5xl drop-shadow-md">Auto <span class="text-red-600">Global</span></h1>
                     <h2 class="text-gray-500 text-lg md:text-2xl tracking-wide md:tracking-wider">Las mejores piezas para tu automóvil</h2>
@@ -166,7 +171,7 @@
     </div>
 
     <div class="mx-auto -mt-8">
-        <div class="flex flex-nowrap space-x-4 sm:justify-between overflow-x-scroll scrollbar-hide">
+        <!-- <div class="flex flex-nowrap space-x-4 sm:justify-between overflow-x-scroll scrollbar-hide">
             <img class="h-16 w-44 px-6" src="/img/logos/acura.svg" alt="Acura">
             <img class="h-16 w-44 px-6" src="/img/logos/alfa-romeo.svg" alt="Alfa Romeo">
             <img class="h-16 w-44 px-6" src="/img/logos/audi.svg" alt="Audi">
@@ -194,7 +199,36 @@
             <img class="h-16 w-44 px-6" src="/img/logos/toyota.svg" alt="Toyota">
             <img class="h-16 w-44 px-6" src="/img/logos/volkswagen.svg" alt="Volkswagen">
             <img class="h-16 w-44 px-6" src="/img/logos/volvo.svg" alt="Volvo">
-        </div>
+        </div> -->
+        <swiper-container :autoplay="true" slides-per-view="auto" loop="true" autoplay-disable-on-interaction="false">
+            <swiper-slide class="w-44"><img class="h-16 w-44 px-6" src="/img/logos/acura.svg" alt="Acura"></swiper-slide>
+            <swiper-slide class="w-44"><img class="h-16 w-44 px-6" src="/img/logos/alfa-romeo.svg" alt="Alfa Romeo"></swiper-slide>
+            <swiper-slide class="w-44"><img class="h-16 w-44 px-6" src="/img/logos/audi.svg" alt="Audi"></swiper-slide>
+            <swiper-slide class="w-44"><img class="h-16 w-44 px-6" src="/img/logos/bmw.svg" alt="BMW"></swiper-slide>
+            <swiper-slide class="w-44"><img class="h-16 w-44 px-6" src="/img/logos/cadillac.svg" alt="Cadillac"></swiper-slide>
+            <swiper-slide class="w-44"><img class="h-16 w-44 px-6" src="/img/logos/chevrolet.svg" alt="Chevrolet"></swiper-slide>
+            <swiper-slide class="w-44"><img class="h-16 w-44 px-6" src="/img/logos/ford.svg" alt="Ford"></swiper-slide>
+            <swiper-slide class="w-44"><img class="h-16 w-44 px-6" src="/img/logos/honda.svg" alt="Honda"></swiper-slide>
+            <swiper-slide class="w-44"><img class="h-16 w-44 px-6" src="/img/logos/hyundai.svg" alt="Hyundai"></swiper-slide>
+            <swiper-slide class="w-44"><img class="h-16 w-44 px-6" src="/img/logos/infiniti.svg" alt="Infiniti"></swiper-slide>
+            <swiper-slide class="w-44"><img class="h-16 w-44 px-6" src="/img/logos/jaguar.svg" alt="Jaguar"></swiper-slide>
+            <swiper-slide class="w-44"><img class="h-16 w-44 px-6" src="/img/logos/jeep.svg" alt="Jeep"></swiper-slide>
+            <swiper-slide class="w-44"><img class="h-16 w-44 px-6" src="/img/logos/kia.svg" alt="Kia"></swiper-slide>
+            <swiper-slide class="w-44"><img class="h-16 w-44 px-6" src="/img/logos/land-rover.svg" alt="Land Rover"></swiper-slide>
+            <swiper-slide class="w-44"><img class="h-16 w-44 px-6" src="/img/logos/lexus.svg" alt="Lexus"></swiper-slide>
+            <swiper-slide class="w-44"><img class="h-16 w-44 px-6" src="/img/logos/lincoln.svg" alt="Lincoln"></swiper-slide>
+            <swiper-slide class="w-44"><img class="h-16 w-44 px-6" src="/img/logos/maserati.svg" alt="Maserati"></swiper-slide>
+            <swiper-slide class="w-44"><img class="h-16 w-44 px-6" src="/img/logos/mazda.svg" alt="Mazda"></swiper-slide>
+            <swiper-slide class="w-44"><img class="h-16 w-44 px-6" src="/img/logos/mercedes-benz.svg" alt="Mercedes Benz"></swiper-slide>
+            <swiper-slide class="w-44"><img class="h-16 w-44 px-6" src="/img/logos/mini.svg" alt="Mini"></swiper-slide>
+            <swiper-slide class="w-44"><img class="h-16 w-44 px-6" src="/img/logos/mitsubishi.svg" alt="Mitsubishi"></swiper-slide>
+            <swiper-slide class="w-44"><img class="h-16 w-44 px-6" src="/img/logos/nissan.svg" alt="Nissan"></swiper-slide>
+            <swiper-slide class="w-44"><img class="h-16 w-44 px-6" src="/img/logos/porsche.svg" alt="Porsche"></swiper-slide>
+            <swiper-slide class="w-44"><img class="h-16 w-44 px-6" src="/img/logos/tesla.svg" alt="Tesla"></swiper-slide>
+            <swiper-slide class="w-44"><img class="h-16 w-44 px-6" src="/img/logos/toyota.svg" alt="Toyota"></swiper-slide>
+            <swiper-slide class="w-44"><img class="h-16 w-44 px-6" src="/img/logos/volkswagen.svg" alt="Volkswagen"></swiper-slide>
+            <swiper-slide class="w-44"><img class="h-16 w-44 px-6" src="/img/logos/volvo.svg" alt="Volvo"></swiper-slide>
+        </swiper-container>
     </div>
 
     <div v-if="!autopartsStore.loading">

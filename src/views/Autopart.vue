@@ -1,9 +1,12 @@
 <script setup>
-    import { onMounted } from 'vue'
+    import { onMounted, ref } from 'vue'
     import Footer from '../components/Footer.vue';
     import { useAutopartsStore } from '../stores/autoparts';
+    import { register } from 'swiper/element/bundle';
+    register();
 
     const autopartsStore = useAutopartsStore()
+    const numberImages = ref(5);
 
     const props = defineProps({
         id: {
@@ -18,6 +21,10 @@
 
     onMounted( async () => {
         await autopartsStore.getAutopart(props.id)
+
+        if (autopartsStore.autopart.images.length <= 5) {
+            numberImages.value = autopartsStore.autopart.images.length - 1
+        }
     })
 
     function setCurrentImage(img) {
@@ -72,12 +79,14 @@
                                     <img class="object-contain w-full h-full" :src="autopartsStore.currentImage?.url" :alt="autopartsStore.autopart.name">
                                 </div>
                                 <div class="flex flex-wrap">
-                                    <div class="w-1/5 p-1" v-for="image in autopartsStore.autopart.images" :key="image.id">
-                                        <div :class="[autopartsStore.currentImage?.id == image.id ? 'border-red-400': 'border-transparent']"
-                                        @mouseover.prevent="setCurrentImage(image)" class="block border-2 hover:border-red-400 rounded-md">
-                                            <img class="object-cover w-full h-20 rounded" loading="lazy" :src="image.url_thumbnail" :alt="autopartsStore.autopart.name">
-                                        </div>
-                                    </div>
+                                    <swiper-container :slides-per-view="numberImages" navigation="true">
+                                        <swiper-slide v-for="image in autopartsStore.autopart.images" :key="image.id">
+                                            <div class="block border-2 hover:border-red-400 rounded-md" :class="[autopartsStore.currentImage?.id == image.id ? 'border-red-400': 'border-transparent']"
+                                                @mouseover.prevent="setCurrentImage(image)">
+                                                <img class="object-cover w-full h-20 rounded" loading="lazy" :src="image.url_thumbnail" :alt="autopartsStore.autopart.name">
+                                            </div>
+                                        </swiper-slide>
+                                    </swiper-container>  
                                 </div>
                             </div>
                         </div>
