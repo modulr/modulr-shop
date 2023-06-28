@@ -263,7 +263,7 @@
             <swiper-container navigation="true" class="max-w-4xl" loop="true" :initial-slide="orderImage" :zoom="true">
                 <swiper-slide v-for="image in autopartsStore.autopart.images" :key="image.id">
                     <div class="swiper-zoom-container">
-                        <img class="w-full" loading="lazy" :src="image.url_thumbnail" :alt="autopartsStore.autopart.name">
+                        <img class="w-full" loading="lazy" :src="image.url" :alt="autopartsStore.autopart.name">
                     </div>
                 </swiper-slide>
             </swiper-container>  
