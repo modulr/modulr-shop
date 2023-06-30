@@ -1,5 +1,5 @@
 <script setup>
-
+import Footer from '../components/Footer.vue';
 </script>
 
 <template>
@@ -21,7 +21,7 @@
     
       <div class="bg-[url('/img/not-found.png')] bg-no-repeat bg-center bg-contain w-full h-full">
         <div class="container mx-auto px-4 text-center pt-24 pb-24">
-          <h2 class="text-6xl font-bold text-red-600">404</h2>
+          <h2 class="font-title text-8xl font-bold text-red-600">404</h2>
           <h1 class="text-4xl font-bold text-gray-500">Página no encontrada</h1>
           <div class="flex justify-center mt-8">
             <router-link to="/" class="py-3 px-12 rounded-full text-center transition bg-gradient-to-b from-red-500 to-red-700 hover:to-red-800 outline-red-600">
@@ -32,6 +32,8 @@
           </div>
         </div>
       </div>
+
+      <Footer></Footer>
     </div>
   </template>
 

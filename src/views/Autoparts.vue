@@ -249,25 +249,25 @@
             </div>
             <div class="flex items-center justify-center pt-28 px-4">
                 <div class="w-full flex items-center justify-between border-t border-gray-200">
-                    <div @click="paginate(autopartsStore.pagination.current_page - 1)" class="flex items-center pt-4 text-gray-600 hover:text-red-700 cursor-pointer">
+                    <button @click="paginate(autopartsStore.pagination.current_page - 1)" class="flex items-center pt-4 text-gray-600 hover:text-red-700 cursor-pointer disabled:cursor-default disabled:text-gray-400 disabled:hover:text-gray-400" :disabled="autopartsStore.pagination.current_page == 1 && 'disabled'">
                         <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M1.1665 4H12.8332" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M1.1665 4L4.49984 7.33333" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M1.1665 4.00002L4.49984 0.666687" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                         <p class=" ml-3 font-medium leading-none">Anterior</p>                    
-                    </div>
+                    </button>
                     <div class="sm:flex hidden">
                         <p @click="paginate(page)" v-for="page in visiblePages" :key="page" :class="[autopartsStore.pagination.current_page == page ? 'text-red-700 border-red-400' : 'border-transparent']" class="pt-4 mr-4 px-2 font-medium leading-none cursor-pointer text-gray-600 border-t hover:text-red-700 hover:border-red-400">{{ page }}</p>
                     </div>
-                    <div @click="paginate(autopartsStore.pagination.current_page + 1)" class="flex items-center pt-4 text-gray-600 hover:text-red-700 cursor-pointer">
+                    <button @click="paginate(autopartsStore.pagination.current_page + 1)" class="flex items-center pt-4 text-gray-600 hover:text-red-700 cursor-pointer disabled:cursor-default disabled:text-gray-400 disabled:hover:text-gray-400" :disabled="autopartsStore.pagination.current_page == autopartsStore.pagination.last_page && 'disabled'">
                         <p class=" font-medium leading-none mr-3">Siguiente</p>
                         <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M1.1665 4H12.8332" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M9.5 7.33333L12.8333 4" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M9.5 0.666687L12.8333 4.00002" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>    
-                    </div>
+                    </button>
                 </div>
             </div>
         </div>
