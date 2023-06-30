@@ -126,7 +126,7 @@
                                     </h3>
                                     <h3 class="w-16 pb-1 mt-2 border-t border-red-400 text-gray-600 text-sm">Años</h3>
                                 </div>
-                                <div class="flex flex-wrap items-center gap-4 my-12">
+                                <div class="flex flex-wrap items-center gap-4 my-12" v-if="autopartsStore.autopart.status_id != 4">
                                     <a :href="`https://api.whatsapp.com/send?phone=528117409087&text=Me%20interesa%20la%20autoparte%20${autopartsStore.autopart.name},%20ID:%20${autopartsStore.autopart.id}&source=&data=`" target="_blank" class="flex items-center justify-center w-full p-4 bg-red-600 rounded-full border border-red-600 lg:w-2/5 text-white hover:bg-red-700">
                                         Comprar
                                     </a>
@@ -134,6 +134,11 @@
                                     class="flex items-center justify-center w-full p-4 text-red-600 border border-red-600 rounded-full lg:w-2/5 hover:bg-red-600 hover:border-red-600 hover:text-white">
                                         Mercado Libre
                                     </a>
+                                </div>
+                                <div class="flex flex-wrap items-center my-12" v-else>
+                                    <div class="flex items-center justify-center w-full p-4 rounded-full bg-red-100 border border-red-200 text-red-400">
+                                        No Disponible
+                                    </div>
                                 </div>
                                 <div class="space-y-2">
                                     <p class="text-sm font-medium text-gray-600" v-if="autopartsStore.autopart.store"><span class="font-light">Vendedor.</span> {{ autopartsStore.autopart.store?.name }} <span v-if="autopartsStore.autopart.store_ml"> | {{ autopartsStore.autopart.store_ml?.name }}</span></p>
