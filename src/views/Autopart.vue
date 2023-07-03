@@ -121,7 +121,7 @@
                                 <div>
                                     <h3 class="font-bold" v-if="autopartsStore.autopart.years?.length > 0">
                                         <span v-for="(year, index) in autopartsStore.autopart.years" :key="year.id" >
-                                            {{year.name}}<span v-if="index+1 < autopartsStore.autopart.years.length">, </span>
+                                            {{year}}<span v-if="index+1 < autopartsStore.autopart.years.length">, </span>
                                         </span>
                                     </h3>
                                     <h3 class="w-16 pb-1 mt-2 border-t border-red-400 text-gray-600 text-sm">Años</h3>

@@ -63,6 +63,7 @@ export const useAutopartsStore = defineStore('autoparts', {
             .then((response) => {
 
                 this.autopart = response.data
+                this.autopart.years = JSON.parse(this.autopart.years)
                 this.setCurrentImage(this.autopart.images[0])
                 this.loading = false
 
