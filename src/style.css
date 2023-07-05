@@ -1,6 +1,9 @@
+@import '/node_modules/@vueform/multiselect/themes/default.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 
 @font-face {
     font-family: 'Good-Times';
@@ -25,4 +28,16 @@
 .scrollbar-hide {
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
+}
+
+.multiselect {
+    @apply rounded-full border-0;
+}
+
+.multiselect.is-active {
+    @apply rounded-full border-0 shadow-none;
+}
+
+.multiselect-dropdown {
+    @apply rounded-xl z-50
 }

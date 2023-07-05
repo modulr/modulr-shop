@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 25.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+
+<svg
+   version="1.1"
+   x="0px"
+   y="0px"
+   viewBox="0 0 338.75 338.72"
+   style="enable-background:new 0 0 338.75 338.72;"
+   xml:space="preserve"
+   id="svg156"
+   sodipodi:docname="volvo.svg"
+   inkscape:version="1.2.2 (b0a84865, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><defs
+   id="defs160" /><sodipodi:namedview
+   id="namedview158"
+   pagecolor="#505050"
+   bordercolor="#eeeeee"
+   borderopacity="1"
+   inkscape:showpageshadow="0"
+   inkscape:pageopacity="0"
+   inkscape:pagecheckerboard="0"
+   inkscape:deskcolor="#505050"
+   showgrid="false"
+   inkscape:zoom="0.69674067"
+   inkscape:cx="167.92475"
+   inkscape:cy="174.38339"
+   inkscape:window-width="1309"
+   inkscape:window-height="763"
+   inkscape:window-x="0"
+   inkscape:window-y="279"
+   inkscape:window-maximized="0"
+   inkscape:current-layer="svg156" />
+<style
+   type="text/css"
+   id="style132">
+	.st0{fill:none;}
+</style>
+<g
+   id="Guides">
+	<rect
+   class="st0"
+   width="338.75"
+   height="338.75"
+   id="rect134" />
+</g>
+<g
+   id="Volvo_Iron_Mark"
+   transform="matrix(1.3813109,0,0,1.3940213,-63.669153,-63.868814)">
+	<g
+   id="g147">
+		<path
+   d="m 158.37,177.93 h 27.41 v -9.15 h -3.01 c 0,3.5 -2.56,6.08 -6.47,6.08 h -4.22 V 161.2 h 4.55 v -3.03 h -18.26 v 3.03 h 4.6 l 0.01,13.66 h -4.61 z"
+   id="path137" />
+		<polygon
+   points="209.56,161.21 213.51,161.21 206.91,173.4 200.23,161.21 205.02,161.21 205.02,158.18 185.22,158.18 185.21,161.21 189.75,161.21 198.96,177.94 209.62,177.95 218.67,161.21 223.21,161.21 223.21,158.18 209.56,158.18 "
+   id="polygon139" />
+		<polygon
+   points="117.44,161.21 121.98,161.21 121.98,158.18 108.33,158.18 108.33,161.21 112.27,161.21 105.68,173.4 99,161.21 103.79,161.21 103.79,158.18 83.99,158.18 83.98,161.21 88.52,161.21 97.73,177.94 108.39,177.95 "
+   id="polygon141" />
+		<path
+   d="m 124.63,168.08 c 0,5.82 4.69,10.45 14.09,10.45 9.4,0 14.04,-4.63 14.04,-10.45 0,-5.74 -4.92,-10.32 -14.1,-10.32 -9.16,0 -14.03,4.58 -14.03,10.32 z m 18.93,0.05 c -0.06,3.59 -1.55,7.33 -4.99,7.27 -3.35,-0.06 -4.82,-3.76 -4.76,-7.44 0.07,-3.81 1.89,-7.13 5.03,-7.08 3.14,0.05 4.79,3.44 4.72,7.25 z"
+   id="path143" />
+		<path
+   d="m 225.83,168.08 c 0,5.82 4.69,10.45 14.09,10.45 9.4,0 14.04,-4.63 14.04,-10.45 0,-5.74 -4.92,-10.32 -14.09,-10.32 -9.17,0 -14.04,4.58 -14.04,10.32 z m 14.21,-7.2 c 3.13,0.06 4.79,3.44 4.72,7.25 -0.07,3.59 -1.55,7.33 -4.99,7.27 -3.35,-0.06 -4.82,-3.76 -4.76,-7.44 0.07,-3.82 1.89,-7.14 5.03,-7.08 z"
+   id="path145" />
+	</g>
+	<g
+   id="g151">
+		<path
+   d="m 262.3,105.22 -11.47,11.47 c 9.83,15.17 15.55,33.26 15.55,52.69 0,53.57 -43.43,97 -97,97 -53.57,0 -97,-43.43 -97,-97 0,-53.57 43.43,-97 97,-97 19.47,0 37.6,5.74 52.8,15.62 L 233.65,76.53 C 215.41,63.88 193.26,56.46 169.38,56.46 c -62.36,0 -112.92,50.55 -112.92,112.92 0,62.37 50.55,112.92 112.92,112.92 62.37,0 112.92,-50.55 112.92,-112.92 -0.01,-23.84 -7.4,-45.94 -20,-64.16 z"
+   id="path149" />
+	</g>
+	<path
+   d="m 226.18,60.9 v 3.17 c 6.85,3.71 13.29,8.09 19.26,13.01 l -16.09,16.09 c 6.07,4.76 11.55,10.24 16.32,16.3 L 261.74,93.4 c 4.93,5.98 9.31,12.43 13.02,19.18 h 3.09 V 60.9 Z"
+   id="path153" />
+</g>
+</svg>
