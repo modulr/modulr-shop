@@ -87,11 +87,11 @@
                             <div class="mb-6 aspect-w-16 aspect-h-10" @click="showCurrentImage(autopartsStore.currentImage.order)">
                                 <img class="object-contain w-full h-full" :src="autopartsStore.currentImage?.url" :alt="autopartsStore.autopart.name">
                             </div>
-                            <div class="flex flex-wrap">
+                            <div class="flex flex-wrap"></div>
                                 <swiper-container :slides-per-view="numberImages" navigation="true">
                                     <swiper-slide v-for="image in autopartsStore.autopart.images" :key="image.id">
                                         <div class="block border-2 hover:border-red-400 rounded-md" :class="[autopartsStore.currentImage?.id == image.id ? 'border-red-400': 'border-transparent']"
-                                            @mouseover.prevent="setCurrentImage(image)">
+                                            @mouseover.prevent="setCurrentImage(image)" @click.prevent="setCurrentImage(image)">
                                             <img class="object-cover w-full h-20 rounded" loading="lazy" :src="image.url_thumbnail" :alt="autopartsStore.autopart.name">
                                         </div>
                                     </swiper-slide>
