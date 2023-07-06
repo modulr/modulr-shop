@@ -13,7 +13,6 @@
     const modelSelect = ref('');
     const categorySelect = ref('');
     const numberSelect = ref('');
-    // const selectedCategory = ref(null);
 
     onMounted( () => {
         if (autopartsStore.lists.makes.length == 0)
@@ -62,7 +61,6 @@
 
     const filteredCategories = computed(() => {
         const query = searchQuery.value.toLowerCase();
-        //const category = selectedCategory.value;
 
         if (!autopartsStore.lists.categories || autopartsStore.lists.categories.length === 0) {
             return [];
@@ -72,9 +70,8 @@
             const nameMatch = option.name.toLowerCase().includes(query);
             const variants = JSON.parse(option.variants || '[]'); // Conversión a matriz
             const variantsMatch = variants && variants.some((variant) => variant.toLowerCase().includes(query));
-            // const categoryMatch = !category || option.id === category;
     
-            return (nameMatch || variantsMatch);// && categoryMatch;
+            return (nameMatch || variantsMatch);
         });
         if(cats.length < 1){
             cats = cats.concat({
@@ -170,35 +167,6 @@
     </div>
 
     <div class="mx-auto -mt-8">
-        <!-- <div class="flex flex-nowrap space-x-4 sm:justify-between overflow-x-scroll scrollbar-hide">
-            <img class="h-16 w-44 px-6" src="/img/logos/acura.svg" alt="Acura">
-            <img class="h-16 w-44 px-6" src="/img/logos/alfa-romeo.svg" alt="Alfa Romeo">
-            <img class="h-16 w-44 px-6" src="/img/logos/audi.svg" alt="Audi">
-            <img class="h-16 w-44 px-6" src="/img/logos/bmw.svg" alt="BMW">
-            <img class="h-16 w-44 px-6" src="/img/logos/cadillac.svg" alt="Cadillac">
-            <img class="h-16 w-44 px-6" src="/img/logos/chevrolet.svg" alt="Chevrolet">
-            <img class="h-16 w-44 px-6" src="/img/logos/ford.svg" alt="Ford">
-            <img class="h-16 w-44 px-6" src="/img/logos/honda.svg" alt="Honda">
-            <img class="h-16 w-44 px-6" src="/img/logos/hyundai.svg" alt="Hyundai">
-            <img class="h-16 w-44 px-6" src="/img/logos/infiniti.svg" alt="Infiniti">
-            <img class="h-16 w-44 px-6" src="/img/logos/jaguar.svg" alt="Jaguar">
-            <img class="h-16 w-44 px-6" src="/img/logos/jeep.svg" alt="Jeep">
-            <img class="h-16 w-44 px-6" src="/img/logos/kia.svg" alt="Kia">
-            <img class="h-16 w-44 px-6" src="/img/logos/land-rover.svg" alt="Land Rover">
-            <img class="h-16 w-44 px-6" src="/img/logos/lexus.svg" alt="Lexus">
-            <img class="h-16 w-44 px-6" src="/img/logos/lincoln.svg" alt="Lincoln">
-            <img class="h-16 w-44 px-6" src="/img/logos/maserati.svg" alt="Maserati">
-            <img class="h-16 w-44 px-6" src="/img/logos/mazda.svg" alt="Mazda">
-            <img class="h-16 w-44 px-6" src="/img/logos/mercedes-benz.svg" alt="Mercedes Benz">
-            <img class="h-16 w-44 px-6" src="/img/logos/mini.svg" alt="Mini">
-            <img class="h-16 w-44 px-6" src="/img/logos/mitsubishi.svg" alt="Mitsubishi">
-            <img class="h-16 w-44 px-6" src="/img/logos/nissan.svg" alt="Nissan">
-            <img class="h-16 w-44 px-6" src="/img/logos/porsche.svg" alt="Porsche">
-            <img class="h-16 w-44 px-6" src="/img/logos/tesla.svg" alt="Tesla">
-            <img class="h-16 w-44 px-6" src="/img/logos/toyota.svg" alt="Toyota">
-            <img class="h-16 w-44 px-6" src="/img/logos/volkswagen.svg" alt="Volkswagen">
-            <img class="h-16 w-44 px-6" src="/img/logos/volvo.svg" alt="Volvo">
-        </div> -->
         <swiper-container :autoplay="true" slides-per-view="auto" loop="true" autoplay-disable-on-interaction="false">
             <swiper-slide class="w-44"><img class="h-16 w-44 px-6" src="/img/logos/acura.svg" alt="Acura"></swiper-slide>
             <swiper-slide class="w-44"><img class="h-16 w-44 px-6" src="/img/logos/alfa-romeo.svg" alt="Alfa Romeo"></swiper-slide>
@@ -233,15 +201,13 @@
     <div v-if="!autopartsStore.loading">
         <div class="container mx-auto px-4 pt-20 lg:pt-32 pb-36" v-if="autopartsStore.autoparts.length > 0">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-x-8 sm:gap-y-16">
-                <router-link :to="`/autopart/${autopart.id}/${autopart.name.replace(/[ \/\.]/g, '-')}`" v-for="autopart in autopartsStore.autoparts" :key="autopart.id"
-                class="w-full mx-auto overflow-hidden bg-white rounded-2xl shadow-md shadow-slate-300/60 duration-300 hover:shadow-xl outline-red-100">
+                <router-link :to="`/autopart/${autopart.id}/${autopart.name.replace(/[ \/\.]/g, '-')}`" v-for="autopart in autopartsStore.autoparts" :key="autopart.id" class="w-full mx-auto overflow-hidden bg-white rounded-2xl shadow-md shadow-slate-300/60 duration-300 hover:shadow-xl outline-red-100">
                     <img class="w-full h-52 object-cover object-center" loading="lazy" :src="autopart.url" :alt="autopart.name" />
                     <div class="px-4 py-6">
                         <h2 class="mb-5 font-medium line-clamp-2">{{ autopart.name }}</h2>
-                        <!-- <p class="mb-5 text-base text-gray-400 truncate ...">{{ autopart.description }}</p> -->
                         <div class="flex items-center">
-                            <p class="mr-2 text-xl font-semibold">${{ autopart.sale_price }}</p>
-                            <p class="text-base font-medium text-gray-500 line-through">${{ autopart.discount_price }}</p>
+                            <p class="mr-2 text-xl font-semibold">${{ new Intl.NumberFormat().format(autopart.sale_price) }}</p>
+                            <p class="text-base font-medium text-gray-500 line-through">${{ new Intl.NumberFormat().format(autopart.sale_price * 1.10) }}</p>
                             <p class="ml-auto text-base font-medium text-green-500">10%</p>
                         </div>
                     </div>
@@ -277,7 +243,7 @@
                     <p class="text-2xl text-gray-500">No encontramos lo que buscas</p>
                     <p class="text-lg text-gray-400">Intentalo de nuevo</p>
                     <div class="flex justify-center">
-                        <img class="" src="/img/loader-4.gif" alt="Loading Autoparts">
+                        <img class="" src="/img/loader-2.gif" alt="Loading Autoparts">
                     </div>
                 </div>
             </div>
@@ -285,9 +251,6 @@
     </div>
 
     <div class="container mx-auto px-4 pt-20 lg:pt-32 pb-72" v-else>
-        <!-- <div class="flex justify-center">
-            <img class="" src="/img/loader-1.gif" alt="Loading Autoparts">
-        </div> -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-y-16">
             <div class="w-full mx-auto overflow-hidden bg-white rounded-2xl shadow-md shadow-slate-300/60 duration-300 hover:shadow-xl">
                 <div class="animate-pulse">
