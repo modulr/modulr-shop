@@ -108,6 +108,7 @@
                                     <p class="text-sm font-medium text-gray-600" v-if="autopartsStore.autopart.store"><span class="font-light">Vendedor.</span> {{ autopartsStore.autopart.store?.name }} <span v-if="autopartsStore.autopart.store_ml"> | {{ autopartsStore.autopart.store_ml?.name }}</span></p>
                                     <p class="text-sm font-medium text-gray-600" v-if="autopartsStore.autopart.autopart_number"><span class="font-light">No. parte.</span> {{ autopartsStore.autopart.autopart_number }}</p>
                                     <p class="text-sm font-medium text-gray-600" v-if="autopartsStore.autopart.id"><span class="font-light">ID.</span> {{ autopartsStore.autopart.id }}</p>
+                                    <p class="text-sm font-medium text-gray-600" v-if="autopartsStore.autopart.ml_id"><span class="font-light">ML.</span> {{ autopartsStore.autopart.ml_id }}</p>
                                     <p class="text-sm font-medium text-gray-600" v-if="autopartsStore.autopart.location"><span class="font-light">Ubicación.</span> {{ autopartsStore.autopart.location }}</p>
                                 </div>
                             </div>

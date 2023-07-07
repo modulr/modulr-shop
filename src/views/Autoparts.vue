@@ -45,7 +45,6 @@
     }
 
     const filterModels = computed(() => {
-        autopartsStore.filters.model = null
 
         if (autopartsStore.filters.make) {
             var filterArray = autopartsStore.lists.models
