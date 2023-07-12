@@ -92,9 +92,15 @@
                                         </span>
                                     </h3>
                                     <h3 class="w-16 pb-1 mt-2 border-t border-red-400 text-gray-600 text-sm">Años</h3>
+                                </div><br/>
+                                <div class="mb-6">
+                                    <h3 class="font-bold" v-if="autopartsStore.autopart.quality">
+                                        <span v-for="star in autopartsStore.autopart.quality" :key="star" class="text-red-600">★</span>
+                                    </h3>
+                                    <h3 class="w-16 pb-1 mt-2 border-t border-red-400 text-gray-600 text-sm">Calidad</h3>
                                 </div>
                                 <div class="flex flex-wrap items-center gap-4 my-12">
-                                    <a v-if="autopartsStore.autopart.status_id != 4" :href="`https://api.whatsapp.com/send?phone=528117409087&text=Me%20interesa%20la%20autoparte%20${autopartsStore.autopart.name},%20ID:%20${autopartsStore.autopart.id}&source=&data=`" target="_blank" class="flex items-center justify-center w-full lg:w-2/5 p-4 rounded-full border border-red-600 bg-red-600 hover:bg-red-700 text-white">
+                                    <a v-if="autopartsStore.autopart.status_id != 4 && autopartsStore.autopart.status_id != 2 && autopartsStore.autopart.status_id != 3" :href="`https://api.whatsapp.com/send?phone=528117409087&text=Me%20interesa%20la%20autoparte%20${autopartsStore.autopart.name},%20ID:%20${autopartsStore.autopart.id}&source=&data=`" target="_blank" class="flex items-center justify-center w-full lg:w-2/5 p-4 rounded-full border border-red-600 bg-red-600 hover:bg-red-700 text-white">
                                         Comprar
                                     </a>
                                     <div v-else class="flex items-center justify-center w-full lg:w-2/5 p-4 rounded-full border border-red-200 bg-red-100 text-red-400">
