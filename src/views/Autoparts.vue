@@ -209,6 +209,9 @@
                             <p class="text-base font-medium text-gray-500 line-through">${{ new Intl.NumberFormat().format(autopart.sale_price * 1.10) }}</p>
                             <p class="ml-auto text-base font-medium text-green-500">10%</p>
                         </div>
+                        <p class="text-base font-medium" v-if="autopart.quality">
+                            <span v-for="star in autopart.quality" :key="star" class="text-red-600">★</span>
+                        </p>
                     </div>
                 </router-link>
             </div>
