@@ -70,7 +70,14 @@
                     <div class="lg:col-span-2 lg:row-span-2 lg:row-end-2">
                         <div class="flex items-center sticky top-10 z-50 overflow-hidden">
                             <div class="w-full mb-14">
-                                <span class="text-sm font-medium" :class="[autopartsStore.autopart.origin_id == 1 ? 'text-red-600' : 'text-gray-400']">{{ autopartsStore.autopart.origin?.name }}</span>
+                                <div class="flex space-x-6">
+                                    <span class="text-sm font-medium" :class="[autopartsStore.autopart.origin_id == 1 ? 'text-red-600' : 'text-gray-400']">{{ autopartsStore.autopart.origin?.name }}</span>
+                                    <span class="flex items-center">
+                                        <svg v-for="quality in autopartsStore.autopart.quality" :key="quality" class="block h-4 w-4 align-middle text-yellow-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" class=""></path>
+                                        </svg>
+                                    </span>
+                                </div>
                                 <h1 class="font-bold mb-6 mt-2 text-2xl md:text-3xl">{{ autopartsStore.autopart.name }}</h1>
                                 <p class="text-green-600 mb-1">10% descuento</p>
                                 <h2 class="inline-block mb-8 text-4xl font-bold text-gray-700">
@@ -85,19 +92,13 @@
                                     <h3 class="font-bold">{{ autopartsStore.autopart.model?.name }}</h3>
                                     <h3 class="w-16 pb-1 mt-2 border-t border-red-400 text-gray-600 text-sm">Modelo</h3>
                                 </div>
-                                <div>
+                                <div class="mb-6">
                                     <h3 class="font-bold" v-if="autopartsStore.autopart.years?.length > 0">
                                         <span v-for="(year, index) in autopartsStore.autopart.years" :key="year.id">
                                             {{year}}<span v-if="index+1 < autopartsStore.autopart.years.length">, </span>
                                         </span>
                                     </h3>
                                     <h3 class="w-16 pb-1 mt-2 border-t border-red-400 text-gray-600 text-sm">Años</h3>
-                                </div><br/>
-                                <div class="mb-6">
-                                    <h3 class="font-bold" v-if="autopartsStore.autopart.quality">
-                                        <span v-for="star in autopartsStore.autopart.quality" :key="star" class="text-red-600">★</span>
-                                    </h3>
-                                    <h3 class="w-16 pb-1 mt-2 border-t border-red-400 text-gray-600 text-sm">Calidad</h3>
                                 </div>
                                 <div class="flex flex-wrap items-center gap-4 my-12">
                                     <a v-if="autopartsStore.autopart.status_id != 4 && autopartsStore.autopart.status_id != 2 && autopartsStore.autopart.status_id != 3" :href="`https://api.whatsapp.com/send?phone=528117409087&text=Me%20interesa%20la%20autoparte%20${autopartsStore.autopart.name},%20ID:%20${autopartsStore.autopart.id}&source=&data=`" target="_blank" class="flex items-center justify-center w-full lg:w-2/5 p-4 rounded-full border border-red-600 bg-red-600 hover:bg-red-700 text-white">
@@ -112,9 +113,9 @@
                                 </div>
                                 <div class="space-y-2">
                                     <p class="text-sm font-medium text-gray-600" v-if="autopartsStore.autopart.store"><span class="font-light">Vendedor.</span> {{ autopartsStore.autopart.store?.name }} <span v-if="autopartsStore.autopart.store_ml"> | {{ autopartsStore.autopart.store_ml?.name }}</span></p>
+                                    <p class="text-sm font-medium text-gray-600" v-if="autopartsStore.autopart.ml_id"><span class="font-light">ML.</span> {{ autopartsStore.autopart.ml_id }}</p>
                                     <p class="text-sm font-medium text-gray-600" v-if="autopartsStore.autopart.autopart_number"><span class="font-light">No. parte.</span> {{ autopartsStore.autopart.autopart_number }}</p>
                                     <p class="text-sm font-medium text-gray-600" v-if="autopartsStore.autopart.id"><span class="font-light">ID.</span> {{ autopartsStore.autopart.id }}</p>
-                                    <p class="text-sm font-medium text-gray-600" v-if="autopartsStore.autopart.ml_id"><span class="font-light">ML.</span> {{ autopartsStore.autopart.ml_id }}</p>
                                     <p class="text-sm font-medium text-gray-600" v-if="autopartsStore.autopart.location"><span class="font-light">Ubicación.</span> {{ autopartsStore.autopart.location }}</p>
                                 </div>
                             </div>
