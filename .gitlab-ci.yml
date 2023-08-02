@@ -42,7 +42,7 @@ deploy_dev:
   stage: deploy_dev
   environment: dev
   script:
-    - ssh ubuntu@54.146.226.251 "cd /var/www/autoglobal-client && git checkout dev && git pull && exit"
+    - ssh ubuntu@54.146.226.251 "cd /var/www/autoglobal-client-dev && git checkout dev && git pull && exit"
   only:
     - dev
 
@@ -50,7 +50,7 @@ deploy_production:
   stage: deploy_production
   environment: production
   script:
-    - ssh ubuntu@54.146.226.251 "cd /var/www/autoglobal-client && git checkout master && git pull && exit"
+    - ssh ubuntu@54.146.226.251 "cd /var/www/autoglobal-client && git checkout main && git pull && exit"
   only:
-    - master
+    - main
 
