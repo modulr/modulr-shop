@@ -1,10 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { useAuthStore } from './stores/auth'
 import Autoparts from './views/Autoparts.vue'
 import Components from './views/Components.vue'
 import Autopart from './views/Autopart.vue'
 import NotFound from './views/404.vue'
 
-export default createRouter({
+const router = createRouter({
 
     history: createWebHistory(),
 
@@ -26,3 +27,10 @@ export default createRouter({
         }
     }
 })
+
+router.beforeEach(async (to, from) => {
+    const authStore = useAuthStore()
+    await authStore.getToken()
+})
+
+export default router
