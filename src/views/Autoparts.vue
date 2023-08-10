@@ -39,7 +39,7 @@
 
     function paginate(page) {
         if (page > 0 && page <= autopartsStore.pagination.last_page) {
-            window.scroll({top: 0, left: 0, behavior: 'smooth'})
+            window.scroll({top: 500, left: 0, behavior: 'smooth'})
             autopartsStore.getAutoparts(page)
         }
     }
