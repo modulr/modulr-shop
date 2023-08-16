@@ -39,7 +39,7 @@
 
     function paginate(page) {
         if (page > 0 && page <= autopartsStore.pagination.last_page) {
-            window.scroll({top: 0, left: 0, behavior: 'smooth'})
+            window.scroll({top: 500, left: 0, behavior: 'smooth'})
             autopartsStore.getAutoparts(page)
         }
     }
@@ -201,7 +201,7 @@
         <div class="container mx-auto px-4 pt-20 lg:pt-32 pb-36" v-if="autopartsStore.autoparts.length > 0">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-x-8 sm:gap-y-16">
                 <router-link :to="`/autopart/${autopart.id}/${autopart.name.replace(/[ \/\.]/g, '-')}`" v-for="autopart in autopartsStore.autoparts" :key="autopart.id" class="w-full mx-auto overflow-hidden bg-white rounded-2xl shadow-md shadow-slate-300/60 duration-300 hover:shadow-xl outline-red-100">
-                    <img class="w-full h-52 object-cover object-center" loading="lazy" :src="autopart.url" :alt="autopart.name" />
+                    <img class="w-full h-52 object-cover object-center" loading="lazy" :src="autopart.url_thumbnail" :alt="autopart.name" />
                     <div class="px-4 py-6">
                         <h2 class="mb-5 font-medium line-clamp-2">{{ autopart.name }}</h2>
                         <div class="flex items-center">

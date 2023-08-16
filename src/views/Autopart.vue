@@ -37,7 +37,6 @@
     function showCurrentImage(order) {
         showImage.value = true
         orderImage.value = order
-        console.log(orderImage.value);
     }
 
 </script>
