@@ -111,9 +111,9 @@
                                     </a>
                                 </div>
 
-                                <div class="bg-gray-100 dark:bg-gray-700 rounded-xl">
+                                <div class="bg-gray-100 rounded-xl">
                                     <div class="p-3 lg:p-5">
-                                        <div class="p-2 rounded-xl lg:p-6 dark:bg-gray-800 bg-gray-50">
+                                        <div class="p-2 rounded-xl lg:p-6 bg-gray-50">
                                             <div class="flex flex-wrap justify-center gap-y-4">
                                                 <p class="w-full text-sm font-medium text-gray-600" v-if="autopartsStore.autopart.store"><span class="font-light"></span> {{ autopartsStore.autopart.store?.name }} <span v-if="autopartsStore.autopart.store_ml"> | {{ autopartsStore.autopart.store_ml?.name }}</span></p>
                                                 <p class="w-full text-sm font-medium text-gray-600" v-if="autopartsStore.autopart.ml_id"><span class="font-light"></span> {{ autopartsStore.autopart.ml_id }}</p>
