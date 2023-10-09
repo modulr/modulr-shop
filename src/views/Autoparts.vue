@@ -88,19 +88,19 @@
         return Array.from({ length: endPage - startPage + 1 }, (_, index) => startPage + index);
     })
 
-    function handleMakeInput(){
-        modelSelect.value.focus();
-        modelSelect.value.open();
-    }
+    // function handleMakeInput(){
+    //     modelSelect.value.focus();
+    //     modelSelect.value.open();
+    // }
 
-    function handleModelInput(){
-        categorySelect.value.focus();
-        categorySelect.value.open();
-    }
+    // function handleModelInput(){
+    //     categorySelect.value.focus();
+    //     categorySelect.value.open();
+    // }
 
-    function handleCategoryInput(){
-        numberSelect.value.focus();
-    }
+    // function handleCategoryInput(){
+    //     numberSelect.value.focus();
+    // }
 
 </script>
 
@@ -113,43 +113,8 @@
                     <h1 class="font-title font-bold text-4xl text-gray-900 md:text-5xl drop-shadow-md">Auto <span class="text-red-600">Global</span></h1>
                     <h2 class="text-gray-500 text-lg md:text-2xl tracking-wide md:tracking-wider">Las mejores piezas para tu automóvil</h2>
                 </div>
-                <form @submit.prevent="search" class="w-full lg:w-9/12 flex flex-col sm:flex-row p-4 sm:p-2 space-y-4 sm:space-y-0 space-x-0 sm:space-x-1 bg-white shadow-md rounded-3xl sm:rounded-full border border-gray-200">
-                    <Multiselect
-                        ref="makeSelect"
-                        placeholder="Marca"
-                        v-model="autopartsStore.filters.make"
-                        :searchable="true"
-                        track-by="name"
-                        label="name"
-                        value-prop="id"
-                        :object="true"
-                        :options="autopartsStore.lists.makes"
-                        @select="handleMakeInput" />
-                    <Multiselect
-                        ref="modelSelect"
-                        placeholder="Modelo"
-                        v-model="autopartsStore.filters.model"
-                        :searchable="true"
-                        track-by="name"
-                        label="name"
-                        value-prop="id"
-                        :object="true"
-                        :options="filterModels" 
-                        @select="handleModelInput"/>
-                    <Multiselect
-                        ref="categorySelect"
-                        placeholder="Autoparte"
-                        v-model="autopartsStore.filters.category"
-                        :searchable="true"
-                        :filter-results="false"
-                        @search-change="searchCategories"
-                        track-by="name"
-                        label="name"
-                        value-prop="id"
-                        :object="true"
-                        :options="filteredCategories" 
-                        @select="handleCategoryInput"/>
-                    <input ref="numberSelect" type="text" class="w-full p-4 rounded-full outline-0" v-model="autopartsStore.filters.number" placeholder="Año, núm parte, lado, posición">
+                <form @submit.prevent="search" class="w-full lg:w-8/12 flex flex-col sm:flex-row p-4 sm:p-2 space-y-4 sm:space-y-0 space-x-0 sm:space-x-1 bg-white shadow-md rounded-3xl sm:rounded-full border border-gray-200">
+                    <input ref="numberSelect" type="text" class="w-full p-4 rounded-full outline-0" v-model="autopartsStore.filters.number" placeholder="Puerta Mazda CX5 2023, Número de parte lado, posición">
                     <button type="submit" class="w-full md:w-auto ml-auto py-3 px-12 rounded-full text-center transition bg-gradient-to-b from-red-500 to-red-700 hover:to-red-800 outline-red-600">
                         <div class="flex justify-center items-center space-x-4">
                             <!-- <svg xmlns="http://www.w3.org/2000/svg" class="w-5 text-white" fill="currentColor" viewBox="0 0 16 16">
@@ -197,8 +162,58 @@
         </swiper-container>
     </div>
 
+    <div class="container mx-auto px-4 flex flex-col sm:flex-row justify-between gap-4 my-10 py-12">
+        <div class="flex flex-col sm:flex-row gap-4 sm:w-9/12">
+            <Multiselect
+            ref="makeSelect"
+            placeholder="Marca"
+            v-model="autopartsStore.filters.make"
+            :searchable="true"
+            track-by="name"
+            label="name"
+            value-prop="id"
+            :object="true"
+            :options="autopartsStore.lists.makes"
+            @change="search" />
+        <Multiselect
+            ref="modelSelect"
+            placeholder="Modelo"
+            v-model="autopartsStore.filters.model"
+            :searchable="true"
+            track-by="name"
+            label="name"
+            value-prop="id"
+            :object="true"
+            :options="filterModels" 
+            @change="search"/>
+        <Multiselect
+            ref="categorySelect"
+            placeholder="Autoparte"
+            v-model="autopartsStore.filters.category"
+            :searchable="true"
+            :filter-results="false"
+            @search-change="searchCategories"
+            track-by="name"
+            label="name"
+            value-prop="id"
+            :object="true"
+            :options="filteredCategories" 
+            @change="search"/>
+        </div>
+       
+        <select @change="search" v-model="autopartsStore.filters.sort" class="outline-none px-2 py-2 cursor-pointer border border-gray-300 rounded-lg">
+            <option disabled selected value="null">Ordenar</option>
+            <option value="latest">Más Recientes</option>
+            <option value="oldest">Más Antigüas</option>
+            <option value="pricetohigh">Mayor Precio</option>
+            <option value="pricetolow">Menor Precio</option>
+            <option value="atoz">A - Z</option>
+            <option value="ztoa">Z - A</option>
+        </select>
+    </div>
+
     <div v-if="!autopartsStore.loading">
-        <div class="container mx-auto px-4 pt-20 lg:pt-32 pb-36" v-if="autopartsStore.autoparts.length > 0">
+        <div class="container mx-auto px-4 pb-36" v-if="autopartsStore.autoparts.length > 0">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-x-8 sm:gap-y-16">
                 <router-link :to="`/autopart/${autopart.id}/${autopart.name.replace(/[ \/\.]/g, '-')}`" v-for="autopart in autopartsStore.autoparts" :key="autopart.id" class="w-full mx-auto overflow-hidden bg-white rounded-2xl shadow-md shadow-slate-300/60 duration-300 hover:shadow-xl outline-red-100">
                     <img class="w-full h-52 object-cover object-center" loading="lazy" :src="autopart.url_thumbnail" :alt="autopart.name" />
@@ -249,7 +264,7 @@
         </div>
     </div>
 
-    <div class="container mx-auto px-4 pt-20 lg:pt-32 pb-72" v-else>
+    <div class="container mx-auto px-4 pb-72" v-else>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-y-16">
             <div class="w-full mx-auto overflow-hidden bg-white rounded-2xl shadow-md shadow-slate-300/60 duration-300 hover:shadow-xl">
                 <div class="animate-pulse">
