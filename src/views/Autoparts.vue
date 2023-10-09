@@ -174,7 +174,7 @@
             value-prop="id"
             :object="true"
             :options="autopartsStore.lists.makes"
-            @change="search" />
+            @select="search" />
         <Multiselect
             ref="modelSelect"
             placeholder="Modelo"
@@ -185,7 +185,7 @@
             value-prop="id"
             :object="true"
             :options="filterModels" 
-            @change="search"/>
+            @select="search"/>
         <Multiselect
             ref="categorySelect"
             placeholder="Autoparte"
@@ -198,10 +198,10 @@
             value-prop="id"
             :object="true"
             :options="filteredCategories" 
-            @change="search"/>
+            @select="search"/>
         </div>
        
-        <select @change="search" v-model="autopartsStore.filters.sort" class="outline-none px-2 py-2 cursor-pointer border border-gray-300 rounded-lg">
+        <select @change="search" v-model="autopartsStore.filters.sort" class="form-select bg-no-repeat appearance-none outline-none pl-4 pr-8 py-2 cursor-pointer border border-gray-300 rounded-lg">
             <option disabled selected value="null">Ordenar</option>
             <option value="latest">Más Recientes</option>
             <option value="oldest">Más Antigüas</option>
