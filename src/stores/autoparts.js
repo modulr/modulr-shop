@@ -32,8 +32,6 @@ export const useAutopartsStore = defineStore('autoparts', {
         async getAutoparts(page) {
 
             this.loading = true
-
-            console.log(this.filters);
             
             await api.post('/api/autoparts/search?page='+page, this.filters)
             .then((response) => {

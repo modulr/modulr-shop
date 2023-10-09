@@ -42,9 +42,12 @@
 </script>
 
 <template>
-    <div class="container mx-auto px-4">
-        <Header class="mt-6 mb-12"></Header>
-
+    <div class="border-b mb-12">
+        <div class="container mx-auto px-4">
+            <Header class="my-6"></Header>
+        </div>
+    </div>
+    <div class="container mx-auto px-4 pb-52">
         <div v-if="!autopartsStore.loading">
             <div v-if="autopartsStore.autopart">
                 <div class="grid grid-cols-1 gap-12 lg:grid-cols-5 lg:gap-16 lg:col-gap-12 xl:col-gap-16">
@@ -244,7 +247,6 @@
                 </div>
             </div>
         </div>
-        
     </div>
 
     <div v-if="showImage" class="fixed w-full h-100 inset-0 z-50 overflow-hidden flex justify-center items-center p-2">
@@ -265,5 +267,7 @@
         </button>
     </div>
 
-    <Footer></Footer>
+    <div class="bg-black">
+        <Footer></Footer>
+    </div>
 </template>
