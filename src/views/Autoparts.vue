@@ -14,22 +14,22 @@
     const categorySelect = ref('');
     const numberSelect = ref('');
 
-    onMounted( () => {
+    onMounted( async () => {
         if (autopartsStore.lists.makes.length == 0)
-            autopartsStore.getMakes()
+            await autopartsStore.getMakes()
 
         if (autopartsStore.lists.models.length == 0)
-            autopartsStore.getModels()
+            await autopartsStore.getModels()
 
         if (autopartsStore.lists.categories.length == 0)
-            autopartsStore.getCategories()
+            await autopartsStore.getCategories()
 
         if (autopartsStore.autoparts.length == 0)
-            autopartsStore.getAutoparts(1)
+            await autopartsStore.getAutoparts(1)
     })
 
-    function search() {
-        autopartsStore.getAutoparts(1)
+    async function search() {
+        await autopartsStore.getAutoparts(1)
         window.scroll({top: 500, left: 0, behavior: 'smooth'})
     }
 
@@ -88,19 +88,26 @@
         return Array.from({ length: endPage - startPage + 1 }, (_, index) => startPage + index);
     })
 
-    // function handleMakeInput(){
-    //     modelSelect.value.focus();
-    //     modelSelect.value.open();
-    // }
+    function handleMakeInput(){
+        autopartsStore.filters.make = null
+        autopartsStore.filters.model = null
+        search()
+        // modelSelect.value.focus();
+        // modelSelect.value.open();
+    }
 
-    // function handleModelInput(){
-    //     categorySelect.value.focus();
-    //     categorySelect.value.open();
-    // }
+    function handleModelInput(){
+        autopartsStore.filters.model = null
+        search()
+        // categorySelect.value.focus();
+        // categorySelect.value.open();
+    }
 
-    // function handleCategoryInput(){
-    //     numberSelect.value.focus();
-    // }
+    function handleCategoryInput(){
+        autopartsStore.filters.category = null
+        search()
+        //numberSelect.value.focus();
+    }
 
 </script>
 
@@ -162,8 +169,8 @@
         </swiper-container>
     </div>
 
-    <div class="pb-52 mt-24">
-        <div class="container mx-auto px-4 mb-16">
+    <div class="pb-52 mt-20 bg-gray-50">
+        <div class="container mx-auto px-4 mb-12 pt-16">
             <div class="flex flex-col sm:flex-row justify-between gap-4">
                 <div class="flex flex-col sm:flex-row gap-4 sm:w-9/12">
                     <Multiselect
@@ -176,8 +183,7 @@
                     value-prop="id"
                     :object="true"
                     :options="autopartsStore.lists.makes"
-                    @clear="search"
-                    @deselect="search"
+                    @clear="handleMakeInput"
                     @select="search" />
                 <Multiselect
                     ref="modelSelect"
@@ -189,8 +195,7 @@
                     value-prop="id"
                     :object="true"
                     :options="filterModels" 
-                    @clear="search"
-                    @deselect="search"
+                    @clear="handleModelInput"
                     @select="search"/>
                 <Multiselect
                     ref="categorySelect"
@@ -204,14 +209,12 @@
                     value-prop="id"
                     :object="true"
                     :options="filteredCategories"
-                    @clear="search"
-                    @deselect="search"
+                    @clear="handleCategoryInput"
                     @select="search"/>
                 </div>
             
                 <select @change="search" v-model="autopartsStore.filters.sort" class="form-select bg-no-repeat appearance-none outline-none pl-4 pr-8 py-2 cursor-pointer border border-gray-300 rounded-lg">
-                    <option disabled selected value="null">Ordenar</option>
-                    <option value="latest">Más Recientes</option>
+                    <option value="latest" selected>Más Recientes</option>
                     <option value="oldest">Más Antigüas</option>
                     <option value="pricetohigh">Mayor Precio</option>
                     <option value="pricetolow">Menor Precio</option>
@@ -219,6 +222,7 @@
                     <option value="ztoa">Z - A</option>
                 </select>
             </div>
+            <hr class="bg-gray-100 mt-6">
         </div>
 
         <div v-if="!autopartsStore.loading">

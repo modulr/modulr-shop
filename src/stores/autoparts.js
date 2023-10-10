@@ -24,6 +24,7 @@ export const useAutopartsStore = defineStore('autoparts', {
             model: null,
             category: null,
             number: null,
+            sort: 'latest'
         },
         autopart: {},
         currentImage: null,
