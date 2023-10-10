@@ -102,21 +102,21 @@
                                     </h3>
                                     <h3 class="w-16 pb-1 mt-2 border-t border-red-400 text-gray-600 text-sm">Años</h3>
                                 </div>
-                                <div class="flex flex-wrap items-center gap-4 my-12">
-                                    <a v-if="autopartsStore.autopart.status_id != 4 && autopartsStore.autopart.status_id != 2 && autopartsStore.autopart.status_id != 3" :href="`https://api.whatsapp.com/send?phone=528117409087&text=Me%20interesa%20la%20autoparte%20${autopartsStore.autopart.name},%20ID:%20${autopartsStore.autopart.id}&source=&data=`" target="_blank" class="flex items-center justify-center w-full lg:w-2/5 p-4 rounded-full border border-red-600 bg-red-600 hover:bg-red-700 text-white">
+                                <div class="flex items-center gap-4 my-12">
+                                    <a v-if="autopartsStore.autopart.status_id != 4 && autopartsStore.autopart.status_id != 2 && autopartsStore.autopart.status_id != 3" :href="`https://api.whatsapp.com/send?phone=52${autopartsStore.autopart.store?.phone}&text=Me%20interesa%20la%20autoparte%20${autopartsStore.autopart.name},%20ID:%20${autopartsStore.autopart.id}&source=&data=`" target="_blank" class="flex items-center justify-center w-full md:w-3/6 p-4 rounded-full border border-red-600 bg-red-600 hover:bg-red-700 text-white transition-all ease-in-out">
                                         Comprar
                                     </a>
-                                    <div v-else class="flex items-center justify-center w-full lg:w-2/5 p-4 rounded-full border border-red-200 bg-red-100 text-red-400">
+                                    <div v-else class="flex items-center justify-center w-full md:w-3/6 p-4 rounded-full border border-gray-200 text-gray-400">
                                         No Disponible
                                     </div>
-                                    <a v-if="autopartsStore.autopart.ml_id" :href="`https://articulo.mercadolibre.com.mx/${autopartsStore.autopart.ml_id.replace('MLM', 'MLM-')}`" target="_blank" class="flex items-center justify-center w-full lg:w-2/5 p-4 rounded-full border border-red-600 hover:border-red-600 hover:bg-red-600 text-red-600 hover:text-white">
+                                    <a v-if="autopartsStore.autopart.ml_id" :href="`https://articulo.mercadolibre.com.mx/${autopartsStore.autopart.ml_id.replace('MLM', 'MLM-')}`" target="_blank" class="flex items-center justify-center w-full md:w-3/6 p-4 text-gray-800 border border-gray-800 rounded-full hover:bg-gray-800 hover:text-white transition-all ease-in-out">
                                         Mercado Libre
                                     </a>
                                 </div>
 
                                 <div class="bg-gray-100 rounded-xl">
-                                    <div class="p-3 lg:p-5">
-                                        <div class="p-2 rounded-xl lg:p-6 bg-gray-50">
+                                    <div class="p-5">
+                                        <div class="p-6 rounded-xl bg-gray-50">
                                             <div class="flex flex-wrap justify-center gap-y-4">
                                                 <p class="w-full text-sm font-medium text-gray-600" v-if="autopartsStore.autopart.store"><span class="font-light"></span> {{ autopartsStore.autopart.store?.name }} <span v-if="autopartsStore.autopart.store_ml"> | {{ autopartsStore.autopart.store_ml?.name }}</span></p>
                                                 <p class="w-full text-sm font-medium text-gray-600" v-if="autopartsStore.autopart.ml_id"><span class="font-light"></span> {{ autopartsStore.autopart.ml_id }}</p>

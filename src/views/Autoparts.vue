@@ -13,6 +13,7 @@
     const modelSelect = ref('');
     const categorySelect = ref('');
     const numberSelect = ref('');
+    const showFilters = ref(false);
 
     onMounted( async () => {
         if (autopartsStore.lists.makes.length == 0)
@@ -31,6 +32,11 @@
     async function search() {
         await autopartsStore.getAutoparts(1)
         window.scroll({top: 500, left: 0, behavior: 'smooth'})
+    }
+
+    async function clearSearch() {
+        autopartsStore.filters.number = null
+        search()
     }
 
     async function clear() {
@@ -127,20 +133,20 @@
         <div class="container mx-auto px-4">
             <Header class="mt-6"></Header>
             <div class="flex flex-wrap pt-20 pb-32 lg:pt-32 lg:pb-40 xl:pt-46 xl:pb-60 2xl:pt-52 2xl:pb-72">
-                <div class="mb-8 pl-1">
-                    <h1 class="font-title font-bold text-4xl text-gray-900 md:text-5xl drop-shadow-md">Auto <span class="text-red-600">Global</span></h1>
+                <div class="mb-8 pl-1 lg:w-8/12">
+                    <h1 class="hidden sm:block font-title font-bold text-4xl text-gray-900 md:text-5xl drop-shadow-md">Auto <span class="text-red-600">Global</span></h1>
                     <h2 class="text-gray-500 text-lg md:text-2xl tracking-wide md:tracking-wider">Las mejores piezas para tu automóvil</h2>
                 </div>
                 <form @submit.prevent="search" class="w-full lg:w-8/12 flex p-2 space-x-1 bg-white shadow-md rounded-full border border-gray-200">
                     <div class="relative w-full">
                         <input ref="numberSelect" type="text" class="w-full px-4 py-2 sm:py-4 rounded-full outline-0" v-model="autopartsStore.filters.number" placeholder="Puerta Mazda CX5 2023, Número de parte">
-                        <button type="button" class="absolute top-1 sm:top-3 right-0 sm:right-1" v-if="autopartsStore.filters.number" @click="clear">
+                        <button type="button" class="absolute top-1 sm:top-3 right-0 sm:right-1" v-if="autopartsStore.filters.number" @click="clearSearch">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 fill-gray-400 stroke-gray-200 hover:fill-gray-500 transition-all ease-in-out">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                         </button>
                     </div>
-                    <button type="submit" class="px-6 sm:px-12 rounded-full text-center transition bg-gradient-to-b from-red-500 to-red-700 hover:to-red-800 outline-red-600">
+                    <button type="submit" class="px-6 sm:px-12 rounded-full text-center transition-all ease-in-out bg-gradient-to-b from-red-500 to-red-700 hover:to-red-800 outline-red-600">
                         <div class="flex justify-center items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 text-white inline sm:hidden" fill="currentColor" viewBox="0 0 16 16">
                                 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
@@ -157,39 +163,42 @@
 
     <div class="mx-auto -mt-10">
         <swiper-container :autoplay="true" slides-per-view="auto" loop="true" autoplay-disable-on-interaction="false">
-            <swiper-slide class="w-44"><img class="h-16 w-44 px-6" src="/img/logos/acura.svg" alt="Acura"></swiper-slide>
-            <swiper-slide class="w-44"><img class="h-16 w-44 px-6" src="/img/logos/alfa-romeo.svg" alt="Alfa Romeo"></swiper-slide>
-            <swiper-slide class="w-44"><img class="h-16 w-44 px-6" src="/img/logos/audi.svg" alt="Audi"></swiper-slide>
-            <swiper-slide class="w-44"><img class="h-16 w-44 px-6" src="/img/logos/bmw.svg" alt="BMW"></swiper-slide>
-            <swiper-slide class="w-44"><img class="h-16 w-44 px-6" src="/img/logos/cadillac.svg" alt="Cadillac"></swiper-slide>
-            <swiper-slide class="w-44"><img class="h-16 w-44 px-6" src="/img/logos/chevrolet.svg" alt="Chevrolet"></swiper-slide>
-            <swiper-slide class="w-44"><img class="h-16 w-44 px-6" src="/img/logos/ford.svg" alt="Ford"></swiper-slide>
-            <swiper-slide class="w-44"><img class="h-16 w-44 px-6" src="/img/logos/honda.svg" alt="Honda"></swiper-slide>
-            <swiper-slide class="w-44"><img class="h-16 w-44 px-6" src="/img/logos/hyundai.svg" alt="Hyundai"></swiper-slide>
-            <swiper-slide class="w-44"><img class="h-16 w-44 px-6" src="/img/logos/infiniti.svg" alt="Infiniti"></swiper-slide>
-            <swiper-slide class="w-44"><img class="h-16 w-44 px-6" src="/img/logos/jaguar.svg" alt="Jaguar"></swiper-slide>
-            <swiper-slide class="w-44"><img class="h-16 w-44 px-6" src="/img/logos/jeep.svg" alt="Jeep"></swiper-slide>
-            <swiper-slide class="w-44"><img class="h-16 w-44 px-6" src="/img/logos/kia.svg" alt="Kia"></swiper-slide>
-            <swiper-slide class="w-44"><img class="h-16 w-44 px-6" src="/img/logos/land-rover.svg" alt="Land Rover"></swiper-slide>
-            <swiper-slide class="w-44"><img class="h-16 w-44 px-6" src="/img/logos/lexus.svg" alt="Lexus"></swiper-slide>
-            <swiper-slide class="w-44"><img class="h-16 w-44 px-6" src="/img/logos/lincoln.svg" alt="Lincoln"></swiper-slide>
-            <swiper-slide class="w-44"><img class="h-16 w-44 px-6" src="/img/logos/maserati.svg" alt="Maserati"></swiper-slide>
-            <swiper-slide class="w-44"><img class="h-16 w-44 px-6" src="/img/logos/mazda.svg" alt="Mazda"></swiper-slide>
-            <swiper-slide class="w-44"><img class="h-16 w-44 px-6" src="/img/logos/mercedes-benz.svg" alt="Mercedes Benz"></swiper-slide>
-            <swiper-slide class="w-44"><img class="h-16 w-44 px-6" src="/img/logos/mini.svg" alt="Mini"></swiper-slide>
-            <swiper-slide class="w-44"><img class="h-16 w-44 px-6" src="/img/logos/mitsubishi.svg" alt="Mitsubishi"></swiper-slide>
-            <swiper-slide class="w-44"><img class="h-16 w-44 px-6" src="/img/logos/nissan.svg" alt="Nissan"></swiper-slide>
-            <swiper-slide class="w-44"><img class="h-16 w-44 px-6" src="/img/logos/porsche.svg" alt="Porsche"></swiper-slide>
-            <swiper-slide class="w-44"><img class="h-16 w-44 px-6" src="/img/logos/tesla.svg" alt="Tesla"></swiper-slide>
-            <swiper-slide class="w-44"><img class="h-16 w-44 px-6" src="/img/logos/toyota.svg" alt="Toyota"></swiper-slide>
-            <swiper-slide class="w-44"><img class="h-16 w-44 px-6" src="/img/logos/volkswagen.svg" alt="Volkswagen"></swiper-slide>
-            <swiper-slide class="w-44"><img class="h-16 w-44 px-6" src="/img/logos/volvo.svg" alt="Volvo"></swiper-slide>
+            <swiper-slide class="w-24 sm:w-44"><img class="h-10 w-24 px-4 sm:h-16 sm:w-44 sm:px-6" src="/img/logos/acura.svg" alt="Acura"></swiper-slide>
+            <swiper-slide class="w-24 sm:w-44"><img class="h-10 w-24 px-4 sm:h-16 sm:w-44 sm:px-6" src="/img/logos/alfa-romeo.svg" alt="Alfa Romeo"></swiper-slide>
+            <swiper-slide class="w-24 sm:w-44"><img class="h-10 w-24 px-4 sm:h-16 sm:w-44 sm:px-6" src="/img/logos/audi.svg" alt="Audi"></swiper-slide>
+            <swiper-slide class="w-24 sm:w-44"><img class="h-10 w-24 px-4 sm:h-16 sm:w-44 sm:px-6" src="/img/logos/bmw.svg" alt="BMW"></swiper-slide>
+            <swiper-slide class="w-24 sm:w-44"><img class="h-10 w-24 px-4 sm:h-16 sm:w-44 sm:px-6" src="/img/logos/cadillac.svg" alt="Cadillac"></swiper-slide>
+            <swiper-slide class="w-24 sm:w-44"><img class="h-10 w-24 px-4 sm:h-16 sm:w-44 sm:px-6" src="/img/logos/chevrolet.svg" alt="Chevrolet"></swiper-slide>
+            <swiper-slide class="w-24 sm:w-44"><img class="h-10 w-24 px-4 sm:h-16 sm:w-44 sm:px-6" src="/img/logos/ford.svg" alt="Ford"></swiper-slide>
+            <swiper-slide class="w-24 sm:w-44"><img class="h-10 w-24 px-4 sm:h-16 sm:w-44 sm:px-6" src="/img/logos/honda.svg" alt="Honda"></swiper-slide>
+            <swiper-slide class="w-24 sm:w-44"><img class="h-10 w-24 px-4 sm:h-16 sm:w-44 sm:px-6" src="/img/logos/hyundai.svg" alt="Hyundai"></swiper-slide>
+            <swiper-slide class="w-24 sm:w-44"><img class="h-10 w-24 px-4 sm:h-16 sm:w-44 sm:px-6" src="/img/logos/infiniti.svg" alt="Infiniti"></swiper-slide>
+            <swiper-slide class="w-24 sm:w-44"><img class="h-10 w-24 px-4 sm:h-16 sm:w-44 sm:px-6" src="/img/logos/jaguar.svg" alt="Jaguar"></swiper-slide>
+            <swiper-slide class="w-24 sm:w-44"><img class="h-10 w-24 px-4 sm:h-16 sm:w-44 sm:px-6" src="/img/logos/jeep.svg" alt="Jeep"></swiper-slide>
+            <swiper-slide class="w-24 sm:w-44"><img class="h-10 w-24 px-4 sm:h-16 sm:w-44 sm:px-6" src="/img/logos/kia.svg" alt="Kia"></swiper-slide>
+            <swiper-slide class="w-24 sm:w-44"><img class="h-10 w-24 px-4 sm:h-16 sm:w-44 sm:px-6" src="/img/logos/land-rover.svg" alt="Land Rover"></swiper-slide>
+            <swiper-slide class="w-24 sm:w-44"><img class="h-10 w-24 px-4 sm:h-16 sm:w-44 sm:px-6" src="/img/logos/lexus.svg" alt="Lexus"></swiper-slide>
+            <swiper-slide class="w-24 sm:w-44"><img class="h-10 w-24 px-4 sm:h-16 sm:w-44 sm:px-6" src="/img/logos/lincoln.svg" alt="Lincoln"></swiper-slide>
+            <swiper-slide class="w-24 sm:w-44"><img class="h-10 w-24 px-4 sm:h-16 sm:w-44 sm:px-6" src="/img/logos/maserati.svg" alt="Maserati"></swiper-slide>
+            <swiper-slide class="w-24 sm:w-44"><img class="h-10 w-24 px-4 sm:h-16 sm:w-44 sm:px-6" src="/img/logos/mazda.svg" alt="Mazda"></swiper-slide>
+            <swiper-slide class="w-24 sm:w-44"><img class="h-10 w-24 px-4 sm:h-16 sm:w-44 sm:px-6" src="/img/logos/mercedes-benz.svg" alt="Mercedes Benz"></swiper-slide>
+            <swiper-slide class="w-24 sm:w-44"><img class="h-10 w-24 px-4 sm:h-16 sm:w-44 sm:px-6" src="/img/logos/mini.svg" alt="Mini"></swiper-slide>
+            <swiper-slide class="w-24 sm:w-44"><img class="h-10 w-24 px-4 sm:h-16 sm:w-44 sm:px-6" src="/img/logos/mitsubishi.svg" alt="Mitsubishi"></swiper-slide>
+            <swiper-slide class="w-24 sm:w-44"><img class="h-10 w-24 px-4 sm:h-16 sm:w-44 sm:px-6" src="/img/logos/nissan.svg" alt="Nissan"></swiper-slide>
+            <swiper-slide class="w-24 sm:w-44"><img class="h-10 w-24 px-4 sm:h-16 sm:w-44 sm:px-6" src="/img/logos/porsche.svg" alt="Porsche"></swiper-slide>
+            <swiper-slide class="w-24 sm:w-44"><img class="h-10 w-24 px-4 sm:h-16 sm:w-44 sm:px-6" src="/img/logos/tesla.svg" alt="Tesla"></swiper-slide>
+            <swiper-slide class="w-24 sm:w-44"><img class="h-10 w-24 px-4 sm:h-16 sm:w-44 sm:px-6" src="/img/logos/toyota.svg" alt="Toyota"></swiper-slide>
+            <swiper-slide class="w-24 sm:w-44"><img class="h-10 w-24 px-4 sm:h-16 sm:w-44 sm:px-6" src="/img/logos/volkswagen.svg" alt="Volkswagen"></swiper-slide>
+            <swiper-slide class="w-24 sm:w-44"><img class="h-10 w-24 px-4 sm:h-16 sm:w-44 sm:px-6" src="/img/logos/volvo.svg" alt="Volvo"></swiper-slide>
         </swiper-container>
     </div>
 
-    <div class="pb-52 mt-20 bg-gray-50">
+    <div class="pb-52 mt-16 sm:mt-20 bg-gray-50">
         <div class="container mx-auto px-4 mb-12 pt-16">
-            <div class="flex flex-col sm:flex-row justify-between gap-4">
+            <div class="w-full text-center mb-6 sm:hidden">
+                <button @click="showFilters = !showFilters" type="button" class="text-gray-500 py-1 px-2 rounded-lg">Más filtros</button>
+            </div>
+            <div class="flex-col sm:flex-row justify-between gap-4" :class="[showFilters ? 'flex' : 'hidden sm:flex']">
                 <div class="flex flex-col sm:flex-row gap-4 sm:w-9/12">
                     <Multiselect
                     ref="makeSelect"
@@ -202,6 +211,7 @@
                     :object="true"
                     :options="autopartsStore.lists.makes"
                     @clear="handleMakeInput"
+                    @change="autopartsStore.filters.model = null"
                     @select="search" />
                 <Multiselect
                     ref="modelSelect"
@@ -231,7 +241,7 @@
                     @select="search"/>
                 </div>
             
-                <select @change="search" v-model="autopartsStore.filters.sort" class="form-select bg-no-repeat appearance-none outline-none pl-4 pr-8 py-2 cursor-pointer border border-gray-300 rounded-lg">
+                <select @change="search" v-model="autopartsStore.filters.sort" class="form-select bg-white bg-no-repeat appearance-none outline-none pl-4 pr-8 py-2 cursor-pointer border border-gray-300 rounded-lg">
                     <option value="latest" selected>Más Recientes</option>
                     <option value="oldest">Más Antigüas</option>
                     <option value="pricetohigh">Mayor Precio</option>
