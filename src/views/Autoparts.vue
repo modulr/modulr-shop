@@ -33,6 +33,17 @@
         window.scroll({top: 500, left: 0, behavior: 'smooth'})
     }
 
+    async function clear() {
+        autopartsStore.filters = {
+            make: null,
+            model: null,
+            category: null,
+            number: null,
+            sort: "latest"
+        }
+        search()
+    }
+
     function searchCategories(search) {
       searchQuery.value = search;
     }
@@ -120,14 +131,21 @@
                     <h1 class="font-title font-bold text-4xl text-gray-900 md:text-5xl drop-shadow-md">Auto <span class="text-red-600">Global</span></h1>
                     <h2 class="text-gray-500 text-lg md:text-2xl tracking-wide md:tracking-wider">Las mejores piezas para tu automóvil</h2>
                 </div>
-                <form @submit.prevent="search" class="w-full lg:w-8/12 flex flex-col sm:flex-row p-4 sm:p-2 space-y-4 sm:space-y-0 space-x-0 sm:space-x-1 bg-white shadow-md rounded-3xl sm:rounded-full border border-gray-200">
-                    <input ref="numberSelect" type="text" class="w-full p-4 rounded-full outline-0" v-model="autopartsStore.filters.number" placeholder="Puerta Mazda CX5 2023, Número de parte">
-                    <button type="submit" class="w-full md:w-auto ml-auto py-3 px-12 rounded-full text-center transition bg-gradient-to-b from-red-500 to-red-700 hover:to-red-800 outline-red-600">
-                        <div class="flex justify-center items-center space-x-4">
-                            <!-- <svg xmlns="http://www.w3.org/2000/svg" class="w-5 text-white" fill="currentColor" viewBox="0 0 16 16">
+                <form @submit.prevent="search" class="w-full lg:w-8/12 flex p-2 space-x-1 bg-white shadow-md rounded-full border border-gray-200">
+                    <div class="relative w-full">
+                        <input ref="numberSelect" type="text" class="w-full px-4 py-2 sm:py-4 rounded-full outline-0" v-model="autopartsStore.filters.number" placeholder="Puerta Mazda CX5 2023, Número de parte">
+                        <button type="button" class="absolute top-1 sm:top-3 right-0 sm:right-1" v-if="autopartsStore.filters.number" @click="clear">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 fill-gray-400 stroke-gray-200 hover:fill-gray-500 transition-all ease-in-out">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </button>
+                    </div>
+                    <button type="submit" class="px-6 sm:px-12 rounded-full text-center transition bg-gradient-to-b from-red-500 to-red-700 hover:to-red-800 outline-red-600">
+                        <div class="flex justify-center items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 text-white inline sm:hidden" fill="currentColor" viewBox="0 0 16 16">
                                 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                            </svg> -->
-                            <span class="inline text-white font-semibold">
+                            </svg>
+                            <span class="hidden sm:inline text-white font-semibold">
                                 Buscar
                             </span>
                         </div>
@@ -265,10 +283,16 @@
                 </div>
             </div>
             <div v-else>
-                <div class="bg-[url('/img/not-found.png')] bg-no-repeat bg-center bg-contain w-full h-full">
+                <div class="sm:bg-[url('/img/not-found.png')] bg-no-repeat bg-center bg-contain w-full h-full">
                     <div class="container mx-auto px-4 text-center pt-40">
                         <p class="text-2xl text-gray-500">No encontramos lo que buscas</p>
                         <p class="text-lg text-gray-400">Intentalo de nuevo</p>
+                        <div class="flex gap-2 justify-center mt-8">
+                            <button type="button" @click="clear"
+                                class="tracking-wide gap-2 text-gray-500 font-semibold border border-gray-300 disabled:border-gray-100 py-2 px-4 rounded-lg hover:border-gray-400 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
+                                Limpiar filtros
+                            </button>
+                        </div>
                         <div class="flex justify-center">
                             <img class="" src="/img/loader-2.gif" alt="Loading Autoparts">
                         </div>
