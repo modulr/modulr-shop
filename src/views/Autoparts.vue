@@ -13,7 +13,6 @@
     const modelSelect = ref('');
     const categorySelect = ref('');
     const numberSelect = ref('');
-    const showFilters = ref(false);
 
     onMounted( async () => {
         if (autopartsStore.lists.makes.length == 0)
@@ -133,8 +132,8 @@
         <div class="container mx-auto px-4">
             <Header class="mt-6"></Header>
             <div class="flex flex-wrap pt-20 pb-32 lg:pt-32 lg:pb-40 xl:pt-46 xl:pb-60 2xl:pt-52 2xl:pb-72">
-                <div class="mb-8 pl-1 lg:w-8/12">
-                    <h1 class="hidden sm:block font-title font-bold text-4xl text-gray-900 md:text-5xl drop-shadow-md">Auto <span class="text-red-600">Global</span></h1>
+                <div class="mb-8 pl-1 hidden sm:block lg:w-8/12">
+                    <h1 class="font-title font-bold text-4xl text-gray-900 md:text-5xl drop-shadow-md">Auto <span class="text-red-600">Global</span></h1>
                     <h2 class="text-gray-500 text-lg md:text-2xl tracking-wide md:tracking-wider">Las mejores piezas para tu automóvil</h2>
                 </div>
                 <form @submit.prevent="search" class="w-full lg:w-8/12 flex p-2 space-x-1 bg-white shadow-md rounded-full border border-gray-200">
@@ -193,66 +192,66 @@
         </swiper-container>
     </div>
 
-    <div class="pb-52 mt-16 sm:mt-20 bg-gray-50">
-        <div class="container mx-auto px-4 mb-12 pt-16">
-            <div class="w-full text-center mb-6 sm:hidden">
-                <button @click="showFilters = !showFilters" type="button" class="text-gray-500 py-1 px-2 rounded-lg">Más filtros</button>
-            </div>
-            <div class="flex-col sm:flex-row justify-between gap-4" :class="[showFilters ? 'flex' : 'hidden sm:flex']">
-                <div class="flex flex-col sm:flex-row gap-4 sm:w-9/12">
+    <div class="container mx-auto px-4 my-16">
+        <div class="bg-gray-100 p-4 rounded-xl">
+            <div class="bg-gray-50 p-6 rounded-xl">
+                <div class="flex flex-col sm:flex-row justify-between gap-4">
+                    <div class="flex flex-col sm:flex-row gap-4 sm:w-9/12">
+                        <Multiselect
+                        ref="makeSelect"
+                        placeholder="Marca"
+                        v-model="autopartsStore.filters.make"
+                        :searchable="true"
+                        track-by="name"
+                        label="name"
+                        value-prop="id"
+                        :object="true"
+                        :options="autopartsStore.lists.makes"
+                        @clear="handleMakeInput"
+                        @change="autopartsStore.filters.model = null"
+                        @select="search" />
                     <Multiselect
-                    ref="makeSelect"
-                    placeholder="Marca"
-                    v-model="autopartsStore.filters.make"
-                    :searchable="true"
-                    track-by="name"
-                    label="name"
-                    value-prop="id"
-                    :object="true"
-                    :options="autopartsStore.lists.makes"
-                    @clear="handleMakeInput"
-                    @change="autopartsStore.filters.model = null"
-                    @select="search" />
-                <Multiselect
-                    ref="modelSelect"
-                    placeholder="Modelo"
-                    v-model="autopartsStore.filters.model"
-                    :searchable="true"
-                    track-by="name"
-                    label="name"
-                    value-prop="id"
-                    :object="true"
-                    :options="filterModels" 
-                    @clear="handleModelInput"
-                    @select="search"/>
-                <Multiselect
-                    ref="categorySelect"
-                    placeholder="Autoparte"
-                    v-model="autopartsStore.filters.category"
-                    :searchable="true"
-                    :filter-results="false"
-                    @search-change="searchCategories"
-                    track-by="name"
-                    label="name"
-                    value-prop="id"
-                    :object="true"
-                    :options="filteredCategories"
-                    @clear="handleCategoryInput"
-                    @select="search"/>
+                        ref="modelSelect"
+                        placeholder="Modelo"
+                        v-model="autopartsStore.filters.model"
+                        :searchable="true"
+                        track-by="name"
+                        label="name"
+                        value-prop="id"
+                        :object="true"
+                        :options="filterModels" 
+                        @clear="handleModelInput"
+                        @select="search"/>
+                    <Multiselect
+                        ref="categorySelect"
+                        placeholder="Autoparte"
+                        v-model="autopartsStore.filters.category"
+                        :searchable="true"
+                        :filter-results="false"
+                        @search-change="searchCategories"
+                        track-by="name"
+                        label="name"
+                        value-prop="id"
+                        :object="true"
+                        :options="filteredCategories"
+                        @clear="handleCategoryInput"
+                        @select="search"/>
+                    </div>
+                
+                    <select @change="search" v-model="autopartsStore.filters.sort" class="form-select bg-white bg-no-repeat appearance-none outline-none pl-4 pr-8 py-2 cursor-pointer border border-gray-300 rounded-lg">
+                        <option value="latest" selected>Más Recientes</option>
+                        <option value="oldest">Más Antigüas</option>
+                        <option value="pricetohigh">Mayor Precio</option>
+                        <option value="pricetolow">Menor Precio</option>
+                        <option value="atoz">A - Z</option>
+                        <option value="ztoa">Z - A</option>
+                    </select>
                 </div>
-            
-                <select @change="search" v-model="autopartsStore.filters.sort" class="form-select bg-white bg-no-repeat appearance-none outline-none pl-4 pr-8 py-2 cursor-pointer border border-gray-300 rounded-lg">
-                    <option value="latest" selected>Más Recientes</option>
-                    <option value="oldest">Más Antigüas</option>
-                    <option value="pricetohigh">Mayor Precio</option>
-                    <option value="pricetolow">Menor Precio</option>
-                    <option value="atoz">A - Z</option>
-                    <option value="ztoa">Z - A</option>
-                </select>
             </div>
-            <hr class="bg-gray-100 mt-6">
         </div>
+    </div>
 
+    <div class="pb-52">
         <div v-if="!autopartsStore.loading">
             <div class="container mx-auto px-4" v-if="autopartsStore.autoparts.length > 0">
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-x-8 sm:gap-y-16">
@@ -268,27 +267,30 @@
                         </div>
                     </router-link>
                 </div>
-                <div class="flex items-center justify-center pt-28 px-4">
-                    <div class="w-full flex items-center justify-between border-t border-gray-200">
-                        <button @click="paginate(autopartsStore.pagination.current_page - 1)" class="flex items-center pt-4 text-gray-600 hover:text-red-700 cursor-pointer disabled:cursor-default disabled:text-gray-400 disabled:hover:text-gray-400" :disabled="autopartsStore.pagination.current_page == 1 && 'disabled'">
-                            <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M1.1665 4H12.8332" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M1.1665 4L4.49984 7.33333" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M1.1665 4.00002L4.49984 0.666687" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                            <p class=" ml-3 font-medium leading-none">Anterior</p>                    
-                        </button>
-                        <div class="sm:flex hidden">
-                            <p @click="paginate(page)" v-for="page in visiblePages" :key="page" :class="[autopartsStore.pagination.current_page == page ? 'text-red-700 border-red-400' : 'border-transparent']" class="pt-4 mr-4 px-2 font-medium leading-none cursor-pointer text-gray-600 border-t hover:text-red-700 hover:border-red-400">{{ page }}</p>
+                <div class="pt-28">
+                    <div class="text-sm text-gray-400 text-center mb-4">{{ autopartsStore.pagination.total }} resultados</div>
+                    <div class="flex items-center justify-center px-4">
+                        <div class="w-full flex items-center justify-between border-t border-gray-200">
+                            <button @click="paginate(autopartsStore.pagination.current_page - 1)" class="flex items-center pt-4 text-gray-600 hover:text-red-700 cursor-pointer disabled:cursor-default disabled:text-gray-400 disabled:hover:text-gray-400" :disabled="autopartsStore.pagination.current_page == 1 && 'disabled'">
+                                <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1.1665 4H12.8332" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M1.1665 4L4.49984 7.33333" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M1.1665 4.00002L4.49984 0.666687" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <p class=" ml-3 font-medium leading-none">Anterior</p>                    
+                            </button>
+                            <div class="sm:flex hidden">
+                                <p @click="paginate(page)" v-for="page in visiblePages" :key="page" :class="[autopartsStore.pagination.current_page == page ? 'text-red-700 border-red-400' : 'border-transparent']" class="pt-4 mr-4 px-2 font-medium leading-none cursor-pointer text-gray-600 border-t hover:text-red-700 hover:border-red-400">{{ page }}</p>
+                            </div>
+                            <button @click="paginate(autopartsStore.pagination.current_page + 1)" class="flex items-center pt-4 text-gray-600 hover:text-red-700 cursor-pointer disabled:cursor-default disabled:text-gray-400 disabled:hover:text-gray-400" :disabled="autopartsStore.pagination.current_page == autopartsStore.pagination.last_page && 'disabled'">
+                                <p class=" font-medium leading-none mr-3">Siguiente</p>
+                                <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1.1665 4H12.8332" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M9.5 7.33333L12.8333 4" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M9.5 0.666687L12.8333 4.00002" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>    
+                            </button>
                         </div>
-                        <button @click="paginate(autopartsStore.pagination.current_page + 1)" class="flex items-center pt-4 text-gray-600 hover:text-red-700 cursor-pointer disabled:cursor-default disabled:text-gray-400 disabled:hover:text-gray-400" :disabled="autopartsStore.pagination.current_page == autopartsStore.pagination.last_page && 'disabled'">
-                            <p class=" font-medium leading-none mr-3">Siguiente</p>
-                            <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M1.1665 4H12.8332" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M9.5 7.33333L12.8333 4" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M9.5 0.666687L12.8333 4.00002" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>    
-                        </button>
                     </div>
                 </div>
             </div>
