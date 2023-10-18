@@ -131,6 +131,7 @@
                                     <div class="bg-gray-50 p-6 rounded-xl">
                                         <div class="flex flex-wrap justify-center gap-y-4">
                                             <p class="w-full text-sm font-medium text-gray-600" v-if="autopartsStore.autopart.autopart_number"><span class="font-light">No. parte.</span> {{ autopartsStore.autopart.autopart_number }}</p>
+                                            <p class="w-full text-sm font-medium text-gray-600" v-if="autopartsStore.autopart.category"><span class="font-light">Categoria.</span> {{ autopartsStore.autopart.category.name }}</p>
                                             <p class="w-full text-sm font-medium text-gray-600" v-if="autopartsStore.autopart.origin"><span class="font-light">Origen.</span> {{ autopartsStore.autopart.origin.name }}</p>
                                             <p class="w-full text-sm font-medium text-gray-600" v-if="autopartsStore.autopart.position"><span class="font-light">Posición.</span> {{ autopartsStore.autopart.position.name }}</p>
                                             <p class="w-full text-sm font-medium text-gray-600" v-if="autopartsStore.autopart.side"><span class="font-light">Lado.</span> {{ autopartsStore.autopart.side.name }}</p>
