@@ -18,12 +18,14 @@ export const useAutopartsStore = defineStore('autoparts', {
             makes: [],
             models: [],
             categories: [],
+            filteredCategories: [],
         },
         filters: {
             make: null,
             model: null,
             category: null,
             number: null,
+            sort: 'latest'
         },
         autopart: {},
         currentImage: null,
@@ -77,37 +79,68 @@ export const useAutopartsStore = defineStore('autoparts', {
             this.currentImage = img
         },
         async getMakes() {
-            await api.get('/api/makes')
-            .then((response) => {
+            if (this.lists.makes.length == 0) {
+                await api.get('/api/makes')
+                .then((response) => {
 
-                this.lists.makes = response.data
+                    this.lists.makes = response.data
 
-            }).catch( error => {
+                }).catch( error => {
 
-                console.error( 'Error al consultar en la API: ', error );
-            })
+                    console.error( 'Error al consultar en la API: ', error );
+                })
+            }
         },
         async getModels() {
-            await api.get('/api/models')
-            .then((response) => {
+            if (this.lists.models.length == 0) {
+                await api.get('/api/models')
+                .then((response) => {
 
-                this.lists.models = response.data
+                    this.lists.models = response.data
 
-            }).catch( error => {
+                }).catch( error => {
 
-                console.error( 'Error al consultar en la API: ', error );
-            })
+                    console.error( 'Error al consultar en la API: ', error );
+                })
+            }
         },
         async getCategories() {
-            await api.get('/api/categories')
-            .then((response) => {
+            if (this.lists.categories.length == 0) {
+                await api.get('/api/categories')
+                .then((response) => {
 
-                this.lists.categories = response.data
+                    this.lists.categories = response.data
+                    this.lists.filteredCategories = response.data
 
-            }).catch( error => {
+                }).catch( error => {
 
-                console.error( 'Error al consultar en la API: ', error );
-            })
+                    console.error( 'Error al consultar en la API: ', error );
+                })
+            }
+        },
+        searchCategories(search) {
+    
+            const query = search.toLowerCase();
+    
+            if (!this.lists.categories || this.lists.categories.length === 0) {
+                return []
+            }
+    
+            let cats = this.lists.categories.filter((option) => {
+                const nameMatch = option.name.toLowerCase().includes(query)
+                const variants = JSON.parse(option.variants || '[]')
+                const variantsMatch = variants && variants.some((variant) => variant.toLowerCase().includes(query))
+    
+                return (nameMatch || variantsMatch)
+            });
+            if(cats.length < 1){
+                cats = cats.concat({
+                    id: 0,
+                    name: query
+                });
+            }
+            
+            this.lists.filteredCategories = cats
         }
     }
 
