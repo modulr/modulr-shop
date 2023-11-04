@@ -14,7 +14,7 @@ const router = createRouter({
         { path: '/components', component: Components },
         { path: '/autopart/:id/:name?', component: Autopart, props: true },
         { path: '/login', component: Components, beforeEnter(to, from, next) {
-            window.location.href = "http://app.autoglobal.mx";
+            window.location.href = "https://inventory.autoglobal.mx";
         }},
         { path: '/:pathMatch(.*)*', component: NotFound },
     ],
