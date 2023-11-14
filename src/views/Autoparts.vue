@@ -232,8 +232,14 @@
         <div v-if="!autopartsStore.loading">
             <div class="container mx-auto px-4" v-if="autopartsStore.autoparts.length > 0">
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-x-8 sm:gap-y-16">
-                    <router-link :to="`/autopart/${autopart.id}/${autopart.name.replace(/[ \/\.]/g, '-')}`" v-for="autopart in autopartsStore.autoparts" :key="autopart.id" class="w-full mx-auto overflow-hidden bg-white rounded-2xl shadow-md shadow-slate-300/60 duration-300 hover:shadow-xl outline-red-100">
-                        <img class="w-full h-52 object-cover object-center" loading="lazy" :src="autopart.url_thumbnail" :alt="autopart.name" />
+                    <router-link :to="`/autopart/${autopart.id}/${autopart.name.replace(/[ \/\.]/g, '-')}`" v-for="autopart in autopartsStore.autoparts" :key="autopart.id" class="relative w-full mx-auto overflow-hidden bg-white rounded-2xl shadow-md shadow-slate-300/60 duration-300 hover:shadow-xl outline-red-100">
+                        <div class="relative">
+                            <img class="w-full h-52 object-cover object-center" loading="lazy" :src="autopart.url_thumbnail" :alt="autopart.id"/>
+                            <div class="absolute right-4 bottom-4">
+                                <img v-if="autopart.store_ml_id" :src="'/img/logos/stores_ml/' + autopart.store_ml_id + '.png'" alt="AG" class="w-11 h-9" />
+                                <img v-else :src="'/img/logos/stores/' + autopart.store_id + '.png'" alt="AG" class="w-11 h-9" />
+                            </div>
+                        </div>
                         <div class="px-4 py-6">
                             <h2 class="mb-5 font-medium line-clamp-2">{{ autopart.name }}</h2>
                             <div class="flex items-center">
