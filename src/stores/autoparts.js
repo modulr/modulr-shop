@@ -14,6 +14,7 @@ export const useAutopartsStore = defineStore('autoparts', {
             last_page: 1
         },
         loading: false,
+        loadingQuotation: false,
         lists: {
             makes: [],
             models: [],
@@ -28,6 +29,7 @@ export const useAutopartsStore = defineStore('autoparts', {
             sort: 'latest'
         },
         autopart: {},
+        shipments:{},
         currentImage: null,
     }),
     actions: {
@@ -72,6 +74,25 @@ export const useAutopartsStore = defineStore('autoparts', {
             }).catch( error => {
 
                 this.loading = false
+                console.error( 'Error al consultar en la API: ', error );
+            })
+        },
+        async getQuotation() {
+            if (isNaN(this.autopart.cp)) {
+                console.error('El valor del Código Postal no es numérico.');
+                return;
+            }
+
+            this.loadingQuotation = true
+
+            await api.post(`/api/teiker/quotation`,this.autopart)
+            .then(async (response) => {
+                var shipments = [response.data[0],response.data[1]]
+                this.shipments = shipments
+                console.log(this.shipments)
+                this.loadingQuotation = false
+            }).catch( error => {
+                this.loadingQuotation = false
                 console.error( 'Error al consultar en la API: ', error );
             })
         },

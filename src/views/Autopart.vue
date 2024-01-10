@@ -10,6 +10,7 @@
     const numberImages = ref(5);
     const showImage = ref(false)
     const orderImage = ref(0)
+    const selectedShipmentIndex = ref(null)
 
     const props = defineProps({
         id: {
@@ -37,6 +38,18 @@
     function showCurrentImage(order) {
         showImage.value = true
         orderImage.value = order
+    }
+
+    function clearSearch() {
+        autopartsStore.autopart.cp = null
+        autopartsStore.shipments = {}
+        selectedShipmentIndex.value = null
+    }
+
+    function setShipmentIndex(shipment,index) {
+        console.log(shipment)
+        selectedShipmentIndex.value = index
+        autopartsStore.autopart.shipment = shipment
     }
 
 </script>
@@ -114,6 +127,36 @@
                                         </span>
                                     </h3>
                                     <h3 class="w-16 pb-1 mt-2 border-t border-red-400 text-gray-600 text-sm">Años</h3>
+                                </div>
+                                <div class="mb-6 flex-row"> 
+                                    <p class="text-gray-600 text-xs">Cotizar Envío</p>
+                                    <div class="flex">
+                                        <div class="relative w-full">
+                                            <input v-model="autopartsStore.autopart.cp" type="text" class="w-full px-4 py-3 rounded-lg font-medium border border-gray-300 placeholder-gray-400 text-sm focus:outline-none focus:border-gray-40" placeholder="Ingresa Código Postal ...">
+                                            <button @click="clearSearch" v-if="autopartsStore.autopart.cp" :disabled="autopartsStore.loading" type="button" class="absolute top-1 right-1 group">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-9 fill-gray-400 stroke-gray-200 hover:fill-gray-500 group-disabled:fill-gray-300 transition-all ease-in-out">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <button type="button" @click="autopartsStore.getQuotation"
+                                                class="tracking-wide font-semibold border border-gray-300 disabled:border-gray-100 py-2 px-3 rounded-lg hover:border-gray-400 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none ml-2">
+                                            <svg v-if="!autopartsStore.loadingQuotation" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 0 0-3.213-9.193 2.056 2.056 0 0 0-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 0 0-10.026 0 1.106 1.106 0 0 0-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
+                                            </svg>
+                                            <p v-if="autopartsStore.loadingQuotation" class="text-gray-600 text-xs">Espere...</p>
+                                        </button>
+                                    </div>
+                                    <p v-if="autopartsStore.shipments.length > 0" class="text-gray-600 text-xs">El precio de envío puede variar al combinar con otras piezas*</p>
+                                </div>
+                                <div @click="setShipmentIndex(shipment,index)" :class="{ 'border-green-400': selectedShipmentIndex === index }" class="border border-red-400 bg-gray-100 rounded-xl mb-2 cursor-pointer" v-for="(shipment, index) in autopartsStore.shipments" :key="shipment?.id">
+                                    <div class="p-6 rounded-xl">
+                                        <div class="flex flex-wrap justify-center gap-y-1">
+                                            <p class="w-full text-sm font-medium text-gray-600"><span class="font-light">Opción. </span> {{ index + 1 }}</p>
+                                            <p class="w-full text-sm font-medium text-gray-600" v-if="shipment.Dias"><span class="font-light"></span>Llega el día {{ shipment.Dias }}</p>
+                                            <p class="w-full text-sm font-medium text-gray-600" v-if="shipment.Precio"><span class="font-light">Precio.</span> ${{ shipment.Precio }}</p>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="flex items-center gap-4 my-12">
                                     <a v-if="autopartsStore.autopart.status_id != 4 && autopartsStore.autopart.status_id != 2 && autopartsStore.autopart.status_id != 3" :href="`https://api.whatsapp.com/send?phone=52${autopartsStore.autopart.store?.phone}&text=Me%20interesa%20la%20autoparte%20${autopartsStore.autopart.name},%20ID:%20${autopartsStore.autopart.id}&source=&data=`" target="_blank" class="flex items-center justify-center w-full md:w-3/6 p-4 rounded-full border border-red-600 bg-red-600 hover:bg-red-700 text-white transition-all ease-in-out">
